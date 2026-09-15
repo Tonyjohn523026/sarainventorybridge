@@ -36,7 +36,7 @@
 ```
 status: batch_ready
 owner: cursor
-updated_at: 2026-09-15 20:09:20
+updated_at: 2026-09-15 21:31
 round: 1
 batch_size: 5
 batch_index: 2
@@ -217,3 +217,4 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
    - Cursor **不得再以识图/看图分歧**为由二次 `fail`；
    - 若仍有图文疑义 → 记入 `plan_notes`/`summary` 提醒用户，或 `blocked` 请用户拍板，**允许本批因识图争议放行进入下一步**（检索造假、未备份、未写淡蓝/原因、违反条码规则等非识图硬伤仍可驳回，不受本条 1 次上限约束）。
    - 交检记录建议写：`image_reject_count: 0|1`（本批因图已驳回次数）。
+automation_test: doubao ping 2026-09-15 21:31
