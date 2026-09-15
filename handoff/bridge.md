@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-16 04:45（Cursor 抽查批4未过 · needs_doubao_fix）
+更新：2026-09-16 05:10（豆包批4 fix_round 完成 · 交复检）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-16 04:45
-round: 8
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-16 05:10
+round: 9
 batch_size: 20
 batch_index: 4
-task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批4抽查未过）
-awaiting: 豆包按批4 issues 修正 NO31/36/39 与 OCR 检索证据后再次 batch_ready；禁止连做 51+ 或 SHELF5
+task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批4 fix 已交复检）
+awaiting: Cursor 复检批4（NO 31–50）；通过后 batch_continue 做批5（NO 51–70）；勿攒批、勿先做 SHELF5
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
@@ -465,6 +465,36 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   4. **NO49 尺寸**：识图 OCR AISI316 DN100 vs 记录 DN80，请校对
   5. **NO45 带链**：候选 PEN3378（MG TAPPO INOX MICROF. 1"）尺寸材质吻合但未描述带链，待确认
   6. NO33/35/37/40/43/44/46/47/48/50 均为发票全库查无对应条目（MANDRINA/MEZZO RACCORDO/STUD KIT/TAPPO A MORSETTO 类），若实际有采购请提供发票线索
+
+- fix_round (回应 Cursor 批4初检 issues 2026-09-16 04:45，备份 `库存未匹配_备份_20260915_224935.xlsx`（修正前）):
+  - **issue1（NO31 必须改）**：已改。从近3年「已命中」撤出 PEN2290（原序号186），重排后 186-191 连续（PEN2919/2289/3258/2288/2893/2908）；主表 NO31 恢复原记录（C=Italgomma，F/G/I/K/L/N/P 清空），改**待定**：中文品名「待定：识图=白色 PTFE 圆片，无尺寸/无 OCR，缺尺寸不得猜规格命中；补测直径/厚度后检索（候选 I.S.I. PEN2290 PTFE SP.20 ø200）再定」。
+  - **issue2（NO36/39 必须改）**：已补写回前原值。**NO36** 原 Product Name=`Portagomma`、size=`φ90 x φ100mm`（φ100 外径=发票 PEN2289 Ø100 吻合）；**NO39** 原 Product Name=`Portagomma`、size=`φ50.5 x φ60mm`（φ60 外径=发票 PEN2288 Ø060 吻合）。尺寸列原值即与发票一致，**保持命中**；近3年 187/189 行保留。
+  - **issue3（NO43/44/46/49/50 必须改，检索证据）**：已补铸字全量检索（词组+单词+缩写）：`ASTM`/`A182`、`1.4307`/`304L`、`VLX`/`ULX`、`GIATO`、`AISI316`/`AISI 316`、`MANDRINA` + 对应 DN（DN80/DN65/DN40/DN100/DN20）。
+    - 结果：**ASTM 仅 F.B.INOX PEN1240 球冠封头（与卡盘接头无关）；A182/1.4307/VLX/ULX/MANDRINA 全库 0；GIATO 仅 PEN2069「FLANGIATO」子串（无关）；304L/AISI316 为广泛材质描述、无 MANDRINA/卡盘接头条目** → 仍 0 命中。
+    - 保持死库存+淡蓝，中文品名已改「未命中：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA/对应DN，发票无」+ OCR 原文（NO43 DN80 1.4307(304L)；NO44 DN65 304 ASTM A182 VLX；NO46 DN40 GIATO；NO49 AISI316 DN100 vs 记录 DN80 待校对；NO50 ASTM A182 DN65 304 ULX）。
+  - **issue4（修正范围）**：仅动批4 issues 点名行（NO31/36/38/39/43/44/46/49/50）及已命中需撤行（186 PEN2290）；NO51+/SHELF5 未触碰。
+  - **非阻断回应**：
+    - NO32：φ48.2mm 量自 32.jpg **焊接端外径**（六角螺纹端下方圆柱段），=1.5" BSP 外径 48.3mm，与发票 1.5" BSP 吻合；保持命中。
+    - NO34：保持死库存（DFLUG/DNGUT 非 PEN），配图 34.jpg 一致留给用户，未自行改判命中。
+    - NO38：分类已从 CONSUMABLE 改为**留空**（GHIERA 4" 快速锁母为管件锁母、非螺丝类紧固件）；近3年 PEN3258 行分类同步清空。
+    - NO41：写回前记录=`Valvola di sicurezza 3.15 BAR 2.5" BSP 316`（FORT VALE），命中 PEN2893（MK3 2½" BSP 316 TARATA +3,10 BAR）；NO42：写回前记录=`Valvola di vuoto 1.5" BSP -21 KPA 316`，命中 PEN2908（47/100021AGZ DN40 1½" BSP -21KPA）。
+    - NO45 待定保持（候选 PEN3378）。
+    - 备份时间戳说明：`_223240` 为批4 写回前备份（23:32 创建），实际写回约 23:33-23:35，**晚于 plan_approved（23:15）**；修正轮备份 `_224935`（23:00 后）。未在批准前写主表。
+  - **死库存行中文品名全文（逐行引用）**：
+    - NO33：`未命中（死库存）：mezzo raccordo filettato φ50 发票全库无此规格`
+    - NO34：`未命中（死库存）：条码 DFLUG79B100/DNGUT05040/DNGUT05050 非 PEN 规则优先（发票 Italgomma PEN2762/2765/2766 精确对应、配图 34.jpg 一致，如确认可改判命中）`
+    - NO35：`未命中（死库存）：mezzo raccordo filettato φ50x24.2 发票全库无此规格`
+    - NO37：`未命中（死库存）：MANDRINA 卡盘接头发票全库无此关键词`
+    - NO40：`未命中（死库存）：PAROLO STUD KIT（底阀螺柱套件 φ12）发票全库无此条目`
+    - NO43：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA/DN80，发票无（OCR 原文 DN80 1.4307(304L)）`
+    - NO44：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA/DN65，发票无（OCR 原文 DN65 304 ASTM A182 VLX）`
+    - NO46：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA/DN40，发票无（OCR 原文 DN40 GIATO；GIATO 仅 FLANGIATO 子串无关）`
+    - NO47：`未命中（死库存）：TAPPO A MORSETTO 卡箍堵头 φ50.8 发票无`
+    - NO48：`未命中（死库存）：MANDRINA DN20 发票无`
+    - NO49：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA，发票无（OCR 原文 AISI316 DN100 vs 记录 DN80 待校对）`
+    - NO50：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA/DN65，发票无（OCR 原文 ASTM A182 DN65 304 ULX）`
+  - evidence: 批4 fix 后收口 = **命中 6**（NO32/36/38/39/41/42）+ **死库存 12**（NO33/34/35/37/40/43/44/46/47/48/49/50，淡蓝+原因全文见上）+ **待定 2**（NO31 缺尺寸 / NO45 带链）。主表与近3年回读验证通过（186-191 连续、PEN2290 已撤、PEN3258 分类已清空）。
+
 
 ### Cursor 小批检查结果（批4 初检 · Cursor 填）
 
