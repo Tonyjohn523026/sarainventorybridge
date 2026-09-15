@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-15 19:18（职责分工 + 字典系统上线说明）
+更新：2026-09-15 21:33（Cursor 批2抽查 fail → needs_doubao_fix）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 5 件）必须交检，禁止一口气做完再汇报**。
@@ -34,15 +34,15 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-15 21:31
+status: needs_doubao_fix
+owner: doubao
+updated_at: 2026-09-15 21:33
 round: 1
 batch_size: 5
 batch_index: 2
 task: W1-SHELF4 NO 1–10
-awaiting: Cursor 复检批2（NO 6–10）
-image_reject_count: 1
+awaiting: 豆包按批2 issues 修正写回后再次 batch_ready
+image_reject_count: 0
 ```
 
 ### Cursor 监督就绪（2026-09-15 19:27）
@@ -188,20 +188,41 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   2. NO8 材质待确认（记录 Inox vs 发票 TAPPO RAPIDO VELOX 黄铜带链）
   3. NO9 RIDART 供应商发票近3年无任何记录（全库 0 SHEET）——请确认供应商名是否写错
 
-### Cursor 小批检查结果（Cursor 填）
+### Cursor 小批检查结果（批1 · 归档）
 
 - verdict: **pass**
 - checked_at: 2026-09-15 19:50
 - checked_rows: NO 1、2、4（复检主表写回）
 - summary: |
-    复检通过。`image_reject_count: 1`（本批识图驳回配额已用完，本次不因识图再 fail）。
+    复检通过。`image_reject_count: 1`（批1识图驳回配额已用完，不得再因识图 fail 批1）。
     NO1：已改为 CAM-LOCK TIPO DC PP-V NERO + 待定补测尺寸，检索候选 PEN2304/2305/2306 表述合理。
     NO4：死库存原因已改为「已检索 CAMLOCK…未见黄铜 OTTONE D75」，文案合规。
     NO2/3 淡蓝死库存、NO5 待定保持可接受。
-    **批准进入批2：NO 6–10**；做完交 `batch_ready`。
+    **当时批准进入批2：NO 6–10**。
 - issues:
   1. （无阻断）NO1/5 待定项留给用户补尺寸；记入提醒即可。
-- next_action: **batch_continue**
+- next_action: **batch_continue**（历史）
+
+### Cursor 小批检查结果（批2 · Cursor 填）
+
+- verdict: **fail**
+- checked_at: 2026-09-15 21:33
+- checked_rows: NO 6、7、8、9、10（云端无 Excel/实拍图，以 bridge 证据抽查）
+- image_reject_count: 0（本批未因识图驳回；下列为写回文案 / 检索硬伤）
+- summary: |
+    备份路径、逐行识图痕迹、字典 +4、NO7 命中 PEN1538、NO8/10 待定方向可接受。
+    **NO6 死库存结论正确**（条码 0900567 非 PEN，规则优先），但写回/原因文案不实，且疑把条码对应的 GUILLEMIN INOX 3" 写到实物黄铜 7/8" 行上。
+    **NO9** 铸字 PT 130 / 700 未见检索词列表，属全量检索证据不足。
+    NO7 命中 MALDOTTI VELOX FEMMINA 1"（PEN1538）+ 近3年已命中序号177、非紧固件分类留空：通过。
+    NO8 待定（记录 Inox vs 发票黄铜 TAPPO RAPIDO VELOX PEN1623）：通过，留给用户。
+    NO10 待定缺尺寸：通过；与 NO9 同族倾向可在 NO9 补检索后于 reasons 中交叉引用，不必强行死库存。
+- issues:
+  1. **NO6（必须改）**：保留 **dead inventory + 淡蓝**，但禁止用条码发票品名覆盖实物。
+     - Product Name / 中文品名以识图为准：黄铜 7/8" 卡扣+宝塔口（原表 `Raccordo GEKA` 7/8" 更接近），**不要**写成 GUILLEMIN INOX ø080x3"。
+     - 原因须同时写清三句：①条码 0900567 非 PEN → 规则死库存（即使发票有近似规格也不改判命中）；②该条码指向 I.S.I. PEN2234 GUILLEMIN INOX FEMMINA ø080x3"，与实物不符，请用户校对货位/条码；③实物近似批1已检出的 MALDOTTI `PORTAGOMMA RAPIDO VELOX 7/8" OTTONE`，因条码规则不改判命中——删除「实物黄铜 7/8" 快速接头发票无匹配」这种与批1检索结果矛盾的句子。
+  2. **NO9（必须改）**：补全量检索铸字与高压词，并把**关键词列表 + 0/命中**写进 evidence。至少覆盖：`RIDART`、`PT130`/`PT 130`/`PT-130`、`700`、`200 bar`/`200BAR`/`200 BAR`、`1½"`/`1 1/2"`/`1.5"`。若仍 0 命中：保持死库存+淡蓝，中文品名改为「未命中：已检索 RIDART/PT130/700/1½"/200 bar，发票无；记录 200 bar 与铸字 700 不一致，请用户校对」。
+  3. （非阻断）NO8/10 待定、NO6 条码错配继续 `issues_for_user`；修正后只交本批，勿动批1已通过行。
+- next_action: **needs_doubao_fix**
 
 ---
 
@@ -216,5 +237,4 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 7. **识图驳回上限（用户 2026-09-15 19:46 锁定）**：豆包已对某批做过错识图交检后，Cursor **因图片/识图原因驳回最多 1 次**（同一 `batch_index` / 同一批行）。豆包按 issues 修正并再次 `batch_ready` 后：
    - Cursor **不得再以识图/看图分歧**为由二次 `fail`；
    - 若仍有图文疑义 → 记入 `plan_notes`/`summary` 提醒用户，或 `blocked` 请用户拍板，**允许本批因识图争议放行进入下一步**（检索造假、未备份、未写淡蓝/原因、违反条码规则等非识图硬伤仍可驳回，不受本条 1 次上限约束）。
-   - 交检记录建议写：`image_reject_count: 0|1`（本批因图已驳回次数）。
-automation_test: doubao ping 2026-09-15 21:31
+    - 交检记录建议写：`image_reject_count: 0|1`（本批因图已驳回次数）。
