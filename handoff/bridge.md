@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-15 21:45（Cursor 批2复检 pass → done）
+更新：2026-09-15 21:50（Cursor 批准任务2计划 → plan_approved）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -34,21 +34,25 @@
 ## 当前状态
 
 ```
-status: plan_submitted
-owner: cursor
-updated_at: 2026-09-15 21:47:31
+status: plan_approved
+owner: doubao
+updated_at: 2026-09-15 21:50
 round: 3
 batch_size: 20
 batch_index: 3
 task: W1-SHELF4 NO 11–31（任务2）
-awaiting: Cursor 审批计划（批3=NO 11-30 / 批4=NO 31）
+awaiting: 豆包做批3（NO 11–30），做完立刻 batch_ready，勿连做 NO 31
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
 
-### Cursor 监督就绪（2026-09-15 19:27）
+### 任务2 已批准（2026-09-15 21:50）
 
-用户已指定：**豆包执行 `W1-SHELF4` 前 10 条（NO 1–10），Cursor 监督**。
+任务1（NO 1–10）已 **done**。任务2 计划已 **plan_approved**。豆包**可以写主表**，但仅限 **批3 NO 11–30**；做完交 `batch_ready`，勿连做 NO 31。
+
+### Cursor 监督就绪（任务1 · 归档 · 2026-09-15 19:27）
+
+用户当时指定：**豆包执行 `W1-SHELF4` 前 10 条（NO 1–10），Cursor 监督**（该范围已完成）。
 
 豆包下一步（**现在还不能写主表**）：
 1. 把本节「① 执行计划」填完整 → `status: plan_submitted` / `owner: cursor`
@@ -135,7 +139,24 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   - [x] 未 plan_approved 前不写主表（当前只读探查）
   - [x] 结合产品名+尺寸列+识图三重判断，品名/尺寸矛盾行提醒用户
 
-### Cursor 计划审批（Cursor 填）
+### Cursor 计划审批（任务2 · Cursor 填）
+
+- plan_verdict: **approved**
+- plan_checked_at: 2026-09-15 21:50
+- plan_notes: |
+    范围 W1-SHELF4 NO 11–31（21 条）写死；`batch_size: 20` 已写（默认 20，无需代填）。
+    拆批合规：批3=NO 11–30（20 条）+ 批4=NO 31（1 条），未声称一次做完。
+    逐行识图 + 超大图预处理、字典先补、词组+单词+缩写全量检索、写回/淡蓝/条码规则、anti_lazy 均具备，非空泛。
+    现状快照覆盖空行（11/12/22）、Bianchi VELOX（13–16）、Clip R（17）、Camlock 族（18–29）、盘根（30）、PTFE（31）及 21/23/28/29 图文矛盾，可开工。
+    路径笔误（非阻断）：`method_识别` 里 `W1-SHELF4\11-31.jpg` 被写成 tab（`\11` 转义），实指 `图片\W1-SHELF4\11.jpg`–`31.jpg`。
+    **批准开工：先做批3 NO 11–30**，做完立刻 `batch_ready`，**禁止连做 NO 31**。
+- plan_issues:
+  1. （无阻断）交检须附：每行识图一句话、检索关键词列表（含 0/命中）、字典新增词条名、备份路径。
+  2. （无阻断）Camlock 18–29 禁止按族一次定性；每行单独识图（型别 A/C/D/DC + 材质 + 尺寸）。
+  3. （无阻断）NO21/23/28/29 及条码行：沿用批2 NO6 教训——识图+尺寸列为准，禁止用发票/条码品名覆盖实物；非 PEN 条码仍规则死库存。
+  4. （无阻断）列定位按表头关键字（SHELF4 或有旧货架号列），勿写死列号。
+
+### Cursor 计划审批（任务1 · 归档）
 
 - plan_verdict: **approved**
 - plan_checked_at: 2026-09-15 19:32
@@ -145,7 +166,7 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
     字典现状：有 VELOX/TAPPO/RACCORDO；**缺** CAMLOCK、GEKA、GUILLEMIN、独立 TUBO/FLEX（仅有 REGGITUBO）——按计划先补再匹配。
     NO6 物料号 0900567 非 PEN：命中判定必须优先死库存规则，识图仅作复核。
     图片链接本轮保持原样、不擅自全表改相对路径——同意。
-    **批准开工：先做批1 NO 1–5**，做完立刻 `batch_ready`，勿连做 6–10。
+    **当时批准开工：先做批1 NO 1–5**，做完立刻 `batch_ready`，勿连做 6–10。任务1 两批均已 pass → done。
 - plan_issues:
   1. （无阻断项）交检时须附：每行识图一句话结论、检索关键词列表、字典新增词条名。
 
