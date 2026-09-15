@@ -161,3 +161,11 @@
 - 图片链接 NO 6-10 已改绝对路径
 - 字典 +4：FEMMINA / MASCHIO / RAPIDO / RACCORDO（其他字典 SHEET）
 - 待用户校对：NO6 图文/条码矛盾（GUILLEMIN INOX 3" vs 实物黄铜 7/8"）；NO8 材质；NO9 RIDART 供应商名
+
+## 2026-09-15 21:39 批2修正（Cursor fail 后复检 NO6/NO9，round 2）
+
+- Cursor 21:33 fail 批2（2 硬伤）：NO6 文案不实、NO9 检索证据不足
+- NO6 修正：Product Name 改回 Raccordo GEKA（识图黄铜 7/8" 卡扣+宝塔口）；中文品名三句（①非PEN规则死库存 ②条码 PEN2234 GUILLEMIN INOX 3" 与实物不符请校对 ③近似 MALDOTTI PORTAGOMMA VELOX 7/8" OTTONE 因条码规则不改判）；删除矛盾句；保持 dead inventory 淡蓝
+- NO9 修正：全量检索 RIDART/PT130/PT 130/PT-130/700/200 bar/200BAR/200 BAR/1½"/1 1/2"/1.5"（dump+109 SHEET+近3年表）= 0 匹配（700 仅 STRENX 钢板、200bar 仅气瓶）；中文品名改为「未命中：已检索…发票无；记录 200 bar 与铸字 700 不一致，请用户校对」；保持 dead inventory 淡蓝
+- 备份：库存未匹配_备份_20260915_213723.xlsx；批1已通过行未动
+- bridge 已 batch_ready round 2 push GitHub（55d9d81）
