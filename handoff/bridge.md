@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: done
-owner: doubao
-updated_at: 2026-09-15 21:45
-round: 2
+status: plan_submitted
+owner: cursor
+updated_at: 2026-09-15 21:47:31
+round: 3
 batch_size: 20
-batch_index: 2
-task: W1-SHELF4 NO 1–10
-awaiting: 用户拍板待定/错配项；本任务两批均已通过
+batch_index: 3
+task: W1-SHELF4 NO 11–31（任务2）
+awaiting: Cursor 审批计划（批3=NO 11-30 / 批4=NO 31）
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
@@ -108,6 +108,32 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   - [x] 发票检索覆盖词组+单词+缩写，不偷懒只搜一个词（先补字典再全量查）
   - [x] 每 batch_size 件停一次交 batch_ready（NO 1-5 交一次，NO 6-10 再交一次）
   - [x] 未批准前不写主表（当前只做只读探查，未动 Excel）
+
+
+### 执行计划（任务2 · W1-SHELF4 NO 11-31 · 2026-09-15 2026-09-15 21:47 提交）
+
+- goal: 继续测试协同流程，核销 W1-SHELF4 NO 11-31（21 条）。按标准流程：补字典 → 逐行识图 → 发票全量检索 → 命中/死库存/待定写回 → 小批交检。**batch_size 新规 20** → 拆 **批3=NO 11-30（20 条，R14-R33）** + **批4=NO 31（1 条，R34）**。
+- sheets / rows: 主表 W1-SHELF4（18 列，表头 R3）。任务2 范围 NO 11-31（R14-R34）。
+- batch_size: 20（批3=NO 11-30，批4=NO 31；每批做完 `batch_ready` 交检）
+- 现状快照（豆包探查 21:xx）：
+  - NO 11/12/22：完全空行（仅货架/数量/图）→ 逐张识图定性
+  - NO 13-16（Bianchi）：`Raccordo Maschio Attacco Veloce` 3/4"/1/2"/1"/1-1/4"，品名列含 VELOX MASCHIO/FEMMINA 多尺寸文本（供应商发票合并书写）→ 结合尺寸列+识图拆分
+  - NO 17（Bianchi）：`Clip R` 1 1/2" qty21
+  - NO 18-29：Camlock 族（Tipo D / Maschio / Tipo C / DC / A；尺寸 3/4"-3" 316/INOX/304；供应商 MG/I.S.I./空）→ 重点族，识别型别+材质+尺寸
+  - NO 21/23/28/29：品名列与 PN/尺寸列疑似矛盾（如 21 写 API 铝合金法兰 vs PN Camlock Tipo D 1" 316；23 写 MK INOX ø080x3" vs size 1 1/2" 304）→ 以识图+尺寸列为准，矛盾提醒用户
+  - NO 30（I.S.I.）：TRECCE 盘根 BADERNA VETRO+PTFE 4116 SEZ.15x10 315g/m 5KG
+  - NO 31：PN=PTFE qty3 无尺寸 → 须识图
+- method_识别: 图片 `D:\sara\库存管理\图片\W1-SHELF4	-31.jpg` **全部存在**。每行逐张识图（Read 直接读本地，≤2000px 不缩放；超大先 PIL 缩）；禁止按族批量假设；图文/型号对不上立即标注提醒用户。
+- method_字典: 先查 `翻译字典.xlsx` 缺词条先补（预计新增：CAMLOCK TIPO A/C/D/DC、MASCHIO/FEMMINA 已有、CLIP R、TRECCIA/BADERNA 盘根、PTFE、API 等，含原文/扩展名/中文/同义词/图片）。匹配覆盖词组+单词+缩写。
+- method_发票检索: `invoice_full_dump.txt` + `物料发票表20260911.xlsx`（109 SHEET 全部供应商，含 Bianchi/MG/I.S.I./MALDOTTI）+ `近3年发票物料_产品列表.xlsx`。关键词：VELOX/MASCHIO/FEMMINA/RACCORDO RAPIDO/CAMLOCK/CAM-LOCK/TIPO A/C/D/DC/CLIP/TRECCIA/BADERNA/PTFE/盘根等，词组+单词+缩写全量。
+- method_命中判定（沿用）: ①条码规则：非 PEN=死库存、PEN=待定；②同基材 304↔316↔镀锌 命中、黄铜 vs 不锈钢不命中；③测量误差不大命中（先汇报）；④厂商简化放宽；⑤同族仅尺寸不同且发票查无此尺寸 → 沿用同族其他数据 + 归死库存。
+- method_写回: 命中 → 写发票准确信息 + 同步近3年「已命中」SHEET（含供应商）；未命中 → 淡蓝 DDEBF7 整行 + 中文品名「未命中：原因」；待定 → 「待定：原因」；分类：紧固件命中=CONSUMABLE、未命中=dead inventory、命中非紧固件=留空。**图片路径**：NO 11-31 行统一单反斜杠绝对路径 `=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF4\<n>.jpg","photo link")`。改前备份。
+- anti_lazy_checklist:
+  - [x] 每行逐张识图（11-31.jpg 全存在，全部看）
+  - [x] 字典先补再检索；检索覆盖词组+单词+缩写
+  - [x] 每 ≤20 件停一次交检（批3 停一次、批4 再停）
+  - [x] 未 plan_approved 前不写主表（当前只读探查）
+  - [x] 结合产品名+尺寸列+识图三重判断，品名/尺寸矛盾行提醒用户
 
 ### Cursor 计划审批（Cursor 填）
 
