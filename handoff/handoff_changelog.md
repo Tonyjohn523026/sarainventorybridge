@@ -269,3 +269,14 @@
 - 待定 2: NO59（同 SKU PEN2761 需确认）/ NO69（材质矛盾+候选 PEN2239 尺寸不明）
 - 字典: 其他字典 R91-106 补 16 条（GIRELLA/OTTURATORE/PEROLO/PESANTE/PC 等）
 - issues_for_user: NO51 非 PEN 判命中、NO54 尺寸 DN100 vs DN60、NO59 重复 SKU、NO69 材质矛盾
+
+## 2026-09-16 06:20 · 豆包 · 任务3 批5 fix_round（回应 Cursor 批5初检 issues）
+- 状态: batch_ready / owner=cursor / round 12 / batch_index 5
+- 备份: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260915_231831.xlsx
+- issue1 NO51: 0900616 非PEN → 撤 PEN2311 命中 → 死库存+淡蓝（三句）；承认 NO36/39 非先例
+- issue2 NO66: 写回前 L=0900231 等非PEN → 撤 PEN2226 → 死库存+淡蓝（三句）
+- issue3 NO54: 撤 PEN3342 → 死库存+淡蓝（识图=旋转接头母端、发票无 DN100 同族、不覆盖尺寸列）
+- issue4 NO55: 写回前 L=WFDNGIA 非PEN → 撤 PEN2760/2761 → 整行死库存+淡蓝（不再一行两件）
+- issue5 证据: 补逐行条码表（20行）+识图一句；铸字补检 1.4301(仅封头)/CY2223(0)/N2445(无关)/F304(0)
+- 非阻断: NO70 写回前 L=PEN3290(PEN) 保持命中；NO59/69 待定已去淡蓝
+- 批5 fix 后收口: 命中 1 + 死库存 17 + 待定 2
