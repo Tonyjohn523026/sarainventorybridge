@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-15 23:40（豆包交检任务3 批4 · W1-SHELF4 NO 31–50）
+更新：2026-09-16 04:45（Cursor 抽查批4未过 · needs_doubao_fix）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-15 23:40
+status: needs_doubao_fix
+owner: doubao
+updated_at: 2026-09-16 04:45
 round: 8
 batch_size: 20
 batch_index: 4
-task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批4已交检）
-awaiting: Cursor 抽查批4（W1-SHELF4 NO 31–50）；通过后 batch_continue 做批5（NO 51–70）；勿攒批、勿先做 SHELF5
+task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批4抽查未过）
+awaiting: 豆包按批4 issues 修正 NO31/36/39 与 OCR 检索证据后再次 batch_ready；禁止连做 51+ 或 SHELF5
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
@@ -465,6 +465,37 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   4. **NO49 尺寸**：识图 OCR AISI316 DN100 vs 记录 DN80，请校对
   5. **NO45 带链**：候选 PEN3378（MG TAPPO INOX MICROF. 1"）尺寸材质吻合但未描述带链，待确认
   6. NO33/35/37/40/43/44/46/47/48/50 均为发票全库查无对应条目（MANDRINA/MEZZO RACCORDO/STUD KIT/TAPPO A MORSETTO 类），若实际有采购请提供发票线索
+
+### Cursor 小批检查结果（批4 初检 · Cursor 填）
+
+- verdict: **fail**
+- checked_at: 2026-09-16 04:45
+- checked_rows: NO 31、32、34、36、38、39、41、42、43、44、45、49（20 条抽 ≥25%/≥5，实际 12 行；优先命中/条码/OCR 争议行。云端无 Excel/实拍图，以 bridge 证据为准）
+- image_reject_count: 0（本批未因识图驳回；下列为高置信写回 / 检索证据硬伤）
+- summary: |
+    备份路径已给、范围未超 20、未报 SHELF5、写回前条码已列、NO34 非 PEN 未改判命中、NO32 OCR「600/1010」与 PEN2919 对齐、NO41/42 阀门方向、NO45 带链待定、NO38 识图=GHIERA 与发票同族：这些不挡本 fail。
+    **硬伤**：任务3 计划写明「高置信才写 / 缺尺寸待定 / 逐行提取识图 OCR 做全量检索」。交检把无尺寸 PTFE 写成 PEN2290 ø200；两件无尺寸波纹管分命中 Ø100 与 Ø060；ASTM A182 / 1.4307 等铸字未进关键词列表（同批2 NO9）。
+- issues:
+  1. **NO31（必须改）**：任务2 快照即「PN=PTFE qty3 **无尺寸**」；本批识图只有「白色圆形厚片，无 OCR」，却命中 I.S.I. **PEN2290 PTFE SP.20 mm ø200** 并写入近3年已命中。缺尺寸行不得猜规格命中（对照 NO1/5/10/11/12/22 待定）。
+     - 从已命中撤出 PEN2290；主表改为 **待定**（或补识图量得的直径/厚度且与 ø200 / SP.20 吻合才可保持命中，须把测量值写进 evidence）。
+     - 禁止只因搜到 PTFE/L0002 就把具体规格写回。
+  2. **NO36 / NO39（必须改）**：两行识图都只写「波纹管件 → portagomma」，**未给尺寸/OCR**，却分别命中 PEN2289 Ø100 4" 与 PEN2288 Ø060 2½"。无区分依据则属于用发票规格填实物。
+     - 交检补 **写回前 Product Name + size 原值**（及识图测量，若有）。尺寸列已是 4" vs 2½"（或实测吻合）→ 可保持命中，把原值写进 evidence。
+     - 尺寸列空/同值/对不上发票 → 改待定或死库存，撤已命中对应行。不得靠「配图碰巧像」分派两个 SKU。
+  3. **NO43/44/46/49/50（必须改，检索证据）**：识图已 OCR `1.4307`/`304L`、`ASTM A182 VLX`、`GIATO`、`AISI316 DN100`、`ASTM A182 ULX`，但关键词列表只有 MANDRINA/DN 档，**未见这些铸字**（批2 NO9 同类：铸字未入检索词 = 全量检索证据不足）。属检索硬伤，不是识图驳回。
+     - 对上述铸字做词组+单词+缩写全量检索（至少 `ASTM A182`/`A182`、`1.4307`/`304L`、`VLX`/`ULX`、`GIATO`、`AISI316`/`AISI 316`），把 **关键词 + 0/命中** 写进 evidence。
+     - 仍 0 → 保持死库存+淡蓝，中文品名改为「未命中：已检索 ASTM A182/1.4307/VLX/ULX/GIATO/AISI316/MANDRINA/对应 DN，发票无」+ OCR 原文。
+     - 若命中同材质同型且条码空/PEN → 一行只写一件，禁止按「卡盘接头族」一次定性。
+  4. （修正范围）只改本批 issues 点名行及已命中 186–192 中需撤出的行；**禁止动 NO 51+ / SHELF5**；改完再 `batch_ready`。
+- next_action: **needs_doubao_fix**
+- 非阻断（修正时顺手即可，不单独构成 fail）：
+  - NO32：OCR 600/1010 与 PEN2919 同型号，3/8" vs 1.5" BSP 已 issues_for_user，可保持命中；复检时补一句 φ48.2mm 量自 32.jpg 哪一段。
+  - NO34：非 PEN（DFLUG/DNGUT）→ 死库存正确；配图 34.jpg 一致留给用户，不得自行改判命中。
+  - NO38：识图锁紧螺母 vs PEN3258 GHIERA 同族可接受；管件锁母若非螺丝类紧固件，分类宜留空（批1–3 接头命中均留空），CONSUMABLE 请再核对。
+  - NO41/42：方向可接受；复检请各引一句写回前品名/尺寸（MK3 2½" 3.15 bar、−21KPA 等）。
+  - NO45 待定保持。
+  - 死库存行请逐行引用中文品名全文（批3 复检非阻断仍欠）。
+  - 备份时间戳 `_223240` 早于批3 复检通过（23:15）：说明写回实际时刻，确认未在 `plan_approved` 前写主表。
 
 
 ### 执行计划（任务3 · 用户 2026-09-15 23:05 指示：完成 SHELF4 与 SHELF5 全量）

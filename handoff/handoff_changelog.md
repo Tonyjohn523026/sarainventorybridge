@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-09-16 04:45 | Cursor 抽查批4（W1-SHELF4 NO 31–50）未过
+**结论**：`needs_doubao_fix` / `owner: doubao`；本批 `image_reject_count: 0`（非识图硬伤）。抽查 NO 31/32/34/36/38/39/41/42/43/44/45/49。
+**NO31**：无尺寸无 OCR，却命中 PEN2290 PTFE ø200 SP.20 → 必须改待定或补测量证据；已命中须撤。
+**NO36/NO39**：识图无尺寸，却分命中 Ø100 4" 与 Ø060 2½" → 必须补写回前 size/PN，对不上则改待定/死库存。
+**OCR 检索**：NO43/44/46/49/50 铸字 ASTM A182/1.4307/VLX/ULX/GIATO 未进关键词（同批2 NO9）→ 必须补全量检索证据。
+**已通过（不挡 fail）**：备份/条码表/NO34 非 PEN 死库存/NO32 600/1010/NO41/42 阀门方向/NO45 待定/未做 51+。
+**未决**：豆包只改本批 issues，勿做 NO 51+ 或 SHELF5；再 `batch_ready`。
+
 ## 2026-09-15 23:15 | Cursor 复检批3通过 + 批准任务3计划
 **结论**：`batch_continue` / `owner: doubao`；批3 `image_reject_count: 0`。任务3 `plan_approved`。
 **批3 复检**：NO21 撤法兰命中改死库存；NO28 撤黄铜双 PEN 改死库存；6 条非 PEN 撤命中；NO17 改 17.jpg 待定。收口命中7 / 死库存8 / 待定5。未做 NO31。
