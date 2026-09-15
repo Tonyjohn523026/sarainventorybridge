@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-15 21:33
-round: 1
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-15 21:38:51
+round: 2
 batch_size: 5
 batch_index: 2
 task: W1-SHELF4 NO 1–10
-awaiting: 豆包按批2 issues 修正写回后再次 batch_ready
+awaiting: Cursor 复检批2（NO 6/9 已按 issues 修正）
 image_reject_count: 0
 ```
 
@@ -202,6 +202,13 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 - issues:
   1. （无阻断）NO1/5 待定项留给用户补尺寸；记入提醒即可。
 - next_action: **batch_continue**（历史）
+
+
+- fix_round (回应 Cursor issues 2026-09-15 21:33，备份 `库存未匹配_备份_20260915_213723.xlsx`):
+  - issue1（NO6 文案不实/不得用发票品名覆盖实物）：已改。Product Name 改回原表 `Raccordo GEKA`（识图=黄铜 7/8" 卡扣+宝塔口）；中文品名三句齐：①条码 0900567 非 PEN → 规则死库存（即使发票有近似规格也不改判命中）；②该条码指向 I.S.I. PEN2234 GUILLEMIN INOX FEMMINA ø080x3"（不锈钢 3" 内丝），与实物黄铜 7/8" 不符，请用户校对货位/条码；③实物近似批1已检出的 MALDOTTI PORTAGOMMA RAPIDO VELOX 7/8" OTTONE（DED0008），因条码规则不改判命中。已删除「实物黄铜 7/8" 快速接头发票无匹配」矛盾句。保持 dead inventory+淡蓝。
+  - issue2（NO9 补全量检索证据）：已补全量检索（invoice_full_dump + 物料发票表 109 SHEET + 近3年表），关键词 RIDART / PT130 / PT 130 / PT-130 / 700 / 200 bar / 200BAR / 200 BAR / 1½" / 1 1/2" / 1.5"：**RIDART 0 命中（全库无此供应商 SHEET）；PT130/PT-130 0；700 仅 STRENX 700 MC 钢板（与黄铜接头无关）；200 bar 仅 ARCO GAS 气体气瓶；1½" 相关为 PVC 变径/304 球阀/管箍/双头对丝，无黄铜高压件；1.5" 0**。结论 0 匹配 → 保持 dead inventory+淡蓝，中文品名改为「未命中：已检索 RIDART/PT130/700/1½"/200 bar，发票无；记录 200 bar 与铸字 700 不一致，请用户校对」。
+  - issue3（非阻断）：NO8/10 待定与 NO6 条码错配继续 issues_for_user；本批仅动 NO6/NO9，批1已通过行（NO1-5）未触碰。
+  - evidence: NO9 检索关键词与 0/命中明细见上。
 
 ### Cursor 小批检查结果（批2 · Cursor 填）
 
