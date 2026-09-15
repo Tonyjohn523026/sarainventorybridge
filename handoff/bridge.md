@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: plan_approved
-owner: doubao
-updated_at: 2026-09-15 21:50
-round: 3
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-15 22:35
+round: 4
 batch_size: 20
 batch_index: 3
 task: W1-SHELF4 NO 11–31（任务2）
-awaiting: 豆包做批3（NO 11–30），做完立刻 batch_ready，勿连做 NO 31
+awaiting: Cursor 抽查批3（NO 11–30，20条）；批4=NO 31 待批3通过后做
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
@@ -296,6 +296,60 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 - next_action: **done**
 
 ---
+
+
+- batch_index: 3
+- batch_rows: W1-SHELF4 NO 11-30（数据行 R14-R33，20 条）
+- batch_done_actions:
+  1. 备份：`库存未匹配_备份_20260915_221150.xlsx`（批3写回前；另有批3前 220101）
+  2. 补字典 7 条（其他字典（待定）SHEET 末尾）：TIPO A / TIPO C / TIPO D / TRECCIA / BADERNA / PTFE / CLIP R（含原文/扩展名/中文/同义词/图片，图片=W1-SHELF4 实拍图）
+  3. 逐张识图 NO 11-30（11-21 直接 Read 原图；22-30 原图 3024-5712px 已 PIL 缩放 ≤2000px 存 `C:\Users\85345\Downloads\img_resized\` 再 Read）：
+     - NO11: 黑色工业管件接头（六角+阶梯插口+挂耳），OCR「JECS SS10」→ 待定（发票 0）
+     - NO12: 不锈钢接头（六角+凹槽端），OCR「A-250 316」→ 待定（发票 0）
+     - NO13: 黄铜公头快速接头 3/4"（卡扣+外螺纹+密封圈）→ VELOX MASCHIO 3/4"
+     - NO14: 黄铜公头快速接头 1/2"（OCR 1/2"）→ VELOX MASCHIO 1/2"
+     - NO15: 黄铜母头快速接头（双耳卡扣+内螺纹）→ VELOX FEMMINA 1"（品名列 FEMMINA 与识图吻合，PN Maschio 为旧信息）
+     - NO16: 黄铜公头快速接头（外螺纹+卡扣耳+密封圈）→ VELOX MASCHIO 1-1/4"
+     - NO17: 黄铜接头顶部黑密封圈+两侧卡扣 → VELOX 1-1/2" 母头（记录 Clip R 疑同物异名）
+     - NO18: **银色 R 型开口销（COPIGLIA）** vs 记录 Camlock Tipo D size R → 图文矛盾，待定
+     - NO19: 银色抛光快速接头（内螺纹+卡耳）→ A 型 3" 公头
+     - NO20: 银色圆形端盖+两侧环拉手（OCR AR）→ DC 堵盖 3/4"（记录 Tipo D 图文矛盾）
+     - NO21: 银色快速接头（六角+挂耳）→ 与发票 PEN2069 API 铝法兰 DN100（图=21.jpg）一致
+     - NO22: 银色快速接头（六角+内螺纹+挂耳，OCR AR）→ 待定（空行缺尺寸）
+     - NO23: 银色快速接头（内螺纹+六角+挂耳）→ 发票 PEN2292 A 型 3"（图=23.jpg）
+     - NO24: 银色卡扣锁快速接头，OCR「C-200 316」→ C 型 2" 316 确认
+     - NO25: 黄铜冲压件（环形+卡扣+圆孔安装耳，OCR U）→ VELOX 堵头特征（PEN1623）
+     - NO26: 银色 DC 盲盖，OCR「316 DC-200」→ DC 2" 316 吻合
+     - NO27: 银色 DC 防尘盖，OCR「DC-3" 316」→ DC 3" 316 吻合
+     - NO28: 银色快速接头，OCR「316 4-200」→ 发票 PEN2332/PEN2447（图=28.jpg）
+     - NO29: 银色快速接头，OCR「A-2" 316」→ A 型 2" 316 吻合
+     - NO30: 白色盘根绳（编织纤维）→ BADERNA VETRO+PTFE（图=30.jpg）
+  4. 发票全量检索（invoice_full_dump + 物料发票表 109 SHEET + 近3年表）：关键词 VELOX/MASCHIO/FEMMINA/RACCORDO RAPIDO/CAMLOCK/CAM-LOCK/TIPO A/TIPO C/TIPO D/DC/DUST CAP/CLIP R/TRECCIA/TRECCE/BADERNA/PTFE/COPIGLIA/JECS/A-250 + 物料编号 0900009/0900187/0900603/0900661/0900657/0900006/1500023/RM12/RM34/RM114/RF1/TV，词组+单词+缩写全量。
+     - 关键命中证据（发票配图=本行实物图）：PEN1542/1543/1541→13.jpg（NO14/13/16）；PEN1538→15.jpg（NO15）；PEN2315→15.jpg（NO17）；PEN2292→23.jpg（NO23）；PEN2069→21.jpg（NO21）；PEN2332/PEN2447→28.jpg（NO28）；PEN2086→30.jpg（NO30）
+     - VELOX 公头族：MALDOTTI PEN1543(3/4")/PEN1542(1/2")/PEN1541(1-1/4")，母头 PEN1538(1")/PEN1539(1-1/2")/PEN1540(3/4")，堵头 PEN1623，另 I.S.I. PEN2315(1½" GAS F 内丝)
+     - Camlock 族：I.S.I. PEN2292(A3")/PEN2291(A2")/PEN2293(D2")/PEN2294(D3")/PEN2296(DC3")，MG PEN3339/3348(DC2")/PEN3340/3349(DC3")；C 型 2" 仅 DED0007 死库存建档；DC 3/4" 仅 DED0002 死库存建档
+     - 盘根：I.S.I. PEN2086 BADERNA VETRO+PTFE 4116 SEZ.15x10 315g/m 5KG（完全匹配）
+     - JECS/SS10/A-250/CLIP R：全库 0
+  5. 判定写回（备份后）：
+     - **命中 14 条**：NO13→PEN1543、NO14→PEN1542、NO15→PEN1538（与NO7同物料，已命中序号177不重复）、NO16→PEN1541、NO17→PEN2315、NO19→PEN2292、NO21→PEN2069、NO23→PEN2292、NO25→PEN1623、NO26→PEN3339、NO27→PEN3340、NO28→PEN2332+PEN2447、NO29→PEN2291、NO30→PEN2086（写发票品名/供应商/物料编号/单价/税率/行总价；非紧固件分类留空）
+     - **死库存 2 条**（淡蓝 DDEBF7 整行 + dead inventory）：NO20（识图 DC 堵盖 3/4" vs 记录 Tipo D 图文矛盾；发票仅 DED0002 建档近3年无真实发票）、NO24（识图 OCR C-200 316 确认 C 型 2"；发票仅 DED0007 建档）
+     - **待定 4 条**（无背景）：NO11（JECS SS10 发票 0，缺尺寸）、NO12（A-250 发票 0，缺尺寸）、NO18（图文矛盾开口销缺尺寸）、NO22（空行缺尺寸）
+     - 记录纠错（以品名+发票图+识图三方为准）：NO21 记录 Camlock D 1"316→API 铝 DN100；NO23 记录 1½"304→A 型 3"316；NO28 记录 A 3"316→PEN2332 黄铜 4"变径+PEN2447 VK 3"外丝；NO25 供应商 Bianchi→MALDOTTI
+  6. 图片路径 NO 11-30 已统一 `=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF4\<n>.jpg","photo link")` 单反斜杠绝对路径
+  7. 近3年表：13 行命中物料从原 SHEET 移动到「已命中」SHEET（序号 178-190，含供应商字段），原行已删除
+- backup: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260915_221150.xlsx
+- dict_changed: yes（+7 条）
+- evidence: 识图结论见上；发票配图与实物图一一对应为命中关键证据；检索关键词与 0/命中明细见第4条；近3年已命中新增序号 178-190
+- issues_for_user:
+  1. **NO18 图文矛盾**：记录 Camlock Tipo D size R，识图为银色 R 型开口销（COPIGLIA）——缺尺寸待测；候选 PEN1446(INOX 3.2x63)/PEN1447(INOX 4x40)，测量后可回填命中
+  2. **NO20 图文矛盾**：记录 Camlock Tipo D 3/4"，识图为 DC 型堵盖（OCR AR）→ 已按识图判死库存（发票仅 DED0002 建档）
+  3. **NO21 记录与品名矛盾**：记录 Camlock Tipo D 1" 316，品名 API 铝法兰 DN100 → 已按品名+发票图（21.jpg=PEN2069）命中 API 铝 DN100，旧记录请校对
+  4. **NO23 记录与品名矛盾**：记录 1½" 304，品名/识图/发票图=3" 316 A 型（PEN2292）→ 已命中并纠正；品名另含 0900657（MK 3" 内丝，同图 23.jpg），若实物为两件请拆分核对
+  5. **NO25 供应商归属**：记录 Bianchi，识图黄铜卡扣环件 → 命中 MALDOTTI PEN1623（TAPPO RAPIDO VELOX），供应商记录与发票归属不符请校对
+  6. **NO28 记录与品名矛盾**：记录 A 型 3" 316，品名/图（28.jpg）=PEN2332 黄铜 4"变径 + PEN2447 VK 3"外丝 → 已命中并纠正
+  7. **NO30 尺寸差异**：尺寸列 10x10 vs 发票/品名 15x10，以发票为准
+  8. NO11/12/22 待定缺尺寸/型号，NO17 记录 Clip R 与 VELOX 命名差异，请用户补测/校对
+
 
 ## 操作规则（两边必守）
 
