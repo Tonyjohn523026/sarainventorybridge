@@ -2,7 +2,7 @@
 更新：2026-09-15 21:45（Cursor 批2复检 pass → done）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
-> 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 5 件）必须交检，禁止一口气做完再汇报**。
+> 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
 
 ## 职责分工（用户 2026-09-15 锁定）
 
@@ -38,10 +38,11 @@ status: done
 owner: doubao
 updated_at: 2026-09-15 21:45
 round: 2
-batch_size: 5
+batch_size: 20
 batch_index: 2
 task: W1-SHELF4 NO 1–10
 awaiting: 用户拍板待定/错配项；本任务两批均已通过
+policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
 
@@ -252,7 +253,7 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 ## 操作规则（两边必守）
 
 1. **先计划后动手**：新任务必须 `plan_submitted` → Cursor `plan_approved` 后才能写 Excel。
-2. **小批交检**：默认每 **5** 件（`batch_size`）停一次 → `batch_ready`；未抽查通过不得做下一批。
+2. **小批交检**：默认每 **20** 件（`batch_size`）停一次 → `batch_ready`；未抽查通过不得做下一批。
 3. 一次只有一个 `owner`；改状态同时改 `updated_at`。
 4. Cursor 抽查重点：是否真识图、是否全量检索痕迹、字典是否先补、确认列/淡蓝/原因是否合规。
 5. 发现「未识图就定性 / 只搜一词 / 一批做完才汇报」→ 直接 `fail` + `needs_doubao_fix` 或 `plan_rejected`。

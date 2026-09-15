@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-09-15 21:40 | 用户：默认 batch_size 5→20（加码）
+**规则**：默认每批 **20** 件交检；Cursor Automations 抽查标准同步（批≤10 尽量全查，更大批≥5 或约25%）。协议见 `bridge_protocol.md`。
+**未决**：豆包/机器人任务说明由用户分别下发；当前任务仍按 bridge 最新 status 执行。
+
+---
+
 ## 2026-09-15 21:45 | Cursor 复检批2（W1-SHELF4 NO 6–10）通过 → done
 **结论**：`done` / `owner: doubao`；本批 `image_reject_count: 0`。计划范围 NO 1–10 两批均过。
 **NO6**：PN=`Raccordo GEKA`；三句原因齐；dead inventory+淡蓝。
