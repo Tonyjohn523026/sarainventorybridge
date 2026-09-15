@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-16 04:55（Cursor 复检批4通过 · batch_continue）
+更新：2026-09-16 05:35（豆包批5 NO51-70 完成 · 交检）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-16 04:55
-round: 10
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-16 05:35
+round: 11
 batch_size: 20
-batch_index: 4
-task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批4复检通过）
-awaiting: 豆包做批5 W1-SHELF4 NO 51–70；做完立刻 batch_ready；禁止连做 71+ 或 SHELF5
+batch_index: 5
+task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批5已交检）
+awaiting: Cursor 复检批5（NO 51–70）；通过后 batch_continue 做批6（NO 71–90）；勿攒批、勿先做 SHELF5
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
@@ -494,6 +494,37 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
     - NO49：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA，发票无（OCR 原文 AISI316 DN100 vs 记录 DN80 待校对）`
     - NO50：`未命中（死库存）：已检索 ASTM A182/1.4307/304L/VLX/ULX/GIATO/AISI316/MANDRINA/DN65，发票无（OCR 原文 ASTM A182 DN65 304 ULX）`
   - evidence: 批4 fix 后收口 = **命中 6**（NO32/36/38/39/41/42）+ **死库存 12**（NO33/34/35/37/40/43/44/46/47/48/49/50，淡蓝+原因全文见上）+ **待定 2**（NO31 缺尺寸 / NO45 带链）。主表与近3年回读验证通过（186-191 连续、PEN2290 已撤、PEN3258 分类已清空）。
+
+
+## ② 当前小批进度（批5 · W1-SHELF4 NO 51–70）
+- batch_5 (NO 51–70) 完成，2026-09-16 05:35 交检；备份 `库存未匹配_备份_20260915_230903.xlsx`（写回前）
+- **命中 5**（无背景色）：
+  - **NO51** MASCHIO A MANDRINA DN100 → I.S.I. **PEN2311**（0900616 RACCORDO ECO INOX MASCHIO ø100 SFERA，发票配图 51.jpg 与本货位同图，17€）。注：0900616 非 PEN 条码，但为发票 I.S.I. 物料编码精确对应+同图，按 NO36/39 先例判命中。
+  - **NO54** FEMMIA A MANDRINA DN100 → MG **PEN3342**（RACC. PORTAGOMMA 2"1/2 FEMM. GIR. x DN60 CON GUARNIZIONE，发票配图 54.jpg 同图，45€）。⚠️ 记录尺寸 DN100 vs 品名/发票 DN60 矛盾 → issues_for_user。
+  - **NO55** GIRELLA DN40 304 → Italgomma **PEN2760**（WFDNGIA01040）+**PEN2761**（WFDNGIA01050）锻制 304 活接头 DN40/DN50（发票配图 55.jpg 同图）。
+  - **NO66** GUARN TEFLON φ63.2xφ100.9 → I.S.I. **PEN2226**（0900231 GUARNIZIONE PTFE OTTURATORE VALVOLA DI FONDO DN100，发票配图 66.jpg 同图，44.85€）。
+  - **NO70** GUARN TEFLON φ82xφ190x2 → MG **PEN3290**（GUARNIZ. SICUREZZA PEROLO IN PTFE D.190x82x2，18件 7.3€，尺寸逐字吻合）。
+- **死库存 13**（淡蓝 DDEBF7+原因全文）：
+  - NO52 `MANDRINA 卡盘接头发票全库无此关键词（D50）`
+  - NO53 `GIRELLA 无 DN25 304（铸字 DN25 1.4301(304) 已检索，发票无此规格）`
+  - NO56 `已检索 ASTM A182/F304/DN40/MANDRINA，发票无（OCR 原文 ASTM A182 F304 DN40 CY2223）`
+  - NO57 `MANDRINA 卡盘接头发票全库无此关键词（DN100）`
+  - NO58 `GIRELLA 无 DN80（发票仅 DN40/DN50/DN65 规格）`
+  - NO60 `MANDRINA 卡盘接头发票全库无此关键词（DN150）`
+  - NO61 `FORT VALE 方形纸垫 φ77.1x113x113 发票无`
+  - NO62 `FORT VALE 纸垫 φ72 发票无（印字 FORT VALE 确认，发票无对应 GUARNIZIONE）`
+  - NO63 `Guard 品牌垫片 φ140.2 发票无（GUARD 关键词搜不到）`
+  - NO64 `PTFE 垫 φ113.1xφ93 尺寸发票无`
+  - NO65 `PTFE 垫 φ79xφ132.1 尺寸发票无`
+  - NO67 `STEP SEAL 阶梯密封圈 φ25.2xφ30x8 发票无（关键词搜不到）`
+  - NO68 `PTFE 垫 φ51.2xφ92.2 尺寸发票无`
+- **待定 2**（淡蓝）：
+  - NO59 `待定：GIRELLA DN50 候选 Italgomma PEN2761（与 NO55 同 SKU），发票行已被 NO55 引用，需确认是否同批重复清点`
+  - NO69 `待定：识图=蓝色 universal 法兰垫（非纸垫），候选 I.S.I. PEN2239（0900807 通用 PTFE 垫）尺寸不明；记录 GUARN CARTA DN100 材质与识图不符`
+- **字典补充**（其他字典 R91-106，16 条）：GIRELLA/OTTURATORE/PEROLO/GUARNIZIONE IMBUSTATA/IMBUSTATA/CNAF/UNIVERSALE/SFERA/SP./CHEMFLY/ECO/STEP SEAL/FORG./PESANTE/PC/HT:（含图片列）
+- **近3年已命中**：追加 192-197（PEN2311/PEN3342/PEN2760/PEN2761/PEN2226/PEN3290，含供应商字段）
+- **issues_for_user**：NO51 非 PEN 条码判命中待确认；NO54 尺寸 DN100 vs DN60 矛盾；NO59 同 SKU 是否重复；NO69 材质矛盾（纸垫 vs 蓝色 PTFE 复合垫）
+- evidence: 识图 20/20（NO53/56/62/63/69/70 有铸字/印字 OCR；NO54/55/66/70 发票配图=货位实拍同图）；检索词组+单词+缩写全覆盖（GIRELLA 23/PORTAGOMMA 20/GUARD 5/UNIVERSAL 7/PTFE 全量/STEP SEAL 0/MANDRINA 0/A182/F304 0）；近3年与主表回读验证通过
 
 
 ### Cursor 小批检查结果（批4 初检 · Cursor 填）

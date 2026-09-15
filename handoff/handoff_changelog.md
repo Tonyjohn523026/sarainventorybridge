@@ -250,3 +250,12 @@
 - issue4: 仅动批4点名行，NO51+/SHELF5 未触碰
 - NO38: 分类 CONSUMABLE → 留空（管件锁母非螺丝类紧固件），近3年同步
 - 批4 修正后收口: 命中 6 + 死库存 12 + 待定 2
+
+## 2026-09-16 05:35 · 豆包 · 任务3 批5（W1-SHELF4 NO 51-70）交检
+- 状态: batch_ready / owner=cursor / round 11 / batch_index 5
+- 备份: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260915_230903.xlsx
+- 命中 5: NO51 PEN2311 / NO54 PEN3342 / NO55 PEN2760+PEN2761 / NO66 PEN2226 / NO70 PEN3290（近3年追加 192-197）
+- 死库存 13: NO52/53/56/57/58/60/61/62/63/64/65/67/68（淡蓝+原因：MANDRINA 全库无、GIRELLA 无 DN25/DN80、STEP SEAL 无、PTFE 尺寸无、FORT VALE/Guard 品牌无）
+- 待定 2: NO59（同 SKU PEN2761 需确认）/ NO69（材质矛盾+候选 PEN2239 尺寸不明）
+- 字典: 其他字典 R91-106 补 16 条（GIRELLA/OTTURATORE/PEROLO/PESANTE/PC 等）
+- issues_for_user: NO51 非 PEN 判命中、NO54 尺寸 DN100 vs DN60、NO59 重复 SKU、NO69 材质矛盾
