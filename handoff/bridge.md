@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-15 23:15（Cursor 复检批3 pass + 批准任务3计划）
+更新：2026-09-15 23:40（豆包交检任务3 批4 · W1-SHELF4 NO 31–50）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-15 23:15
-round: 7
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-15 23:40
+round: 8
 batch_size: 20
-batch_index: 3
-task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批3已 pass）
-awaiting: 豆包做批4（W1-SHELF4 NO 31–50），做完立刻 batch_ready；勿攒批、勿先做 SHELF5
+batch_index: 4
+task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批4已交检）
+awaiting: Cursor 抽查批4（W1-SHELF4 NO 31–50）；通过后 batch_continue 做批5（NO 51–70）；勿攒批、勿先做 SHELF5
 policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
 image_reject_count: 0
 ```
@@ -417,6 +417,55 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   2. （无阻断）已命中 178–185 含 RF1[NO7]：写清是否重排吞掉原序号177，避免和批2 已命中行重复/丢失。
   3. （无阻断，留给用户）NO11/12/22 缺尺寸；NO17 Clip R vs VELOX；NO18 开口销；NO20 DC vs Tipo D；NO21/23/28 货位/条码/配图错配；NO25 vs NO8 供应商/材质；NO6 条码错配（任务1）。
 - next_action: **batch_continue**（下一批=任务3 批4：W1-SHELF4 NO 31–50）
+
+- batch_index: 4
+- batch_rows: W1-SHELF4 NO 31-50（数据行 R34-R53，20 条）
+- batch_done_actions:
+  1. 备份：`库存未匹配_备份_20260915_223240.xlsx`（写回前）
+  2. 字典：批4 涉及词条前期已补全（其他字典 SHEET R75-R90：MANDRINA / MASCHIO A MANDRINA / FEMMIA A MANDRINA / TAPPO A MORSETTO / STUD KIT / VALVOLA DI SICUREZZA / VALVOLA DI VUOTO / GUARNIZIONE IN PTFE / PORTAGOMMA / MEZZO RACCORDO FILETTATO / GHIERA 等），本轮 dict_changed: no
+  3. 逐张识图 NO 31-50（每行一句话结论）：
+     - NO31: 白色圆形厚片（PTFE 圆垫片），无 OCR → 候选 PEN2290
+     - NO32: 银色金属接头（六角+螺纹端+焊接端），OCR「FORT VALE 600/1010 CAST 473974」→ 600/1010 半螺纹焊接短管
+     - NO33: 银色环形台阶状接头（内壁螺纹）→ mezzo raccordo filettato
+     - NO34: 白色环形密封圈（PTFE 垫）→ 底阀/蝶阀特氟龙垫
+     - NO35: 银色环形接头（螺纹+焊接端）→ mezzo raccordo filettato
+     - NO36: 波纹管件（软管接头/宝塔状）→ portagomma
+     - NO37: 环形台阶状零件（内壁螺纹）→ 卡盘接头
+     - NO38: 六角锁紧螺母（螺纹圈）→ GHIERA 锁紧螺母
+     - NO39: 波纹管件（软管接头）→ portagomma
+     - NO40: 细长金属杆件（双头螺纹+六角）→ stud kit 螺柱
+     - NO41: 金属阀体（圆盘+螺纹+阀杆）→ 安全阀
+     - NO42: 金属管接头（带黄色衬套/密封）→ 负压安全阀
+     - NO43: 环形管件，OCR「DN 80 1.4307(304L)」→ 卡盘接头
+     - NO44: 环形管件，OCR「DN65 304 ASTM A182 VLX」→ 卡盘接头
+     - NO45: 圆形堵头（带链环+六角），OCR「DN25 1.4307 CP」→ 内丝堵头带链
+     - NO46: 环形管件，OCR「DN40(1½) GIATO」→ 卡盘接头
+     - NO47: 圆形盖+卡箍耳（带密封）→ 卡箍堵头
+     - NO48: 环形管件（带沟槽）→ 卡盘接头
+     - NO49: 环形管件，OCR「AISI316 DN100」→ 卡盘接头
+     - NO50: 环形管件，OCR「ASTM A182 DN65 304 ULX」→ 卡盘接头
+  4. 发票全量检索（invoice_full_dump + 物料发票表20260911.xlsx 109 SHEET + 近3年表），词组+单词+缩写全覆盖：600/1010、MANICOTTO A SALDARE、MEZZO RACCORDO、MANDRINA、PORTAGOMMA、GHIERA、TAPPO、MORSETTO、STUD、PAROLO、VALVOLA DI SICUREZZA、VALVOLA DI VUOTO、FORT VALE、MK3、TEFLON、PTFE、TARATA、SETTING、-21KPA、φ50、φ60、φ90、φ100、DN100/DN80/DN65/DN40/DN20、1½"、2½"、4"、0900300、0900291、13300136、13000178、13000166、DFLUG79B100、DNGUT05040、DNGUT05050、L0002。
+     - **0 命中族**：MEZZO RACCORDO / MANDRINA / TAPPO A MORSETTO / STUD KIT / PAROLO / CLIP（全库无）
+     - **命中明细**（发票配图=本行实物/同源）：NO31→I.S.I. PEN2290 PTFE SP.20 mm ø200（26.00，L0002）；NO32→KENFITT PEN2919 600/1010 MANICOTTO A SALDARE DN1.5" BSP AISI316（25.38，13300136，配图 W1-SHELF3/135.jpg）；NO36→I.S.I. PEN2289 PORTAGOMMA INOX PESANTE Ø100 PER GIRELLA 4"（47.97，0900300）；NO38→MG PEN3258 GHIERA 4" RAPIDO M. x 4" GAS F.（23.00，配图 38.jpg 与实拍同源）；NO39→I.S.I. PEN2288 PORTAGOMMA INOX PESANTE Ø060 PER GIRELLA 2½"（24.38，0900291）；NO41→KENFITT PEN2893 FORT VALE MK3 安全阀 2½" BSP 316 TARATA 3,10 BAR（302.65，13000178，配图 W1-SHELF5/231.jpg）；NO42→KENFITT PEN2908 FORT VALE 47/100021AGZ 负压安全阀 DN40 1½" BSP -21KPA（123.75，13000166，配图 KENFITT/10.jpg）
+  5. 写回前条码（L 列供应商物料编号）原值：**除 NO34=DFLUG79B100/DNGUT05040/DNGUT05050（非 PEN → 规则死库存）外，其余 19 行 L 列全空**（无条码阻断，按发票判定）
+  6. 判定写回（备份后）：
+     - **命中 7 条**：NO31→PEN2290、NO32→PEN2919、NO36→PEN2289、NO38→PEN3258（紧固件→分类 CONSUMABLE）、NO39→PEN2288、NO41→PEN2893、NO42→PEN2908（写发票品名/供应商/物料编号/单价/税率；非紧固件分类留空）
+     - **死库存 12 条**（淡蓝 DDEBF7 整行 + dead inventory + 中文品名原因）：NO33（mezzo raccordo φ50 发票无）、NO34（L 列非 PEN 规则优先；发票 Italgomma PEN2762/2765/2766 精确对应、配图 34.jpg 一致，待用户校对可否改判）、NO35（mezzo raccordo φ50x24.2 发票无）、NO37（MANDRINA 发票无）、NO40（PAROLO STUD KIT 发票无）、NO43/44/46/48/49/50（MANDRINA 发票无，OCR 型号附注）、NO47（TAPPO A MORSETTO 发票无）
+     - **待定 1 条**（无背景）：NO45（候选 PEN3378 MG TAPPO INOX MICROF. 1" 尺寸材质吻合，带链特征待确认）
+     - 记录纠错：NO32 尺寸 3/8"→发票 1.5" BSP（φ48.2mm=1.5"BSP 外径）；NO41 压力 3.15 vs 发票 3.10 待校对；NO49 识图 DN100 vs 记录 DN80 待校对
+  7. 图片路径 NO 31-50 已统一 `=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF4\<n>.jpg","photo link")` 绝对路径（原「实拍图/」旧格式一并修正）
+  8. 近3年表「已命中」追加 7 行（序号 186-192，含供应商字段）
+- backup: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260915_223240.xlsx
+- dict_changed: no（前期已补全）
+- evidence: 识图结论见上；发票配图与实物对应为命中关键证据；检索 0 命中族与命中明细见第4条；近3年已命中新增序号 186-192
+- issues_for_user:
+  1. **NO32 尺寸**：记录 3/8" 螺纹，识图/发票=1.5" BSP（φ48.2mm≈1.5"BSP 外径 48.3mm），已按发票校正，请确认
+  2. **NO34 条码规则 vs 发票对应**：L 列 DFLUG79B100/DNGUT05040/DNGUT05050 正是 Italgomma 发票 PEN2762/2765/2766 编码，配图 34.jpg 一致——若非误填可改判命中
+  3. **NO41 压力**：记录 3.15 bar vs 发票 3.10 bar（型号 MK3/2½" BSP/316 全对），请确认
+  4. **NO49 尺寸**：识图 OCR AISI316 DN100 vs 记录 DN80，请校对
+  5. **NO45 带链**：候选 PEN3378（MG TAPPO INOX MICROF. 1"）尺寸材质吻合但未描述带链，待确认
+  6. NO33/35/37/40/43/44/46/47/48/50 均为发票全库查无对应条目（MANDRINA/MEZZO RACCORDO/STUD KIT/TAPPO A MORSETTO 类），若实际有采购请提供发票线索
+
 
 ### 执行计划（任务3 · 用户 2026-09-15 23:05 指示：完成 SHELF4 与 SHELF5 全量）
 
