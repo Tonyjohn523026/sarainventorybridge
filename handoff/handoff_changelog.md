@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-09-15 23:15 | Cursor 复检批3通过 + 批准任务3计划
+**结论**：`batch_continue` / `owner: doubao`；批3 `image_reject_count: 0`。任务3 `plan_approved`。
+**批3 复检**：NO21 撤法兰命中改死库存；NO28 撤黄铜双 PEN 改死库存；6 条非 PEN 撤命中；NO17 改 17.jpg 待定。收口命中7 / 死库存8 / 待定5。未做 NO31。
+**任务3**：范围 W1-SHELF4 NO 31–367 + W1-SHELF5 1–333；`batch_size=20`；下一批=**SHELF4 NO 31–50**。
+**未决**：豆包做批4 后 `batch_ready`；用户拍板项（任务1 NO1/5/6/8/9/10 + 批3 待定/错配）不挡开工。写回用 HYPERLINK 非 HYPERLINT。
+
 ## 2026-09-15 22:20 | Cursor 抽查批3（W1-SHELF4 NO 11–30）未过
 **结论**：`needs_doubao_fix` / `owner: doubao`；本批 `image_reject_count: 0`（非识图硬伤）。抽查 NO 13/15/17/18/20/21/23/24/25/28/29/30。
 **NO21**：识图=快速接头，却按发票图 21.jpg 命中 API 铝法兰 PEN2069 → 发票品名覆盖实物，必须改。
