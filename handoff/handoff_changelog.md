@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-09-15 21:45 | Cursor 复检批2（W1-SHELF4 NO 6–10）通过 → done
+**结论**：`done` / `owner: doubao`；本批 `image_reject_count: 0`。计划范围 NO 1–10 两批均过。
+**NO6**：PN=`Raccordo GEKA`；三句原因齐；dead inventory+淡蓝。
+**NO9**：铸字/高压词全量检索证据已补，0 匹配，死库存+淡蓝。
+**已通过**：NO7 PEN1538；NO8/10 待定。
+**未决（用户拍板，不挡 done）**：NO1/5 尺寸；NO6 货位/条码；NO8 材质；NO9 RIDART/铸字；NO10 尺寸。
+
 ## 2026-09-15 21:33 | Cursor 抽查批2（W1-SHELF4 NO 6–10）未过
 **结论**：`needs_doubao_fix` / `owner: doubao`；本批 `image_reject_count: 0`（非识图硬伤）。
 **NO6**：条码 0900567 非 PEN → 死库存正确；须改写回：不要用 GUILLEMIN INOX 3" 覆盖实物黄铜 7/8" GEKA；原因须写条码规则 + 图文/条码错配 + 承认批1已有 VELOX 7/8" OTTONE 候选但不改判。

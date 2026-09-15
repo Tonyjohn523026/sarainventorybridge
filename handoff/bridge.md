@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-15 21:33（Cursor 批2抽查 fail → needs_doubao_fix）
+更新：2026-09-15 21:45（Cursor 批2复检 pass → done）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 5 件）必须交检，禁止一口气做完再汇报**。
@@ -34,14 +34,14 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-15 21:38:51
+status: done
+owner: doubao
+updated_at: 2026-09-15 21:45
 round: 2
 batch_size: 5
 batch_index: 2
 task: W1-SHELF4 NO 1–10
-awaiting: Cursor 复检批2（NO 6/9 已按 issues 修正）
+awaiting: 用户拍板待定/错配项；本任务两批均已通过
 image_reject_count: 0
 ```
 
@@ -210,7 +210,7 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
   - issue3（非阻断）：NO8/10 待定与 NO6 条码错配继续 issues_for_user；本批仅动 NO6/NO9，批1已通过行（NO1-5）未触碰。
   - evidence: NO9 检索关键词与 0/命中明细见上。
 
-### Cursor 小批检查结果（批2 · Cursor 填）
+### Cursor 小批检查结果（批2 初检 · 归档）
 
 - verdict: **fail**
 - checked_at: 2026-09-15 21:33
@@ -229,7 +229,23 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
      - 原因须同时写清三句：①条码 0900567 非 PEN → 规则死库存（即使发票有近似规格也不改判命中）；②该条码指向 I.S.I. PEN2234 GUILLEMIN INOX FEMMINA ø080x3"，与实物不符，请用户校对货位/条码；③实物近似批1已检出的 MALDOTTI `PORTAGOMMA RAPIDO VELOX 7/8" OTTONE`，因条码规则不改判命中——删除「实物黄铜 7/8" 快速接头发票无匹配」这种与批1检索结果矛盾的句子。
   2. **NO9（必须改）**：补全量检索铸字与高压词，并把**关键词列表 + 0/命中**写进 evidence。至少覆盖：`RIDART`、`PT130`/`PT 130`/`PT-130`、`700`、`200 bar`/`200BAR`/`200 BAR`、`1½"`/`1 1/2"`/`1.5"`。若仍 0 命中：保持死库存+淡蓝，中文品名改为「未命中：已检索 RIDART/PT130/700/1½"/200 bar，发票无；记录 200 bar 与铸字 700 不一致，请用户校对」。
   3. （非阻断）NO8/10 待定、NO6 条码错配继续 `issues_for_user`；修正后只交本批，勿动批1已通过行。
-- next_action: **needs_doubao_fix**
+- next_action: **needs_doubao_fix**（历史）
+
+### Cursor 小批检查结果（批2 复检 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-15 21:45
+- checked_rows: NO 6、7、8、9、10（云端无 Excel/实拍图，以 bridge 证据复检 round 2）
+- image_reject_count: 0（本批未因识图驳回）
+- summary: |
+    复检通过。备份 `库存未匹配_备份_20260915_213723.xlsx`；仅动 NO6/NO9，批1未触碰。
+    **NO6**：PN 改回 `Raccordo GEKA`；中文品名三句（非 PEN 死库存 / 条码指向 PEN2234 GUILLEMIN INOX 3" 与实物黄铜 7/8" 不符请校对 / 近似 MALDOTTI VELOX 7/8" OTTONE 因条码规则不改判）齐备；已删矛盾句；dead inventory+淡蓝。
+    **NO9**：已列 RIDART/PT130/PT 130/PT-130/700/200 bar/200BAR/200 BAR/1½"/1 1/2"/1.5" 及 0/无关命中；死库存原因含铸字 700 vs 记录 200 bar 不一致。
+    NO7 PEN1538、NO8/10 待定维持通过。
+    计划范围 W1-SHELF4 NO 1–10 两批均过 → **done**。
+- issues:
+  1. （无阻断）留给用户：NO1/5 待测尺寸；NO6 货位/条码错配；NO8 材质（Inox vs 黄铜）；NO9 RIDART/铸字；NO10 缺尺寸。
+- next_action: **done**
 
 ---
 
