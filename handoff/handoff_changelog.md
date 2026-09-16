@@ -314,3 +314,19 @@
 - 近3年已命中: 追加 seq 193-203 共 11 行（含供应商字段），回读验证连续（NO91×8 + NO97 + NO101 + NO108）
 - 图片路径: 全部 =HYPERLINK("D:\sara\库存管理\图片\W1-SHELF4\<n>.jpg","photo link") 绝对路径
 - 下一步: 继续货柜级 NO111-367；整柜完成后 ready_for_cursor_check / owner=cursor
+
+## 2026-09-16 09:50 · 豆包 · 货柜级执行 W1-SHELF4 块8（NO 111-130）写回
+- 状态: executing_shelf / owner=doubao / round 14 / 货柜级（块6+块7 已写回后继续）
+- 块8 备份: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260916_094416.xlsx
+- 识图: 111-130 全部 PIL 缩放 ≤2000px 后逐张 Read（20/20）
+  - 111-125 多为白色环形 PTFE 垫（无 OCR）；118 标签 OCR「AR/A」；122/123=白色带孔圆盘（中心大孔+3小孔）
+  - 126=黑色环形金属/石墨密封件（记录 GUARN TEFLON 白色，图文矛盾请校对）
+  - 129/130=蓝色 NBR O 型圈
+- 发票检索: CO.ME.CISTERNE 2 垫类 121 行 + MG 垫类 59 行 + I.S.I. 垫类全量已阅（词组+单词+缩写）
+- 判定: 命中 3 + 死库存 15（含请特批 NO128）+ 待定 2
+  - 命中 3（无淡蓝）: NO112→CO.ME.CISTERNE 2 PEN0630（ANELLI IN TEFLON DA 4"）；NO121→MG PEN3303（VAL FARFALLA FV DN80 精确）；NO127→CO.ME.CISTERNE 2 PEN0691（PIATTELLO C.M.E.）
+  - 死库存 15（淡蓝+原因）: NO111/113/114/115/116/117/118/119/120/122/123/124/125/126（尺寸发票无，含近似行 PEN3235/3286/2206/2211 不符）；NO128=请用户特批（L 列 L0002 非 PEN 规则优先；品名第1行精确对应 PEN0656 DN100 蝶阀、第2行对应 PEN2290 PTFE SP.20 ø200）
+  - 待定 2（无淡蓝）: NO129/130（蓝色 NBR O 圈 φ70x80x15 / φ60x70x5，候选 I.S.I. NBR BLU DIN 系列 PEN2217-2220 尺寸不明待补测）
+- 近3年已命中: 追加 seq 204-206（PEN0630/PEN3303/PEN0691，含供应商字段），回读验证连续
+- 图片路径: HYPERLINK 绝对路径已统一
+- 下一步: 继续货柜级 NO131-367；整柜完成后 ready_for_cursor_check / owner=cursor
