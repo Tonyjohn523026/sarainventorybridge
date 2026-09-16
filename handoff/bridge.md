@@ -1,4 +1,4 @@
-更新：2026-09-16 15:35（SHELF5 块10 NO181-200 已写回：命中3+死库存1+待校14；NO199/200 沿用 SHELF4 定稿 DED1118/1119）
+更新：2026-09-16 15:45（SHELF5 块11 NO201-220 已写回：命中6+死库存6+待校6；NO201/204 沿用 SHELF4 定稿 DED1120/1121）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -35,12 +35,12 @@
 ```
 status: executing_shelf
 owner: doubao
-updated_at: 2026-09-16 15:35
+updated_at: 2026-09-16 15:45
 round: 24
 batch_size: shelf（整货柜）
 batch_index: W1-SHELF5（NO 1–333）
 task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（货柜级执行模式）
-awaiting: SHELF5 块10（NO181-200）已写回（命中3+死库存1+待校14），继续块11（NO201-220）。整柜完成再 ready_for_cursor_check。禁止回头改已通过的 SHELF4 判定；禁止把已撤 30 行非 PEN 改回命中。
+awaiting: SHELF5 块11（NO201-220）已写回（命中6+死库存6+待校6），继续块12（NO221-240）。整柜完成再 ready_for_cursor_check。禁止回头改已通过的 SHELF4 判定；禁止把已撤 30 行非 PEN 改回命中。
 policy_note: 2026-09-16 用户拍板货柜级交检（覆盖本任务剩余 20 件停检）。硬规则（逐行识图、词组+单词+缩写、非 PEN=死库存、淡蓝+原因、一行一件）不变。
 image_reject_count: 0
 ```

@@ -633,3 +633,19 @@
 - 待校 14：NO182 黑色金属件无产品名、NO184-187 Coperchio（识图均为非盖：弯折多孔件/U型把手/U型件/三角斜面件，发票无塑料盖）、NO188-190 无产品名（工具台混拍卷尺/卡尺/T型手柄）、NO191 T型螺杆手柄、NO192 塑料矩形框、NO195/196 橡胶绑带+金属环、NO197/198 CANTONALE（识图为 ERMAX/ASPOCH 塑料拖车角件，发票 CANTONALE 为铝角型材 L5200 类型不符）
 - 字典：「其他字典（待定）」R203-R207 +5（VITE T.E./CAVALLOTTO/CANTONALE/COPERCHIO/MANIGLIA NERA）
 - 识图：NO181-198 全部逐张识图（本地 181-198.jpg）；NO199/200 已定死库存未重判
+
+## 2026-09-16 15:45 — SHELF5 块11（NO201-220）写回
+- 范围：W1-SHELF5 R204-R223（NO201-220），20 行
+- 备份：库存未匹配_备份_20260916_151025.xlsx（写回前）
+- 判定：命中 6 + 死库存 6（DED1237-1242，淡蓝）+ 待校 6（无背景）+ 沿用 SHELF4 定稿 2（NO201/204 DED1120/1121 未动）
+- 命中明细（近3年 seq 244-249 R125-130 追加）：
+  - NO212 CINGHIA（灰色编织绑带）→ PEN1251（F.LLI TAPPANI，29.84/36.4048）
+  - NO216 CLASS 9（预填 6117/A/30）→ PEN3776（Reflexallen，0.6/0.732）
+  - NO217 CLASS 8（预填 6116/A/30）→ PEN3775（0.6/0.732）
+  - NO218 CL 5.1（识图 5.1 火焰标）→ PEN3771（0.6/0.732）
+  - NO219 CLASS 6.1（预填 6102/A/30）→ PEN3774（0.6/0.732）
+  - NO220 CLASS 3（预填 6112/A/30）→ PEN3773（0.6/0.732）
+- 死库存 6：NO202/203 Gancio a D 卸扣（发票 GANCIO 仅 Gancio carne d.12/MOSCHETTONE，无卸扣类）、NO208/209 Catadiottro 反光镜（发票无 CATADIOTTRO）、NO210 Nastro di gomma（发票无）、NO213 Nastro a strappo（发票 VELCRO 均为打磨盘背衬非织带）
+- 待校 6：NO205/206/207 Supporto antivibrante（发票 SUPPORTO GOMMA UNIPOINT 白/黄/G001 有但无尺寸颜色未明）、NO211 无产品名（米色弧形垫片）、NO214/215 PORTA TABELLA（识图方形金属标牌板，发票 TABELLA 30X30 可候选无尺寸、PIEGHEVOLE 折叠式类型不符）
+- 字典：「其他字典（待定）」R209-R216 +8（GANCIO A D/SUPPORTO ANTIVIBRANTE/CATADIOTTRO/NASTRO DI GOMMA/CINGHIA/NASTRO A STRAPPO/PORTA TABELLA/ADESIVO CLASSE）
+- 识图：NO202-218 全部逐张识图（本地 202-218.jpg）；NO201/204 已定死库存未重判；NO216-220 危险品标识族识图确认
