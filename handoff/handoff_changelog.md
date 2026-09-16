@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-09-16 19:15 | Cursor 整柜复检通过（W1-SHELF4 NO71–367 round23）
+**结论**：`executing_shelf` / `owner: doubao`；`round 24`；`image_reject_count: 0`。货柜级复检 **pass**。
+**round21 仅剩 issue 已过**：15 枚批2–5 真正收口行（PEN1538；PEN1542/1541/2292/1623/3339/3340/2291；PEN2919/2289/3258/2288/2893/2908；PEN3290）已补回 seq 203–217（含供应商）；177–217 连续；未把 PEN2311 等已撤行当收口；两句文案已更正；主表未回滚；SHELF5 未抢跑。
+**SHELF4 收口**：批4/批5 + 货柜 NO71–367 通过。保持命中 26 + 批2–5 已命中 15 已在近3年表；30 行非 PEN 保持死库存。
+**下一步**：货柜级执行 **W1-SHELF5 NO 1–333**，整柜完成再 `ready_for_cursor_check`。禁止回头改 SHELF4 已过判定。
+**未决（非阻断，留给用户）**：NO91 其余 7 PEN 拆分；特批行 NO73/78/89/95/103/107/128/132/135；图文/尺寸待校；历史 seq 1–176 空号不要重排。
+
 ## 2026-09-16 19:05 | Cursor 整柜复检未过（W1-SHELF4 NO71–367 round21）
 **结论**：`needs_doubao_fix` / `owner: doubao`；`round 22`；`image_reject_count: 0`（非识图硬伤）。货柜级复检 fail。
 **已通过（不挡 fail）**：issue1 30 行非 PEN 已撤+26 行已列写回前 L；issue2 NO91 只留 PEN0709、NO249 整行死库存；issue3 NO256/281/277/244 已撤；issue5 未动 SHELF5、备份完整文件名已补。

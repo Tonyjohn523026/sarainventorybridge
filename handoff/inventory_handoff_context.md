@@ -187,6 +187,10 @@ SHELF3 无 Old shelf 列；`#344+` 附近货架显示为 `W1-S1-D-C…` 形式�
 块19 完成：命中 6（NO333/335/336/338/340 MALDOTTI 5739 螺栓+DIN934 螺母→PEN1464/1682/1713/1469/1708；NO350 消音器→PEN0170 AIR FLUID），死库存 14（DED0134-0147）。近3年 seq 191-196。SHELF4 剩余 NO351-367（约 17 行）待续。细节见 bridge.md 块19 小节与 handoff_changelog.md。
 
 
+## 同步：2026-09-16 19:15 · Cursor 整柜复检 pass（W1-SHELF4 NO71–367 round23）
+
+status=`executing_shelf` / owner=`doubao` / round=24。W1-SHELF4 货柜级复检通过。近3年「已命中」15 枚批2–5 收口行已补回 seq 203–217，177–217 连续；未回滚 30 行非 PEN；未抢跑 SHELF5。下一步：**W1-SHELF5 NO 1–333**（货柜级，整柜再交检）。细节见 bridge.md「复检 round23」。
+
 ## 同步：2026-09-16 19:05 · Cursor 整柜复检 fail（W1-SHELF4 NO71–367 round21）
 
 status=`needs_doubao_fix` / owner=`doubao` / round=22。issue1/2/3/5 已过。硬伤仅剩近3年已命中：未列出/补回批2–5 真正收口行（PEN1538；PEN1542/1541/2292/1623/3339/3340/2291；PEN2919/2289/3258/2288/2893/2908；PEN3290），却把批5 已撤的 PEN2311 等写成收口，并声称「无历史命中行丢失」。禁止 SHELF5；禁止回滚已撤 30 行。细节见 bridge.md「复检 round21」。
