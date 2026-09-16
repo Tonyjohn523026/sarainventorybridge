@@ -592,3 +592,15 @@
 - 字典：「其他字典（待定）」R172-R182 +11（FANALE POSTERIORE/MILLENNIUM 2000/ECOLED 3/EUROPOINT 3/LUCE INGOMBRO/KIT AUTOPORTANTE/ATTACCO RAPIDO/RIVETTO/TASSELLO/CLIP/SMCG）
 - 图片：NO121-140 全部识图（本地 W1-SHELF5\121-140.jpg）
 - 备注：NO127-140 产品名 Attacco rapido，但识图多为塑料卡扣/铆钉/膨胀件（非气动快接），发票无对应规格，已按识图类型写回
+
+## 2026-09-16 15:10 — SHELF5 块8（NO141-160）写回
+- 范围：W1-SHELF5 R144-R163（NO141-160），20 行
+- 备份：库存未匹配_备份_20260916_145608.xlsx
+- 判定：命中 2 + 死库存 12（DED1222-1233，淡蓝）+ 待校 6（无背景）
+- 命中明细（近3年 seq 232-233 R113-114 追加）：
+  - NO150 Gomma conica φ6xφ18x4 → PEN2984 GUARNIZ. GOMMA 3/8 10PZ（Leroy Merlin Italia，0.53/0.6466；保留用户已填品名/中文/供应商/数量/价格，补发票编号，行原分类 CONSUMABLE 保留）
+  - NO158 Testa del rivetto m3x10 → PEN1554 RIVETTO INOX MM.3.2X10（FERRAMENTA MALDOTTI，0.04352/0.053094；m3≈3.2 命中）
+- 死库存 12：NO141/142/144/145/151 塑料卡扣（发票无塑料卡扣规格，TASSELLO 为膨胀塞不同类）、NO146/147/148/152 卡式螺母（发票 DADO 113 行均标准/管接螺母，无卡式）、NO155 内螺纹柱 m6x22/NO157 空心铆钉 m8x23（发票 RIVETTO 仅 3.2X10/4.8X18）、NO159 m5x8（发票无）
+- 待校 6：NO143 Tassello 膨胀塞无尺寸（发票有 6X30/8X40/D.8 无法对应）、NO149 金属冲压卡勾无产品名、NO153/154 铆钉 m5x13/14（发票 4.8X18 长度差 4-5mm）、NO156 弹片件无产品名、NO160 铰接拉紧件 m10 无产品名（识图与 RACCORDO RAPIDO 不符）
+- 字典：「其他字典（待定）」R184-R190 +7（RACCORDO RAPIDO/DADO A CLIP/TESTA DEL RIVETTO/CODA DEL RIVETTO/TASSELLO DUOPOWER/CLIP PLASTICA/GOMMA CONICA）
+- 识图：NO141-160 全部逐张识图（本地 141-160.jpg）；NO141-145/151 塑料卡扣、NO146-148/152 卡式螺母（与产品名 Raccordo rapido 不符）、NO153-159 铆钉族、NO160 铰接件
