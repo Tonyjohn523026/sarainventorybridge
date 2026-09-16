@@ -45,6 +45,40 @@ policy_note: 2026-09-16 用户拍板货柜级交检（覆盖本任务剩余 20 �
 image_reject_count: 0
 ```
 
+
+### SHELF5 块1 已写回（NO1-20 · 2026-09-16 13:27）
+
+SHELF5 首块：识图 20/20 → 补翻译字典『其他字典（待定）』12 词条（PRESSACAVO/DADO PRESSACAVO/FUSIBILE/FUSIBILE A LAMA/LAMPADINA/CERNIERA/MANIGLIA A U/GANCIO/ANELLO A D/RONDELLA DI GOMMA/GUARNIZIONE DI GOMMA/PIASTRA FORATA，R108-R119）→ 发票全量检索（词组+单词+缩写）→ 写回主表+photo 链接全列批改绝对路径。
+
+**死库存 18（淡蓝 DDEBF7，挂 MALDOTTI 建档，DED1126-1142 新建；DED1116 沿用）**：
+| NO | 品名（意） | 未命中原因 |
+|----|-----------|-----------|
+| 1 | Rondella di gomma φ175 x 4 mm | 发票无此尺寸橡胶垫圈（RONDELLA 均为金属/小尺寸） |
+| 2 | Rondella di gomma φ150 x 3 mm | 发票无此尺寸橡胶垫圈 |
+| 3 | Guarnizione di gomma 22 mm | 发票无 22mm 橡胶密封垫（⚠图像为卷状带条，待用户校对图文） |
+| 4 | Piastra forata zincata 40x20x8 φ8x2 | 发票无此规格打孔连接板 |
+| 5 | Piastra forata zincata 25x230x8 φ8x3 | 发票无此规格打孔连接条 |
+| 7 | Cerniera 20x45 φ5x2 | 发票 CERNIERA 仅 110mm/H65x64，无小合页 |
+| 8 | Maniglia a U 10x62 φ5x2 | 发票 MANIGLIA 无此规格 U 型拉手 |
+| 9 | Maniglia a U 15x66 φ5x2 | 发票无此规格 |
+| 10 | Gancio metallico 20x60 φ6x2 | 发票 GANCIO 仅肉钩 Φ12，无小型挂钩 |
+| 11 | Copiglia φ6x88 | 发票无 φ6x88；相近 m6x86 已建档 DED0237（归 NO315） |
+| 12 | Copiglia φ6x126 | 发票无 φ6x126；相近 m6x127 已建档 DED0238（归 NO316） |
+| 13 | Pressacavo PG13.5 φ20xφ15 | 发票无 PG13.5 本体（仅 PG11/M20）；供应商 cember 发票无对应 |
+| 14 | Dado Pressacavo PG13.5 | 沿用 DED1116（发票无 PG13.5 锁母活行）✓ |
+| 16 | Fusibile ceramico 40A 500V | 发票无熔断器本体（仅 PORTAFUSIBILE） |
+| 17 | Lampadina W5W 12V 5W | 发票无 W5W 灯泡（BERNER 仅手电筒） |
+| 18 | Lampadina P21W 12V 5W | 发票无 P21W 灯泡 |
+| 19 | Lampadina P21W 24V 25/7W | 发票无 |
+| 20 | Fusibile a lama 20A | 发票无插片保险丝 |
+
+**待校 2（无淡蓝，未建档，等用户裁决）**：
+| NO | 品名（意） | 待校内容 |
+|----|-----------|---------|
+| 6 | Anello a D W 24 mm | 预填 SANAM ANELLO INOX PER CUSTODIA D.150（Φ150 环）与识图 D 型环 W24 尺寸不符 |
+| 15 | Disco concentrico φ20 mm | 同心圆纹圆片，类型待确认（垫片/毛毡/密封圈） |
+
+近3年：本块无命中，无新增。photo 列：SHELF5 全部 333 行已批改绝对路径（对齐 SHELF4 格式）。
 ### 块10 已写回（NO151-170 · 2026-09-16 10:12）
 
 货柜级执行 NO151-170 完工（识图 20/20 → 补翻译字典『其他』31 词条球阀族 → 发票全量检索 → 写回主表+近3年）。
