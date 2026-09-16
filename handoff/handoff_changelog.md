@@ -496,3 +496,17 @@
 - **证据**：主表回读 17 行全部淡蓝+分类正确。
 - **issues_for_user（头型存疑，整柜校对）**：NO356/357/359 预填沉头十字→识图盘头十字；NO362/363 预填球面六角→识图盘头十字；NO364 预填球面六角→识图内六角圆柱头。死库存判定不受影响。
 - **整柜完成**：W1-SHELF4 NO71-367（297 行）全部写回完成，交 Cursor 检查（ready_for_cursor_check）。
+
+---
+
+## 2026-09-16 13:27 · W1-SHELF5 块1（NO1-20）已写回
+
+- **范围**：W1-SHELF5 sheet R4-R23（NO1-20），主表备份 库存未匹配_备份_20260916_20260916_132601.xlsx。
+- **识图**：20/20 完成（本地图片 W1-SHELF5\1-20.jpg）。
+- **字典**：『其他字典（待定）』R108-R119 +12（PRESSACAVO/DADO PRESSACAVO/FUSIBILE/FUSIBILE A LAMA/LAMPADINA/CERNIERA/MANIGLIA A U/GANCIO/ANELLO A D/RONDELLA DI GOMMA/GUARNIZIONE DI GOMMA/PIASTRA FORATA）。
+- **发票检索**：词组+单词+缩写全量（RONDELLA/GOMMA/GUARN/PIASTRA/STAFFA/FORATO/ANELLO/CERNIERA/MANIGLIA/GANCIO/COPIGLIA/PRESSACAVO/FUSIBILE/LAMPADINA/W5W/P21W + 供应商 CEMBER/SANAM/BERNER 专项）。
+- **判定**：死库存 18 行（淡蓝 DDEBF7，挂 MALDOTTI，DED1126-1142 新建、DED1116 沿用），待校 2 行（NO6 D型环 W24 vs SANAM 预填 Φ150 存疑；NO15 同心圆纹圆片类型待确认，均未建档未淡蓝）。
+- **关键依据**：DED0237（m6x86）/DED0238（m6x127）已被 NO315/316 占用 → NO11/12 新建 DED1135/1136；发票最大 DED1125 → 新号从 1126 起。
+- **photo 列**：SHELF5 全部 333 行批改绝对路径 D:\sara\库存管理\图片\W1-SHELF5\<n>.jpg（对齐 SHELF4 格式）。
+- **近3年**：本块无命中，无新增。
+- **bridge**：已更新块1 区 + commit 27bbb7b + push。

@@ -206,3 +206,7 @@ status=`ready_for_cursor_check` / owner=`cursor` / round=21。主表：30 行非
 ## 同步：2026-09-16 18:45 · Cursor 整柜初检 fail（W1-SHELF4 NO71–367）
 
 status=`needs_doubao_fix` / owner=`doubao`。硬伤：命中行条码未列写回前 L 列；块19 预填非 PEN 仍命中；NO91 一行 8 PEN、NO249 一行两 PEN；NO256/281/277/244 发票规格或借图覆盖实物；近3年 seq 193–234 与 177–196 断裂。块17/18/20 全死库存与请特批行不挡本 fail。禁止 SHELF5。细节见 bridge.md「Cursor 货柜检查结果」。
+
+## 同步：2026-09-16 13:27 · W1-SHELF5 块1（NO1-20）已写回
+
+SHELF5 货柜级执行启动。块1 识图 20/20、字典 +12（其他字典（待定）R108-R119）、发票全量检索完成。判定：死库存 18（淡蓝，挂 MALDOTTI，新建 DED1126-1142、沿用 DED1116）+ 待校 2（NO6 D型环 W24 vs SANAM 预填 Φ150 存疑；NO15 同心圆纹圆片类型待确认）。photo 列全部 333 行批改绝对路径。备份：库存未匹配_备份_20260916_20260916_132601.xlsx。bridge commit 27bbb7b 已 push，status=executing_shelf。继续块2（NO21-40）。
