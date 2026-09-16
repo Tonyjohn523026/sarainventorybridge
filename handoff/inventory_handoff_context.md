@@ -175,3 +175,8 @@ SHELF3 无 Old shelf 列；`#344+` 附近货架显示为 `W1-S1-D-C…` 形式�
 ## 同步：2026-09-16 18:05 · 块17（W1-SHELF4 NO291-310）已写回
 
 块17 完成：20 行全死库存（NO291-301 MG 不锈钢管抱箍 Morsetto tubo INOX 族 DED0094-0104；NO302-310 MALDOTTI 紧固件族 DED0105-0113），发票无对应 PEN 活行，识图与建档一致（NO295/NO300 图文存疑待校）。近3年不追加。SHELF4 剩余 NO311-367（约 57 行）待续。细节见 bridge.md 块17 小节与 handoff_changelog.md。
+
+
+## 同步：2026-09-16 18:25 · 块18（W1-SHELF4 NO311-330）已写回
+
+块18 完成：20 行全死库存（MALDOTTI 紧固件族 DED0114-0133），发票无对应 PEN 活行，识图与建档基本一致（NO312 头型出入/NO319 模糊/NO326 内六角杯头 vs 盘头十字待校）。近3年不追加。SHELF4 剩余 NO331-367（约 37 行）待续。细节见 bridge.md 块18 小节与 handoff_changelog.md。

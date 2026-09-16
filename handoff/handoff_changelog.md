@@ -425,3 +425,15 @@
 - **证据**：检索输出 search_b17.txt（455 组，尺寸档噪音已按供应商定向复核）+ search_b17_pen.txt（146 行 PEN 活行）；主表回读 20 行全部正确（全淡蓝，行号 R294-313=NO291-310）。
 - **issues_for_user（整柜完成后统一校对）**：NO295 识图为环形密封件带橡胶圈 vs 预填 PVC 管件 DN80 PN10；NO300 识图为三段式折弯支架 vs 预填管抱箍无尺寸（图文不符）；NO308 与 NO303 同规格 m4x30 第二盒（DED0111 vs DED0106）是否重复清点。
 - 下一步：继续货柜级 NO311-367。
+
+
+## 块18 · W1-SHELF4 NO311-330 · 2026-09-16 18:25（豆包写回）
+
+- **流程**：识图 20/20（逐张 Read 311-330.jpg）→ 补翻译字典『其他』9 词条（R144-152：INCASSATA PIATTA/VITE MANO/TESTA/GAMBO/SVASATA A INTAGLIO/INTAGLIO/PIATTA CROCE/BOMBATA/TAGLIO）→ 发票全量+MALDOTTI 定向复核（DED0114-0133 建档确认、PEN 活行仅 PEN1742 帽头一字 m8x16 不命中）→ 写回主表。
+- **命中 0**：无。本块全部为用户新登记死库存。
+- **死库存 20（淡蓝 DDEBF7 整行+原因全文+分类=死库存）**：NO311-330（MALDOTTI 紧固件族 DED0114-0133：Vite farfalla×2/Incassata piatta/Manо×1/Testa×3/Gambo×3/Svasata intaglio×3/Svasata croce×6/Piatta croce×1）。
+- **近3年已命中**：本块无命中，不追加。
+- **备份**：`库存未匹配_备份_20260916_122128.xlsx`。
+- **证据**：search_b18.py 输出（DED 建档 20 行全部确认；PEN 活行仅 PEN1742 VITE TESTA BOMBATA TAGLIO m8x16，头型槽型与块内产品不同）；主表回读 20 行全部正确（全淡蓝，R314-333=NO311-330）。
+- **issues_for_user（整柜完成后统一校对）**：NO312 识图十字槽盘头 vs 预填 Incassata piatta 埋头（头型出入）；NO319 识图模糊（细小金属凸起）；NO326 识图黑色内六角圆柱头螺钉 vs 预填盘头十字 m8x75（图文不符，重点）。
+- 下一步：继续货柜级 NO331-367（约 37 行，SHELF4 收尾）。
