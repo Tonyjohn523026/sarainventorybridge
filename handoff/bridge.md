@@ -1,5 +1,5 @@
 # Cursor ↔ 豆包 协同桥接（状态机）
-更新：2026-09-16 06:20（豆包批5 fix_round 完成 · 交复检）
+更新：2026-09-16 07:00（用户拍板：批次规则改为货柜级执行 · Cursor 失联降级）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -34,15 +34,15 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-16 06:20
-round: 12
-batch_size: 20
-batch_index: 5
-task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（批5 fix 已交复检）
-awaiting: Cursor 复检批5（NO 51–70）；通过后 batch_continue 做批6（NO 71–90）；勿攒批、勿先做 SHELF5
-policy_note: 2026-09-15 起默认 batch_size=20（人力加码）
+status: executing_shelf
+owner: doubao
+updated_at: 2026-09-16 07:00
+round: 13
+batch_size: shelf（整货柜）
+batch_index: W1-SHELF4（续 NO 71–367）
+task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（货柜级执行模式）
+awaiting: 豆包按「货柜级」执行 W1-SHELF4 剩余（NO 71–367），逐块记录到本文件；整柜完成后交 Cursor 检查
+policy_note: 2026-09-16 用户拍板——Cursor 失联不空等，一次执行完一个货柜再交检（详见 workflow.md「批次与交接规则」）
 image_reject_count: 0
 ```
 
@@ -525,6 +525,8 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 - **近3年已命中**：追加 192-197（PEN2311/PEN3342/PEN2760/PEN2761/PEN2226/PEN3290，含供应商字段）
 - **issues_for_user**：NO51 非 PEN 条码判命中待确认；NO54 尺寸 DN100 vs DN60 矛盾；NO59 同 SKU 是否重复；NO69 材质矛盾（纸垫 vs 蓝色 PTFE 复合垫）
 - evidence: 识图 20/20（NO53/56/62/63/69/70 有铸字/印字 OCR；NO54/55/66/70 发票配图=货位实拍同图）；检索词组+单词+缩写全覆盖（GIRELLA 23/PORTAGOMMA 20/GUARD 5/UNIVERSAL 7/PTFE 全量/STEP SEAL 0/MANDRINA 0/A182/F304 0）；近3年与主表回读验证通过
+
+- **货柜级执行启动（2026-09-16 07:00，用户拍板）**：Cursor 轮询/抽查失联，用户要求改为**一次执行完一个货柜再让 Cursor 检查**。批5（NO 51-70）fix 判定已写入主表且回读验证通过（命中1+死库存17+待定2），近3年已同步。本文件自即日起记录「当前货柜进度」：豆包逐块执行 W1-SHELF4 NO 71–367，每块完成追加本区；整柜收口后交检（status=ready_for_cursor_check）。本地与远端 handoff 双写并 push。
 
 - fix_round (回应 Cursor 批5初检 issues 2026-09-16 05:50，备份 `库存未匹配_备份_20260915_231831.xlsx`（修正前）):
   - **issue1（NO51 必须改）**：已改。从近3年已命中撤出 **PEN2311**；主表 NO51 恢复写回前原值（F=MASCHIO A MANDRINA、G=DN100、L=0900616、N=17），改 **dead inventory+淡蓝**，中文品名三句：①条码 0900616 非 PEN → 规则优先不改判命中；②该条码指向发票 I.S.I. PEN2311 RACCORDO ECO INOX MASCHIO ø100 SFERA（配图碰巧 51.jpg），不以配图覆盖规则；③请用户校对可否特批改判。承认 NO36/39 非先例（批4 该两行 L 列为空），误引已更正。
