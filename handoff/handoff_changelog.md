@@ -520,3 +520,17 @@
 - **发票检索**：ALOGEN/HALOGEN、SILURO/CARTUCC、FUSIBILE、PRESSACAVO、LAMPAD 全量。
 - **判定**：命中 4（NO23→PEN1023 PG11；NO25→PEN1282 P21/5；NO27→PEN1281 P21；NO31→PEN1280 H7，均无背景，写近3年 seq 218-221）；死库存 15（NO21/22/24/26/28/29/30/32-39，淡蓝，DED1143-1156 新建、DED1117 沿用）；待校 1（NO40 图文不符）。
 - **证据**：主表回读 20 行验证通过（4 无背景 + 15 淡蓝 + 1 无背景待校）；近3年 R99-R102 验证通过。
+## 2026-09-16 14:12 — SHELF5 块3（NO41-60）写回
+- 范围：W1-SHELF5 R44-R63（NO41-60），20 行
+- 备份：库存未匹配_备份_20260916_20260916_140928.xlsx
+- 判定：死库存 14（DED1157-1170，淡蓝 DDEBF7，供应商 FERRAMENTA MALDOTTI S.A.S. DI M）+ 待校 6（NO41/54/56/58/59/60，无背景不建档）
+- 死库存明细（发票无熔断器本体）：NO42-53/55/57 熔断器族（fusibile/cartuccia fusibile，4A-63A 各规格）
+- 待校明细：
+  - NO41 Fusibile 40W 220V → 识图荧光灯电子镇流器（MEC 75 Tipo 600277，220V 28-40W），图文不符
+  - NO54 Fusibile 20A 500V → 识图两端金属+织物状材质圆柱件，类型待确认
+  - NO56 无产品名/尺寸 → 识图白色金属连接支架（镂空臂状），货架 W1-S3-A-C5-L2 量 1box
+  - NO58 Portafusibile termoceramico → 识图金属管状接头+白色防滑塑料套，图文不符（发票 PEN3052 PORTAFUSIBILE MIDI FUS 200 不适用）
+  - NO59 Lampadina 42V 60W E27 → 识图 OCR 240V 60W E27，电压不符；发票 E27 60W 仅 24V 水滴 PEN1002
+  - NO60 Lampadina 24V 75/70W P45t → 识图 H7 卤素灯（BERNER），P45t 为 H4 底座，底座不符；发票无 H4 行
+- 字典：「其他字典（待定）」R131-R135 +5（PORTAFUSIBILE/TERMOCERAMICO/REATTORE/FUSIBILE D01/P45T）
+- 图片：NO41-60 全部识图（本地 W1-SHELF5\41-60.jpg）
