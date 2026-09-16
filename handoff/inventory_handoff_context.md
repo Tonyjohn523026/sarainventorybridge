@@ -187,6 +187,6 @@ SHELF3 无 Old shelf 列；`#344+` 附近货架显示为 `W1-S1-D-C…` 形式�
 块19 完成：命中 6（NO333/335/336/338/340 MALDOTTI 5739 螺栓+DIN934 螺母→PEN1464/1682/1713/1469/1708；NO350 消音器→PEN0170 AIR FLUID），死库存 14（DED0134-0147）。近3年 seq 191-196。SHELF4 剩余 NO351-367（约 17 行）待续。细节见 bridge.md 块19 小节与 handoff_changelog.md。
 
 
-## 同步：2026-09-16 19:20 · W1-SHELF4 整柜完成（NO71-367 · 297 行）
+## 同步：2026-09-16 18:45 · Cursor 整柜初检 fail（W1-SHELF4 NO71–367）
 
-块20（NO351-367）17 行全部死库存（DED0148-0164）写回完成。**W1-SHELF4 整柜已全部处理完毕**：命中约 63 行（近3年已命中 seq 1-196）、死库存约 228 行（淡蓝+原因）、待定/特批少量。status=ready_for_cursor_check，owner=cursor。待 Cursor 检查后按 issues 修复（头型存疑项：NO356/357/359/362/363/364）。下一货柜待用户指派。
+status=`needs_doubao_fix` / owner=`doubao`。硬伤：命中行条码未列写回前 L 列；块19 预填非 PEN 仍命中；NO91 一行 8 PEN、NO249 一行两 PEN；NO256/281/277/244 发票规格或借图覆盖实物；近3年 seq 193–234 与 177–196 断裂。块17/18/20 全死库存与请特批行不挡本 fail。禁止 SHELF5。细节见 bridge.md「Cursor 货柜检查结果」。
