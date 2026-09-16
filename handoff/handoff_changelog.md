@@ -413,3 +413,15 @@
 - **证据**：检索输出 search_b16.txt（192 行）；主表回读 20 行全部正确（8 无背景+12 淡蓝，行号 R274-293=NO271-290）。
 - **issues_for_user（整柜完成后统一校对）**：NO277 发票配图疑点；NO281 OCR 80-110 vs HGI30 30mm；NO289 OCR 10 vs 7/8"；NO287 与 NO268 同 SKU 合并确认。
 - 下一步：继续货柜级 NO291-367。
+
+
+## 块17 · W1-SHELF4 NO291-310 · 2026-09-16 18:05（豆包写回）
+
+- **流程**：识图 20/20（逐张 Read 291-310.jpg 缩图，全部 ≤2000px 直接读，OCR 抓到 MADE IN ENGLAND RS 53151091/ICE MIKKO 等）→ 补翻译字典『其他』7 词条（R137-143：SPINA VITE PIATTA/VITE FARFALLA/SVASATA CROCE LEGNO/CHIODO/LEGNO/ESAGONALE/DED）→ 发票全量检索+MG/MALDOTTI 定向 sheet 核对（PEN 活行 vs DED 建档）→ 写回主表。
+- **命中 0（无淡蓝）**：无。本块全部为用户新登记死库存。
+- **死库存 20（淡蓝 DDEBF7 整行+原因全文+分类=死库存）**：NO291-301（MG Morsetto tubo INOX 管抱箍族 DED0094-0104，发票 MG 无该族 PEN 活行，仅 FASCETTA COLLARE 重型卡箍 PEN3238-3241 已命中+COLLARE CERNIERA 铰链卡箍不同产品）；NO302-310（MALDOTTI 紧固件 DED0105-0113：Spina vite piatta×3/Esagonale m5.5 非标/木螺钉×2/Chiodo/Farfalla×2，发票无对应 PEN 活行）。
+- **近3年已命中**：本块无命中，不追加。
+- **备份**：`库存未匹配_备份_20260916_120253.xlsx`。
+- **证据**：检索输出 search_b17.txt（455 组，尺寸档噪音已按供应商定向复核）+ search_b17_pen.txt（146 行 PEN 活行）；主表回读 20 行全部正确（全淡蓝，行号 R294-313=NO291-310）。
+- **issues_for_user（整柜完成后统一校对）**：NO295 识图为环形密封件带橡胶圈 vs 预填 PVC 管件 DN80 PN10；NO300 识图为三段式折弯支架 vs 预填管抱箍无尺寸（图文不符）；NO308 与 NO303 同规格 m4x30 第二盒（DED0111 vs DED0106）是否重复清点。
+- 下一步：继续货柜级 NO311-367。

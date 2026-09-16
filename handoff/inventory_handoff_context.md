@@ -170,3 +170,8 @@ SHELF3 无 Old shelf 列；`#344+` 附近货架显示为 `W1-S1-D-C…` 形式�
 ## 同步：2026-09-16 17:55 · 块16（W1-SHELF4 NO271-290）已写回
 
 货柜级模式执行中。块16 完成：命中 8（NO271→PEN2106 / NO275→PEN2105 / NO276→PEN3241 / NO277→PEN1478 / NO278→PEN3239 / NO280→PEN2104 / NO281→PEN1477 / NO287→PEN0301）+ 死库存 12（NO272/273/274/279/282/283/284/285/286/288/289/290，MG DED0082-0093 建档复核）。近3年『已命中』追加 seq 184-190。主表 W1-SHELF4 NO271-290 已回读验证（8 无淡蓝 + 12 淡蓝 DDEBF7）。SHELF4 剩余 NO291-367（约 77 行）待续；整柜完成后 status=ready_for_cursor_check 交 Cursor 抽查。细节见 bridge.md 块16 小节与 handoff_changelog.md。
+
+
+## 同步：2026-09-16 18:05 · 块17（W1-SHELF4 NO291-310）已写回
+
+块17 完成：20 行全死库存（NO291-301 MG 不锈钢管抱箍 Morsetto tubo INOX 族 DED0094-0104；NO302-310 MALDOTTI 紧固件族 DED0105-0113），发票无对应 PEN 活行，识图与建档一致（NO295/NO300 图文存疑待校）。近3年不追加。SHELF4 剩余 NO311-367（约 57 行）待续。细节见 bridge.md 块17 小节与 handoff_changelog.md。
