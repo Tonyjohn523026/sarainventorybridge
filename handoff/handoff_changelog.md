@@ -510,3 +510,13 @@
 - **photo 列**：SHELF5 全部 333 行批改绝对路径 D:\sara\库存管理\图片\W1-SHELF5\<n>.jpg（对齐 SHELF4 格式）。
 - **近3年**：本块无命中，无新增。
 - **bridge**：已更新块1 区 + commit 27bbb7b + push。
+---
+
+## 2026-09-16 13:55 · W1-SHELF5 块2（NO21-40）已写回
+
+- **范围**：W1-SHELF5 R24-R43，备份 库存未匹配_备份_20260916_20260916_134950.xlsx。
+- **识图**：20/20（本地图 21-40.jpg）。NO40 图文不符（Fusibile FS-11 RAF vs 荧光灯电子镇流器 220/240V EAC）。
+- **字典**：其他字典（待定）R121-R129 +9（FUSIBILE A SILURO/CARTUCCE FUSIBILE/LAMPADINA ALOGENA/BAY15D/BAU15S/BA15S/C5W/PX26D/PK22S）。
+- **发票检索**：ALOGEN/HALOGEN、SILURO/CARTUCC、FUSIBILE、PRESSACAVO、LAMPAD 全量。
+- **判定**：命中 4（NO23→PEN1023 PG11；NO25→PEN1282 P21/5；NO27→PEN1281 P21；NO31→PEN1280 H7，均无背景，写近3年 seq 218-221）；死库存 15（NO21/22/24/26/28/29/30/32-39，淡蓝，DED1143-1156 新建、DED1117 沿用）；待校 1（NO40 图文不符）。
+- **证据**：主表回读 20 行验证通过（4 无背景 + 15 淡蓝 + 1 无背景待校）；近3年 R99-R102 验证通过。

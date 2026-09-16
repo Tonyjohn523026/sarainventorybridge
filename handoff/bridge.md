@@ -1,4 +1,4 @@
-更新：2026-09-16 19:15（Cursor 整柜复检 **pass** · W1-SHELF4 NO71–367 round23 → executing_shelf；下一步 W1-SHELF5）
+更新：2026-09-16 13:55（SHELF5 块2 NO21-40 已写回：命中4+死库存15+待校1）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -35,12 +35,12 @@
 ```
 status: executing_shelf
 owner: doubao
-updated_at: 2026-09-16 19:15
+updated_at: 2026-09-16 13:55
 round: 24
 batch_size: shelf（整货柜）
 batch_index: W1-SHELF5（NO 1–333）
 task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（货柜级执行模式）
-awaiting: SHELF4 整柜复检 pass。按货柜级执行 W1-SHELF5 NO 1–333，整柜完成再 ready_for_cursor_check。禁止回头改已通过的 SHELF4 判定；禁止把已撤 30 行非 PEN 改回命中。
+awaiting: SHELF5 块2（NO21-40）已写回（命中4+死库存15+待校1），继续块3（NO41-60）。整柜完成再 ready_for_cursor_check。禁止回头改已通过的 SHELF4 判定；禁止把已撤 30 行非 PEN 改回命中。
 policy_note: 2026-09-16 用户拍板货柜级交检（覆盖本任务剩余 20 件停检）。硬规则（逐行识图、词组+单词+缩写、非 PEN=死库存、淡蓝+原因、一行一件）不变。
 image_reject_count: 0
 ```
@@ -79,6 +79,41 @@ SHELF5 首块：识图 20/20 → 补翻译字典『其他字典（待定）』12
 | 15 | Disco concentrico φ20 mm | 同心圆纹圆片，类型待确认（垫片/毛毡/密封圈） |
 
 近3年：本块无命中，无新增。photo 列：SHELF5 全部 333 行已批改绝对路径（对齐 SHELF4 格式）。
+
+### SHELF5 块2 已写回（NO21-40 · 2026-09-16 13:55）
+
+识图 20/20 → 字典+9（FUSIBILE A SILURO/CARTUCCE FUSIBILE/LAMPADINA ALOGENA/BAY15D/BAU15S/BA15S/C5W/PX26D/PK22S，其他字典（待定）R121-R129）→ 发票全量检索 → 写回。
+
+**命中 4（无背景，已写近3年 seq 218-221）**：
+| NO | 品名（意） | 发票行 | 供应商 |
+|----|-----------|--------|--------|
+| 23 | Pressacavo PG 11 con ghiere | PEN1023（0.444/0.54168） | Elettrotecnica Piacentina |
+| 25 | Lampada P21/5 24V 21/5W BAY15d | PEN1282（2.1/2.562） | F.LLI TAPPANI |
+| 27 | Lampada P21 24V 21W BA15S | PEN1281（1.85/2.257） | F.LLI TAPPANI |
+| 31 | Lampada H7 12V 55W PX26D | PEN1280（13.6/16.592） | F.LLI TAPPANI |
+
+**死库存 15（淡蓝，挂 MALDOTTI，DED1143-1156 新建 + DED1117 沿用）**：
+| NO | 品名（意） | 未命中原因 |
+|----|-----------|-----------|
+| 21 | Fusibile a lama 30A GREEN | 发票无插片保险丝 |
+| 22 | Fusibile a lama 10A RED | 发票无插片保险丝 |
+| 24 | Dado Pressacavo PG 11 | 沿用 DED1117 ✓（发票无独立 PG11 锁母行；PEN1023 为带锁母套件已归 NO23） |
+| 26 | Lampadina BAU15S Orange 24V 21W | 发票 LAMPADA P21 为白色标准型，无琥珀转向灯行 |
+| 28 | Lampadina alogena PK22S 24V 70W | 发票仅 230W 230V 长型卤素灯（PEN1001） |
+| 29 | Lampadina alogena PK22S 55W | 发票无 PK22S 卤素灯 |
+| 30 | Lampadina C5W 24V 5W | 发票无 C5W 双尖灯泡 |
+| 32 | Fusibile a siluro 8P | 发票无熔断器本体（仅 PORTAFUSIBILE PEN3052 座） |
+| 33 | Fusibile 35A 500V DII gG | 发票无熔断器本体 |
+| 34 | Fusibile 16A 500V E16 | 发票无熔断器本体 |
+| 35 | Fusibile 20A 500V | 发票无熔断器本体 |
+| 36 | Fusibile 25A 500V | 发票无熔断器本体 |
+| 37 | Cartuccia fusibile 4A 500V | 发票无熔断器本体 |
+| 38 | Cartuccia fusibile 1A 500V | 发票无熔断器本体 |
+| 39 | Fusibile 10A 500V | 发票无熔断器本体 |
+
+**待校 1（无背景，未建档）**：NO40 产品名「Fusibile FS-11 RAF」vs 识图为**荧光灯电子镇流器**（220/240V、EAC 认证、W 功率标识），图文不符，待用户校对。
+
+近3年：+4 命中（seq 218-221，含供应商字段）。备份：库存未匹配_备份_20260916_20260916_134950.xlsx。
 ### 块10 已写回（NO151-170 · 2026-09-16 10:12）
 
 货柜级执行 NO151-170 完工（识图 20/20 → 补翻译字典『其他』31 词条球阀族 → 发票全量检索 → 写回主表+近3年）。
