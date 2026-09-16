@@ -534,3 +534,23 @@
   - NO60 Lampadina 24V 75/70W P45t → 识图 H7 卤素灯（BERNER），P45t 为 H4 底座，底座不符；发票无 H4 行
 - 字典：「其他字典（待定）」R131-R135 +5（PORTAFUSIBILE/TERMOCERAMICO/REATTORE/FUSIBILE D01/P45T）
 - 图片：NO41-60 全部识图（本地 W1-SHELF5\41-60.jpg）
+
+## 2026-09-16 14:26 — SHELF5 块4（NO61-80）写回
+- 范围：W1-SHELF5 R64-R83（NO61-80），20 行
+- 备份：库存未匹配_备份_20260916_20260916_141842.xlsx
+- 判定：死库存 15（DED1171-1185，淡蓝 DDEBF7，供应商 FERRAMENTA MALDOTTI S.A.S. DI M）+ 待校 5（NO64/66/67/68/79，无背景不建档）
+- 死库存明细（发票无对应）：
+  - NO61-63/65/72/73 电源线带连接器线束（发票仅裸电缆 H07RNF/MASSA，无线束总成；标签 814037001/3000035 无对应）
+  - NO69 挂车后部线束 15+2x7（发票 CONNETTORE/SPINA POLI 为裸插头插座 PEN2648/2649/3053）
+  - NO70/71 LED 示廓/侧标志灯（发票 FANALE 为后灯总成 TM11/EUROPOINT PEN0313/0314/2655-2657）
+  - NO74-76 带插座接线盒（发票仅空接线盒 PENN0031 100x100x50，无带插座款）
+  - NO77 黄色警示灯 COBO 35.400（发票仅 CICALINO COBO 蜂鸣器 PEN3038）
+  - NO78 警示灯安装杆（发票无 ASTA 行）
+  - NO80 侧标志灯带线（发票无 LUCE LATERALE 行）
+- 待校明细：
+  - NO64 Crimp connectors H-18 → 识图 PG9 电缆防水接头（Pressacavo PG9，发票 PRESSACAVO 仅 PG11/M20）
+  - NO66/67 Gomma per fanale → 识图黑色开槽工件/异形塑料件，非尾灯橡胶
+  - NO68 无产品名 → 识图 T 型槽螺栓滑块组
+  - NO79 Cavo → 识图黑色橡胶 O 型密封圈堆
+- 字典：「其他字典（待定）」R137-R147 +11（CAVO ALIMENTAZIONE/CABLAGGIO/CRIMP CONNECTOR/GOMMA PER FANALE/FANALE LED/SCATOLA DI DERIVAZIONE/LAMPEGGIANTE/ASTA LAMPEGGIANTE/LUCE LATERALE/O-RING/T-SLOT）
+- 图片：NO61-80 全部识图（本地 W1-SHELF5\61-80.jpg）
