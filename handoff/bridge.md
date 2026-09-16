@@ -36,12 +36,12 @@
 ```
 status: executing_shelf
 owner: doubao
-updated_at: 2026-09-16 08:40
+updated_at: 2026-09-16 09:25
 round: 14
 batch_size: shelf（整货柜）
 batch_index: W1-SHELF4（续 NO 71–367）
 task: 任务3 · W1-SHELF4 NO 31–367 + W1-SHELF5 NO 1–333（货柜级执行模式）
-awaiting: 批5 复检已 pass。豆包继续货柜级执行 W1-SHELF4 NO 71–367，逐块写入本文件；整柜完成后 `ready_for_cursor_check` / owner=cursor。勿先做 SHELF5。识图/条码/淡蓝硬规则不变。
+awaiting: 货柜级进度：块6（NO71-90，20 行全死库存）已写回；块7（NO91-110，20 行：命中4=NO91/97/101/108 + 死库存13 + 请特批3=NO95/103/107 + 待定1=NO109）已写回；近3年已命中追加 seq 193-203（11 行）。继续货柜级执行 NO111-367；整柜完成后 `ready_for_cursor_check` / owner=cursor。勿先做 SHELF5。识图/条码/淡蓝硬规则不变。
 policy_note: 2026-09-16 用户拍板货柜级交检（覆盖本任务剩余 20 件停检）。Cursor 已重新连上并完成批5 复检。硬规则（逐行识图、词组+单词+缩写、非 PEN=死库存、淡蓝+原因、一行一件）不变。
 image_reject_count: 0
 ```
@@ -529,6 +529,28 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 - evidence: 识图 20/20（NO53/56/62/63/69/70 有铸字/印字 OCR；NO54/55/66/70 发票配图=货位实拍同图）；检索词组+单词+缩写全覆盖（GIRELLA 23/PORTAGOMMA 20/GUARD 5/UNIVERSAL 7/PTFE 全量/STEP SEAL 0/MANDRINA 0/A182/F304 0）；近3年与主表回读验证通过
 
 - **货柜级执行启动（2026-09-16 07:00，用户拍板；Cursor 08:40 已复检批5 pass）**：Cursor 曾失联，用户要求改为**一次执行完一个货柜再让 Cursor 检查**。批5（NO 51-70）fix 已由 Cursor 复检 **pass**（命中1+死库存17+待定2）。本文件继续记录「当前货柜进度」：豆包逐块执行 W1-SHELF4 NO 71–367，每块完成追加本区；整柜收口后交检（status=ready_for_cursor_check / owner=cursor）。本地与远端 handoff 双写并 push。硬规则不变。
+
+- **货柜块6（W1-SHELF4 NO 71–90 · 20 行全死库存 · 2026-09-16 09:10 写回）**：
+  - 备份：`库存未匹配_备份_20260916_084715.xlsx`（块6 写回前；期间因列布局修正恢复过该备份，最终按标准 18 列布局写回成功）
+  - 字典：块6/块7 涉及词条前期已补全（GIRELLA/OTTURATORE/PEROLO/GUARNIZIONE IMBUSTATA/IMBUSTATA/CNAF/UNIVERSALE/SFERA/SP./CHEMFLY/ECO/STEP SEAL/FORG./PESANTE/PC/HT: 等，其他字典 R1-106），dict_changed: no
+  - 逐张识图 NO 71-90（20/20，每行一句）：71=FORT VALE 蓝色复合垫；72=蓝色复合垫手写 C.F.180F00105；73=蓝色环形垫（TS88）；74=FORT VALE 蓝色垫；75=TEADIT 深绿垫；76=橙红色 O 型圈（O-Ring PTFE φ94x5）；77=浅绿方垫四角孔；78=FORT VALE 复合法兰垫（OCR 0005 4684）；79=TEADIT 绿垫；80=Flexitallic 垫；81=FORT VALE 双层垫；82=蓝色 universal 垫+白内环（OCR OSFREE/iversal）；83=Bluflex 3000 垫；84=Bluflex 3000® 垫；85=FORT VALE 圆垫；86=蓝色垫+白环（OCR ESTive）；87=Flexitalic® 垫；88=绿色 8 孔法兰垫 PTFE 内环；89=TEADIT 4 孔垫；90=PEROLO 蓝色方垫（OCR UP/VF）
+  - 发票全量检索（词组+单词+缩写，限相关供应商 SHEET）：**FORT VALE 12 行命中全为蝶阀类（无垫片）**；**TEADIT 0 / FLEXITALLIC 0 / BLUFLEX 0 / ASBESTOS FREE 0 / UNITEX 0 / ZA(垫片) 0**；PEROLO 仅阀门 64 行无垫片；O-RING φ94x5 全库无此规格；C.F.180 均为 CO.ME.CISTERNE 法兰（非垫片）
+  - 判定写回：**20 行全部死库存**（淡蓝 DDEBF7 整行 + 中文品名原因 + 分类=死库存）。其中 NO73/78/89 有发票精确对应但**条码非 PEN**（NO73 ELLE.A.TECNICA TS88 ANELLO DIN20S/30S + MG GOMMA ELASTICA；NO78 KENFITT 5005-467 CNAF/PTFE；NO89 Leroy Merlin 绿色无石棉垫 1/2"与 3/8"）→ 按非 PEN 规则判死库存并在中文品名写「请用户特批」；NO76 O-RING φ94x5 全库无此规格；NO72 手写 C.F.180F00105 与发票 C.F.180（CO.ME.CISTERNE 法兰）非垫片区分 → 死库存
+  - 近3年已命中：块6 无命中，未动（当前末行 seq=192 PEN3290）
+  - evidence: 识图 20/20；检索关键词与 0/命中明细见上；主表回读验证通过（20 行淡蓝+原因+分类）；写回期间曾因列布局理解修正 v2→v3（标准表头 18 列：列1=NO、2=photo、3=supplier、4=Shelf、5=quantity、6=Product Name、7=size、8=Classification、9=品名、10=中文品名、11=供应商Sheet、12=供应商物料编号、13=数量、14=单价、15=折扣、16=税率、17=行总价、18=分类；数据行 R4 起 NO=n 在 R=n+3）
+
+- **货柜块7（W1-SHELF4 NO 91–110 · 20 行 · 2026-09-16 09:20 写回）**：
+  - 备份：`库存未匹配_备份_20260916_091854.xlsx`（块7 写回前）
+  - 图片预处理：91-110.jpg 全部 PIL 缩放 ≤2000px（quality=88）存 `C:\Users\85345\Downloads\img_resized\`，逐张 Read 识图 20/20
+  - 逐张识图：91=UNITEX 蓝色带孔法兰垫+白内环（OCR UNITEX/ZA UNI/PL）；92=白色环形塑料垫；93=Bluflex 3000 复合垫+白 PTFE 内环（手写 OCR CF180 FORO 105）；94=ZA 160 绿色法兰垫+白内环；95=白色环形密封垫（配图=DN500 人孔垫特征）；96=Flexitallic 青绿色垫（手写 AC555434）；97=白色小 O 型圈；98=红色 O 型圈；99=ASBESTOSFREE 网格垫；100=金属法兰+白色密封圈总成；101=白色 12 孔法兰垫；102=白色 PTFE 垫；103=白色环形垫（配图=DN100 旋转接头垫特征）；104=白色 PTFE 垫；105=白色 PTFE 厚垫；106=白色 PTFE 薄垫；107=白色环形垫（配图=DN65 旋转接头垫特征）；108=白色小型密封垫；109=白色圆形 8 孔法兰垫；110=白色圆形件保鲜膜包裹
+  - 发票全量检索（词组+单词+缩写）：NO91 预填 9 规格全部对应 CO.ME.CISTERNE A BUSTA CF 系列（PEN0709 CF180 Φ11/100 / PEN0606 CF220 / PEN0634 CF160 / PEN0648 CF130 / PEN0640 CF150 / PEN0643 CF180 FORO105 / PEN0689 CF100 / PEN0707 CF210，8 行确认）；NO97 精确匹配 CO.ME.CISTERNE PEN0661（O.R. IN FEP PER VALVOLE CONTRO IL VUOTO）；NO101 精确匹配 MG PEN3283（GUARNIZ. IN PTFE SP.4 D.340 D.int.220 12 FORI，376/E）；NO108 精确匹配 CO.ME.CISTERNE 2 PEN0651（TEFLON 60X48X2，641）；NO95= I.S.I. PEN2223（0900226 DN500 人孔 EPDM+PTFE 14×14）；NO103= I.S.I. PEN2233（0900249 DN100 旋转接头 PTFE 3mm）；NO107= I.S.I. PEN2232（0900247 DN65 旋转接头 PTFE 3mm）；NO109 品名 2 行精确匹配 MG PEN3278（袋装垫 160/80/4孔）+PEN3287（底阀特氟龙 39FF00134）；NO96 AC555434 全库 0；NO92/93/94/96/98/99/100/102/104/105/106/110 无品牌/无规格对应（BLUFLEX/FLEXITALLIC/FORT VALE 垫 0 结论复用块6）
+  - 判定写回：
+    - **命中 4**（无淡蓝）：NO91→CO.ME.CISTERNE A BUSTA CF 系列 8 行发票（PEN0709/0606/0634/0648/0640/0643/0689/0707）；NO97→PEN0661；NO101→PEN3283；NO108→PEN0651（写中文品名命中描述；非紧固件分类 NO91/97 留空，NO101/108 保留原 CONSUMABLE）
+    - **死库存 13 + 请特批 3**（淡蓝+原因全文）：NO92/93/94/96/98/99/100/102/104/105/106/110 死库存（原因见 bridge 块7 区）；NO95/103/107 为**请用户特批**——条码 0900226/0900249/0900247 非 PEN 规则优先不改判命中，但发票 PEN2223/PEN2233/PEN2232 精确对应且配图一致
+    - **待定 1**（无淡蓝）：NO109——品名 2 行发票精确匹配（PEN3278/PEN3287）但主表尺寸 φ143xφ250x2 与识图 8 孔均与第1行（160/80/4孔）不符，无法确定对应，请用户校对
+  - 近3年已命中：追加 **seq 193-203 共 11 行**（PEN0709/PEN0606/PEN0634/PEN0648/PEN0640/PEN0643/PEN0689/PEN0707/PEN0661/PEN3283/PEN0651，含供应商字段），回读验证连续
+  - issues_for_user：NO95/103/107 非 PEN 可否特批改判命中；NO109 尺寸/孔数与发票+识图三方矛盾待校对；NO91 预填 9 规格中 BUSTE R1 COMPLETE 未在发票检索到（其余 8 规格已写近3年）；NO100 法兰总成无品牌型号
+  - evidence: 识图 20/20（含 OCR 铸字）；检索关键词与 0/命中明细见上；近3年与主表回读验证通过（命中无淡蓝、死库存淡蓝+原因、待定无淡蓝）
 
 - fix_round (回应 Cursor 批5初检 issues 2026-09-16 05:50，备份 `库存未匹配_备份_20260915_231831.xlsx`（修正前）):
   - **issue1（NO51 必须改）**：已改。从近3年已命中撤出 **PEN2311**；主表 NO51 恢复写回前原值（F=MASCHIO A MANDRINA、G=DN100、L=0900616、N=17），改 **dead inventory+淡蓝**，中文品名三句：①条码 0900616 非 PEN → 规则优先不改判命中；②该条码指向发票 I.S.I. PEN2311 RACCORDO ECO INOX MASCHIO ø100 SFERA（配图碰巧 51.jpg），不以配图覆盖规则；③请用户校对可否特批改判。承认 NO36/39 非先例（批4 该两行 L 列为空），误引已更正。

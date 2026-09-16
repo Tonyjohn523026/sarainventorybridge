@@ -296,3 +296,21 @@
 - Cursor 轮询/抽查失联，用户拍板：**批次粒度改为货柜级**，一次执行完一个货柜再让 Cursor 检查
 - workflow.md 新增「批次与交接规则」：货柜内分块执行（20-30条/块，块间不等 Cursor）；执行记录详细双写本地+远端 handoff 并 push；Cursor 失联降级=不空等继续推进
 - bridge.md 状态 executing_shelf / owner=doubao / round 13 / batch=W1-SHELF4 续 NO71-367
+
+## 2026-09-16 09:25 · 豆包 · 货柜级执行 W1-SHELF4 块6+块7（NO 71-110）写回
+- 状态: executing_shelf / owner=doubao / round 14 / 货柜级（批5 复检已 pass 后继续）
+- 块6 备份: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260916_084715.xlsx（期间因列布局修正恢复该备份，v3 按标准 18 列写回）
+- 块7 备份: D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260916_091854.xlsx
+- 块6（NO71-90）: 20 行全部死库存（淡蓝+原因+分类=死库存）
+  - 检索结论（块6/块7 死库存理由可复用）: FORT VALE 12 行全为蝶阀类无垫片；TEADIT/FLEXITALLIC/BLUFLEX/ASBESTOS FREE/UNITEX/ZA(垫片) 均 0；PEROLO 仅阀门无垫片
+  - 请特批: NO73（ELLE.A.TECNICA TS88 + MG GOMMA ELASTICA）/ NO78（KENFITT 5005-467 CNAF/PTFE）/ NO89（Leroy Merlin 绿垫）条码非 PEN 但发票精确对应
+  - NO76 O-RING φ94x5 全库无；NO72 手写 C.F.180F00105 与发票 C.F.180 法兰区分→死库存
+- 块7（NO91-110）: 命中 4 + 死库存 13 + 请特批 3 + 待定 1
+  - 命中 4（无淡蓝）: NO91→CO.ME.CISTERNE A BUSTA CF 系列 8 行发票（PEN0709/0606/0634/0648/0640/0643/0689/0707）；NO97→PEN0661；NO101→PEN3283；NO108→PEN0651
+  - 死库存 13: NO92/93/94/96/98/99/100/102/104/105/106/110（品牌/规格发票无）
+  - 请特批 3: NO95（0900226→I.S.I. PEN2223 DN500 人孔 EPDM+PTFE 14×14）/ NO103（0900249→PEN2233 DN100 旋转接头 PTFE 3mm）/ NO107（0900247→PEN2232 DN65 旋转接头 PTFE 3mm）——非 PEN 规则优先
+  - 待定 1: NO109（品名 2 行发票精确匹配 PEN3278/PEN3287 但尺寸 φ143xφ250x2+识图 8 孔与第1行 160/80/4孔 矛盾）
+  - 识图: 91-110 全部缩放 ≤2000px 后逐张 Read（20/20，含 OCR 铸字：UNITEX/ZA UNI/PL、CF180 FORO 105、ZA 160、AC555434 等）
+- 近3年已命中: 追加 seq 193-203 共 11 行（含供应商字段），回读验证连续（NO91×8 + NO97 + NO101 + NO108）
+- 图片路径: 全部 =HYPERLINK("D:\sara\库存管理\图片\W1-SHELF4\<n>.jpg","photo link") 绝对路径
+- 下一步: 继续货柜级 NO111-367；整柜完成后 ready_for_cursor_check / owner=cursor
