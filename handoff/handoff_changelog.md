@@ -389,3 +389,15 @@
 - **备份**：`库存未匹配_备份_20260916_111221.xlsx`。
 - **证据**：检索三轮输出 search_b14.txt（304行）/search_b14b.txt（241行）/search_b14c.txt（28KB，含 FARFALLA/FKQJ/PPGR/BREVET/RIDUZIONE 全量 0/命中结论）；写回后 verify_b14 回读全部行号/淡蓝/近3年连续验证通过。
 - **issues_for_user（整柜完成后统一校对）**：NO238/241 记录 PVC vs 识图金属；NO243 Camlock 识图黑色金属杯状 vs 发票 PP-V 塑料材质；NO244 发票图挂245.jpg（共用）型号 DN040 精确对应 NO244 已按型号判定；NO247 手轮阀 vs 阻火网套件照片疑似错配；NO248 法兰侧出口无法确证；NO246/250 气动蝶阀/PP蝶阀发票无行（若实际采购过请提供发票线索）。
+
+## 块15 · W1-SHELF4 NO251-270 · 2026-09-16 11:45（豆包写回）
+
+- **流程**：识图 20/20（逐张 Read 缩图 251-270.jpg，含 OCR）→ 补翻译字典『其他』18 词条（R108-R125：NI2/NR2/HIDROTEN/MONOGHIERA/1V301/1V303/VXEFV/FASCETTA STRINGITUBO/SERRAGGI PESANTI/MORSETTO/GHIERA/TAPPO MASCHIO/FLANGIA MASCHIO/FLANGIA QUADRA/MANIGLIA/FILETTATO/IMP./STOCK SENZA FATTURA）→ 发票四轮全量检索（search_b15.py 全量 4347 行 → b15b 9 供应商精确 63 行 → b15c 补漏 266 行 → b15d 收尾 92 行；词组+单词+缩写+编码）→ 写回主表+近3年已命中。
+- **命中 7（无淡蓝）**：NO256→PEN2396（FKOVLM 蝶阀 ø090-3" 0405398 245.785；记录 D50 1" 尺寸矛盾以发票为准待校）；NO259→PEN2268（NIPPLO NI2 3/4" 0300828 2×1.71）；NO260→PEN2265（HIDROTEN 1/2" 2500374 1×1.25 50%）；NO262→PEN2413（球阀 1V301 DN40 0301092 2×19.13）；NO265→PEN2306（Camlock DC DN80 0900109 14.23）；NO268→PEN0301（Bizeta FASCETTA 13-15MM 1015. 1×0.4）；NO270→PEN3238（MG 重型卡箍 113x121 1×3.5）。
+- **待定 3（无淡蓝）**：NO251（识图 FITZ 焊枪 vs 记录蝶阀手柄图文不符）；NO252（FIP φ40 内螺纹 vs 发票 MANICOTTO INCOLLO 粘接存疑）；NO264（识图金属方形底阀法兰 OCR FONDO 8 vs 记录 PVC 方形法兰，候选 PEN2171/2145 不符）。
+- **死库存 10（淡蓝 DDEBF7 整行+原因全文+分类=死库存）**：NO253（FIP 锁紧螺母 φ60 发票无）、NO254（FON 卡套）、NO255（半圆柱件）、NO257（DED0078 复检）、NO258（DED0079 复检）、NO261（DED0080 复检）、NO263（DED0081 复检）、NO266（外丝法兰 φ200 类型不符）、NO267（外丝法兰 φ185 发票无）、NO269（管夹 φ160 发票无，同族不同尺寸）。
+- **近3年已命中**：追加 seq 177-183（R58-R64，7 行含供应商 I.S.I. SRL/Bizeta Srl/MG TECNOFORNITURE S.R.L.），回读验证连续。⚠️ 当前文件 max seq=176，块6-14 曾记 seq 193-234 但当前文件无此行（文件在块14 期间被替换/整理过）——以当前文件为准从 177 续写，历史 seq 193-234 去向需用户知悉。
+- **备份**：`库存未匹配_备份_20260916_113432.xlsx`（备份目录共 65 个历史备份）。
+- **证据**：检索四轮输出 search_b15.txt（4347 行）/search_b15b.txt（63 行）/search_b15c.txt（266 行）/search_b15d.txt（92 行）；写回后 verify_b15.py 主表 20 行回读全部正确 + verify_3y_b15.py 近3年 177-183 连续。
+- **issues_for_user（整柜完成后统一校对）**：NO251 焊枪 vs 手柄照片疑似错配；NO256 尺寸 D50 1" vs ø090-3"=DN80；NO252 承插 vs 螺纹待确认；NO264 金属 vs PVC 法兰；近3年历史 seq 193-234 去向。
+- 下一步：继续货柜级 NO271-367。
