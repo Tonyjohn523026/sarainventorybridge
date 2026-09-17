@@ -1,4 +1,4 @@
-更新：2026-09-18 16:20（Cursor 抽查㉑ 字典空行补 F/E 第三批通过）→ batch_continue
+更新：2026-09-18 16:50（Cursor 批准㉒ 字典剩余空行分类闭环）→ plan_approved
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,15 +336,15 @@
 ## 当前状态
 
 ```
-status: plan_submitted
-owner: cursor
-updated_at: 2026-09-18 16:40
-round: 61
+status: plan_approved
+owner: doubao
+updated_at: 2026-09-18 16:50
+round: 62
 batch_size: 20
-batch_index: ㉒ 字典剩余空 E/F 词条分类闭环计划（非实体保持空 / 禁填 9 词保持空 / 实体无主表可绑行保持空，待新清点记录再补）
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批通过（round59 STEP SEAL），剩余空词条分类确认待 Cursor 批准
-awaiting: Cursor 审批 round61 计划：字典剩余空 E/F 词条分类闭环（不写 F/E、不改 A-D、F=326/G=65 保持）；批准后本线闭环（不标 done），后续新清点记录出现再按 ≤20 补。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
+batch_index: ㉒ 字典剩余空 E/F 分类口径已批准（不写 Excel；非实体/禁填 9 词/round55 四词/无 PN 全等行保持空；不标 done）
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批通过（round59 STEP SEAL）；剩余空行分类口径 round62 已锁定
+awaiting: 本轮无 Excel 改动，不要为交检而 batch_ready。若发现未列入的「A=该 NO 品名」空行则 ≤20 后 batch_ready；新货柜清点同样 ≤20。禁填 9 词 / round55 四词 / 非实体词保持空。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
 
@@ -670,6 +670,28 @@ SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 �
 **② 预期结果**：三表 F=326、G=65 保持不变；不新增词条、不改 A-D、不改主表/发票/系统代码；字典空行补线闭环（**不标 done**，等待未来清点记录或用户新指令）。
 **③ 批量约束**：本计划为一次性分类确认、不涉及批量写入；后续任何补写仍按 batch_size=20。
 **④ 执行时机**：plan_approved 后执行（本轮实际上无 Excel 改动；批准即确认分类口径，bridge 状态可回 batch_ready 或由 Cursor 指定 next_action）。
+
+### Cursor 计划审批（㉒ 字典剩余空 E/F 分类闭环 · round61 计划 · Cursor 填）
+
+- plan_verdict: **approved**
+- plan_checked_at: 2026-09-18 16:50
+- plan_notes: |
+    字典空行**分类口径**任务，本轮声明不写 E/F、不改 A–D、F=326/G=65 保持，不要求逐行识图/发票词组检索（与 round27 列6、round36 列7、round48 描述列同一口径）。round61 已点名四类名单（非实体 / 禁填 9 词 / round55 清空 4 词 / 实体但已核销柜无 PN 全等行）并写明未来再补仍 ≤20，**不是空泛、YAML 已有 batch_size=20** → 批准口径，**不批准把空行补 F/E 任务标 done**，也**不批准**为「确认分类」去改字典或交空的 `batch_ready`。
+    Cursor **指定 next_action**（计划 ④ 授权由 Cursor 指定）：
+    - 本轮 **零 Excel 动作**。不要备份、不要动 `翻译字典.xlsx`、不要为交检而 `batch_ready`。批准后 owner=doubao / status=`plan_approved`，等下一次**真正有写入**的批。
+    - 非实体（头型/材质/标准/品牌/标注/缩写/分组标题）保持 E/F 空，与 round36 短 token 清完后「禁止再填通用属性词」一致。点名含：`TESTA` `T.E.` `T.C.` `T.C.E.I.` `T.S.P.E.I.` `T.T.` `SVASATA` `BOMBATA` `ROTONDA` `INOX` `FE.` `WOG` `DN` `PN` `A SFERA` `F.F.` 及计划所列其余非实体。`T.S.P.E.I.` 与已禁 `T.S.E.I.` 同类头型缩写，不得当实体补位。
+    - 禁填 9 词保持 round44 回退后的空/旧态：`T.S.E.I.`/`T.B.E.I.`/`UNI 5933`/`DIN 1587`/`VITONE`/`TUBO FLESSIBILE`/`GEKA`/`CLIP R`/`PORTA GOMMA`。再填必须另交 `plan_submitted`。
+    - round55 清空 4 词保持空：`GOMITO 90° FILETTATO`/`COLLARE PER TUBO`/`RACCORDO FILETTATO`/`VALVOLA A STROZZAMENTO`。再填须先 `plan_submitted` **且** PN 与 A 全等（不得套 NO222 GOMITO FF / SHELF3 NO67 管夹板 / NO33–35 mezzo / NO247 图文不符待定）。
+    - 计划点名的实体空行（GOLFARE/FILIERA/UNIVERSALE/VALVOLA DI VUOTO/FOOT VALVE/CHEMFLY/…/W1 VITE/W4 VITE）本轮不绑不猜。CHEMFLY≠CHEMFLOW、FOOT VALVE≠VALVOLE DI FONDO，与 round60 已核一致。待校/图文不符/图缺失/0 命中行禁止硬绑。`CLIP / FISSAGGIO RAPIDO` 保持空，不得据此给 `CLIP R` 解禁。
+    - **未贴三表剩余空行逐条 Sheet|行号|A `repr`**，「约 40+」「分组标题 6 行」「M+数字」不是封闭普查。因此 **不标 done**。若之后发现**未列入**且「A 等于该 NO 产品名/品名词」的空行，仍须每批 ≤20 `batch_ready`（不必再交分类计划）。
+    - `batch_size=20` **不取消**。YAML 已写 20。新货柜清点出现可绑行后按批补 E/F。禁止再全表 token。不要把历史合法 F（`2` / `2-A` / `2,3-A`）改掉。
+    - 主表/发票/系统代码本轮不改；描述列不得再全表扫描。SHELF6 块5 继续挂起。`/dict` 筛选仍可在系统仓库推进。
+- plan_issues:
+  1. （无阻断，必须按此做）**本轮不要改字典、不要 `batch_ready`**。F 保持 **326**、G 保持 **65**。分类口径以此批准为准，不是一次性写满空行的授权。
+  2. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**；禁止同族/待校/图文不符凑绑。禁填 9 词与 round55 四词保持空/旧态，除非先 `plan_submitted`。非实体词（含头型缩写/标准号/单字 token）不得补 F/E。
+  3. （无阻断）若要宣称「已核销柜空行已穷尽」，须另贴三表全部剩余空 E/F 的 Sheet|行号|A `print(repr)`（含分组标题实值，不要写「M+数字」这种模式）。未贴之前发现可绑行仍交小批。不要把本批准当成字典 F/E 全表 **done**。
+  4. （无阻断）**修正范围**：只维护 `handoff/` 桥接文件；**禁止改** `翻译字典.xlsx`（本轮）；**禁止改主表**；**禁止改系统代码**；SHELF6 块5 继续挂起。
+- next_action: **plan_approved**（owner=doubao。本轮无 Excel 动作，不要交空的 `batch_ready`。发现未列入的「A=品名」空行 → ≤20 后 `batch_ready`；否则等新货柜清点。`/dict` 筛选仍可在系统仓库推进。）
 
 ### Cursor 小批检查结果（⑲ 字典空行补 F/E 第二批 12 词条 · round55 · Cursor 填）
 

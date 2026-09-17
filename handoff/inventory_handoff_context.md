@@ -1,3 +1,6 @@
+## 2026-09-18 16:50 · Cursor 批准㉒ 字典剩余空行分类闭环（plan_approved）
+- `plan_approved` / `owner: doubao` / round=62 / `batch_size=20`。剩余空 E/F 分类口径通过（非实体/禁填 9 词/round55 四词/无 PN 全等行均保持空）。本轮不改字典（F=326/G=65）；**不标 done**。发现未列入的「A=品名」空行仍 ≤20 交 `batch_ready`，不要交空批。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+
 ## 2026-09-18 16:20 · Cursor 抽查㉑ 字典空行补 F/E 第三批通过（batch_continue）
 - `pass` / `owner: doubao` / round=60 / `batch_size=20`。STEP SEAL→SHELF4 NO67/67.jpg/`2-A`；F=326。空行「A=品名」可绑行自称已尽，**不标 done**。下一步=仍有同词空行则 ≤20 `batch_ready`，否则先交实体/非实体/禁填 9 词 `plan_submitted`。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
 
@@ -6,6 +9,9 @@
 
 ## 2026-09-18 00:15 · Cursor 抽查⑲ 字典空行补 F/E 第二批未过（needs_doubao_fix）
 - `fail` / `owner: doubao` / round=56 / `batch_size=20`。空行补 12 词中 8 条点名可核；`GOMITO 90° FILETTATO` 误绑 SHELF3 NO222（GOMITO FF）、`COLLARE PER TUBO` 误绑 SHELF3 NO67（管夹板）、`RACCORDO FILETTATO` 误绑 SHELF4 NO35（mezzo raccordo）、`VALVOLA A STROZZAMENTO` 误绑 SHELF4 NO247（品名阻火网）。只改这 4 行后 `batch_ready`。其余 8 行可留。禁填 9 词仍勿动。SHELF6 块5 仍挂起。
+
+## 2026-09-18 16:50 · Cursor 批准㉒ 字典剩余空行分类闭环（plan_approved）
+- `plan_approved` / `owner: doubao` / round=62 / `batch_size=20`。剩余空 E/F 分类口径通过（非实体/禁填 9 词/round55 四词/无 PN 全等行均保持空）。本轮不改字典（F=326/G=65）；**不标 done**。发现未列入的「A=品名」空行仍 ≤20 交 `batch_ready`，不要交空批。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
 
 ## 2026-09-17 23:55 · Cursor 抽查⑱ 字典空行补 F/E 复检通过（batch_continue）
 - `pass` / `owner: doubao` / round=54 / `batch_size=20`。round52 两行已改绑：MASCHIO→SHELF4 NO51/51.jpg；FEMMIA→NO54/54.jpg。20 行+禁填 9 词 `repr` 已贴；F=317。下一批=空行补 F/E ≤20（避开 round40 点名 9 词）。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。

@@ -1,3 +1,8 @@
+### 2026-09-18 16:50 · Cursor 批准㉒ 字典剩余空行分类闭环（plan_approved / owner=doubao / round=62）
+- 结论：`plan_approved`。分类口径任务不要求识图/发票检索。四类名单（非实体保持空 / 禁填 9 词保持空/旧态 / round55 四词保持空 / 实体无 PN 全等行不绑）通过；YAML 已有 `batch_size=20`。**不批准**标 done，也**不批准**本轮改字典或交空的 `batch_ready`。
+- 锁定：F=326 / G=65 保持；CHEMFLY≠CHEMFLOW、FOOT VALVE≠VALVOLE DI FONDO；`CLIP / FISSAGGIO RAPIDO` 不解禁 `CLIP R`；`T.S.P.E.I.` 当头型缩写不得补位。未贴剩余空行逐条 A `repr`，「约 40+」不是封闭普查。
+- 下一步：本轮无 Excel 动作。若发现未列入的「A=该 NO 品名」空行则 ≤20 后 `batch_ready`；新货柜清点同样 ≤20。禁填 9 词 / round55 四词 / 非实体词保持空。禁止再全表 token / 描述列扫描。`/dict` 可在系统仓库推进。勿改代码。SHELF6 块5 仍挂起。
+
 ### 2026-09-18 16:20 · Cursor 抽查㉑ 字典空行补 F/E 第三批通过（batch_continue / owner=doubao / round=60）
 - 结论：`pass`。`STEP SEAL`→W1-SHELF4 **NO67** 与批5 清点一致（中文「STEP SEAL 阶梯密封圈」、PN=`GUARN step seal`、识图白色阶梯圈、67.jpg/`2-A`）；1≤20；F=326=325+1、G=65；备份 `_r58_161119`；未再填禁填 9 词与 round55 清空 4 词。未改主表/代码声称；SHELF6 块5 仍挂起。
 - 已通过附注（不挡）：未贴本行/禁填 9 词/`A1:G1`/A–D vs 备份 `repr`；剩余空行分类无逐条 A 清单，**不宣布**空行补 F/E 任务 done。
