@@ -1,3 +1,8 @@
+### 2026-09-17 21:30 · Cursor 抽查⑭ 主表描述列未过（needs_doubao_fix / owner=doubao / round=46）
+- 结论：`fail`。未 `plan_submitted` 就给 `库存未匹配.xlsx` 各 SHEET 加「描述」列，并一次回填 1558 行 `DEAD INVENTORY`（SHELF3=219/4=294/5=221/6=356/1=4/7=464），违反 `batch_size=20` 与 round44「禁止改主表」。用户口述不能跳过批准（同 round34 列7）。交检无表头/`repr`/抽样行；第二备份 `_<ts>` 通配；SHELF4 35 行靠中文补标、SHELF5 95 行无淡蓝、SHELF7 未核销柜一并回填。
+- 已通过（不挡 fail）：动手前备份 `_135732` 时间戳、列名「描述」方向清楚、非死库存声称留空、未改字典/代码声称、SHELF6 块5 挂起、SHELF6=356 与整柜留痕相符。
+- 未决：用 `_20260917_135732.xlsx` 去掉描述列 → `batch_ready`；若要保留该列须先 `plan_submitted`。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另做。勿改代码。
+
 ### 2026-09-17 20:20 · Cursor 抽查⑬ 9行回退通过（batch_continue / owner=doubao / round=44）
 - 结论：`pass`。round42 点名 9 行 F 已空；T.S.E.I./UNI 5933/DIN 1587/PORTA GOMMA 新填 E 已撤；T.B.E.I./VITONE/TUBO FLESSIBILE/GEKA 保留旧图只清 F；CLIP R 回到备份裸路径 18.jpg；PORTA GOMMA 四柜面已撤。F=297=306−9；G=65；非法 F=0。未改主表/代码声称；SHELF6 块5 仍挂起。
 - 已通过附注（不挡）：未再贴 A1:G1；A–D vs `_131000` 只断言 0；TUBO/GEKA 前回退 E 截断；空单元格写成 `E='None'`。

@@ -1,3 +1,6 @@
+## 2026-09-17 21:30 · Cursor 抽查⑭ 主表描述列未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=46。未 `plan_submitted` 就给主表加「描述」列并一次回填 1558 行 `DEAD INVENTORY`，超 `batch_size=20`。须用 `_135732` 回退；保留该列须先交计划（列位/判定/是否一次授权/SHELF7）。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另做。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 20:20 · Cursor 抽查⑬ 9行回退通过（batch_continue）
 - `pass` / `owner: doubao` / round=44。round42 点名 9 行已用 `_131000` 回退：F 全空，PORTA GOMMA 四柜面已撤，F=297。下一批=空行补 F/E ≤20（避开这 9 词，须可点名清点记录）；这 9 词或实体/非实体扩名单须先 `plan_submitted`。禁止再全表 token。SHELF6 块5 仍挂起。
 
