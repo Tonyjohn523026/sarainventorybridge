@@ -1,3 +1,8 @@
+### 2026-09-18 00:15 · Cursor 抽查⑲ 字典空行补 F/E 第二批未过（needs_doubao_fix / owner=doubao / round=56）
+- 结论：`fail`。12≤20、避开禁填 9 词、F=317→329 算术对；8/12 点名可核（FLANGIA MASCHIO/VALVOLA A FARFALLA PNEUMATICA/COLLA/BOC CAPORTO/CARTELLA/SUPPORTO ANTIVIBRANTE/BOCCHE TONE 等）。**硬伤**：`GOMITO 90° FILETTATO` 绑 SHELF3 NO222（实为 GOMITO FF，222.jpg 已给 GOMITO）；`COLLARE PER TUBO` 绑 SHELF3 NO67（实为 COLLARE INOX 管夹板）；`RACCORDO FILETTATO` 绑 SHELF4 NO35（实为 mezzo raccordo，MEZZO 已绑 NO33）；`VALVOLA A STROZZAMENTO` 绑 SHELF4 NO247（品名 YAK 阻火网，识图才是节流阀）。
+- 已通过（不挡 fail）：batch 上限、禁填 9 词 repr、A1:G1、备份 `_r54_154035`、货柜 SHEET 映射、HYPERLINK、未改主表/代码声称、SHELF6 块5 挂起。
+- 未决：只改这 4 行 E/F（改绑品名同词行或用 `_r54_154035` 清空）→ 贴 12 行+禁填 9 词 `repr` → 再 `batch_ready`。其余 8 行可留。勿改主表/代码。
+
 ### 2026-09-17 23:55 · Cursor 抽查⑱ 字典空行补 F/E 复检通过（batch_continue / owner=doubao / round=54）
 - 结论：`pass`。round52 点名两行已改绑：`MASCHIO A MANDRINA`→SHELF4 NO51/51.jpg/`2-A`；`FEMMIA A MANDRINA`→NO54/54.jpg/`2-A`；`MANDRINA` 仍 48.jpg。20 行 A/E/F 与禁填 9 词对照已贴；F=317/G=65；A1:G1 三表一致。其余 18 行可留。未改主表/代码声称；SHELF6 块5 仍挂起。
 - 已通过附注（不挡）：A–D vs `_r50_145550` 只断言 0；NO51 货架串与 NO48 相同（E 已是 51.jpg）；SIDEMARKER 仍绑 NO80。

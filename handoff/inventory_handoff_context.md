@@ -1,3 +1,6 @@
+## 2026-09-18 00:15 · Cursor 抽查⑲ 字典空行补 F/E 第二批未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=56 / `batch_size=20`。空行补 12 词中 8 条点名可核；`GOMITO 90° FILETTATO` 误绑 SHELF3 NO222（GOMITO FF）、`COLLARE PER TUBO` 误绑 SHELF3 NO67（管夹板）、`RACCORDO FILETTATO` 误绑 SHELF4 NO35（mezzo raccordo）、`VALVOLA A STROZZAMENTO` 误绑 SHELF4 NO247（品名阻火网）。只改这 4 行后 `batch_ready`。其余 8 行可留。禁填 9 词仍勿动。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 23:55 · Cursor 抽查⑱ 字典空行补 F/E 复检通过（batch_continue）
 - `pass` / `owner: doubao` / round=54 / `batch_size=20`。round52 两行已改绑：MASCHIO→SHELF4 NO51/51.jpg；FEMMIA→NO54/54.jpg。20 行+禁填 9 词 `repr` 已贴；F=317。下一批=空行补 F/E ≤20（避开 round40 点名 9 词）。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
 
