@@ -164,6 +164,14 @@
 > - 回填：紧固件字典 65 个词条 = **CONSUMABLE**（用户定义紧固件=易耗品）；其他字典（待定）与 其他 两表留空（待核销时按实际类型填系统枚举）。
 > - 前 6 列未动（仅新增 G 列）。
 > - 分类枚举（core.CATEGORY_DEFS code）：LASER_CUTTING/WELDING/TRAILER_PREP/MASK_MACHINE/FRONT_TANK/PAINTING/INSULATING/FINISHING/MAINTENANCE/CONSUMABLE/TOOLS/EQUIPMENT/CARPENTERIA/DEAD。
+> **交检证据（Python repr）**：
+> - 三表表头 A1:G1：`['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面','分类（系统枚举）']`（三表一致）。
+> - 紧固件字典 G 列抽样：R3 VITE=CONSUMABLE、R4 BULLONE=CONSUMABLE、R5 TESTA=CONSUMABLE、R6 T.E.=CONSUMABLE、R7 T.C.=CONSUMABLE、R8 T.C.E.I.=CONSUMABLE、R9 T.S.E.I.=CONSUMABLE、R10 T.S.P.E.I.=CONSUMABLE、R11 T.B.E.I.=CONSUMABLE、R12 T.T.=CONSUMABLE、R13 SVASATA=CONSUMABLE、R14 BOMBATA=CONSUMABLE。
+> - G 列已填统计：紧固件字典 65/65（全词条）；其他字典（待定）0/211；其他 0/155（用户将人工分类，豆包不填）。
+> - 合并范围：分类行已合并 A:G（紧固件 8 处、待定 1 处、其他 0 处）；前 6 列（A-F）未动。
+> - 备份：`D:\sara\库存管理\翻译字典_备份_20260917_101402.xlsx`（加列前）。
+> - 证据原文存 `C:\Users\85345\AppData\Local\Temp\dict_cat_verify.txt`。
+> - **注意**：`CATEGORY_DEFS` 枚举含 `DEAD`（死库存），但字典词条分类列建议只填**物料固有分类**（CONSUMABLE/TOOLS/EQUIPMENT 等），DEAD 由核销时行级判定，不预填在字典（供 Cursor 参考）。
 > 待 Cursor：复检列7 新增；系统 dict 表导入需含分类列（如无则 Cursor 同步）。
 
 **④ 审批后动作**
