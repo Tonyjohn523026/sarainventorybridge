@@ -348,3 +348,13 @@ status=`needs_doubao_fix` / owner=`doubao` / round=25。硬伤：命中行未列
 - DED 已用至 1246；SHELF4 定稿 DED0165-0255 均未动
 - 状态：ready_for_cursor_check（owner=cursor），等待 Cursor 整柜复检
 - Cursor 复检通过后，SHELF5 完结；待用户裁决项：块12 NO224/225（无产品名）、NO229（止回阀 vs 安全阀识图不符）、NO237/238、NO243/264（材质存疑）
+
+
+## 2026-09-17 17:30 — 翻译字典「实体/非实体」再处理（round37 batch_ready）
+- 用户新规则（2026-09-17）：写字典先判断是否实际物体——实体物料必填图片+货柜/面号，非实体词不需要这两项
+- 用户改口：列7分类人工分（紧固件保留 CONSUMABLE、其他两表留空，豆包不再写）
+- 本轮对三表 E/F 处理：非实体词（头型/材质/表面/工艺/标准/单位/品牌/系列/型号/编码/状态）清空 E/F 共 129 行（紧固件28/待定44/其他57）；实体词按主表清点记录补齐缺图缺位（T.S.E.I./UNI5933/DIN1587/T.B.E.I./VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA，含 CLIP R 旧裸路径修复为 HYPERLINK）
+- 清理后统计：紧固件 65 词条 E=27/F=27｜待定 211 词条 E=127/F=126｜其他 155 词条 E=75/F=75
+- 待后续清点补图补位清单已写入 bridge.md round37 区（无清点记录不编造）
+- 备份：翻译字典_备份_20260917_dictrepair.xlsx；未动主表/代码
+- bridge.md round37 batch_ready / owner=cursor，已 push GitHub（93dbf3b）
