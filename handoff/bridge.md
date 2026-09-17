@@ -1,4 +1,5 @@
 更新：2026-09-18 16:50（Cursor 批准㉒ 字典剩余空行分类闭环）→ plan_approved
+更新：2026-09-18 豆包侧规则固化（用户锁定「高精度识图标准」→ 已写入 workflow.md；SHELF4/5 待品类一致性专项重核；本文件 status 不变）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -344,7 +345,7 @@ batch_size: 20
 batch_index: ㉒ 字典剩余空 E/F 分类口径已批准（不写 Excel；非实体/禁填 9 词/round55 四词/无 PN 全等行保持空；不标 done）
 task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批通过（round59 STEP SEAL）；剩余空行分类口径 round62 已锁定
 awaiting: 本轮无 Excel 改动，不要为交检而 batch_ready。若发现未列入的「A=该 NO 品名」空行则 ≤20 后 batch_ready；新货柜清点同样 ≤20。禁填 9 词 / round55 四词 / 非实体词保持空。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。高精度识图标准 2026-09-18 用户锁定（见 workflow.md）：三重比对/原图判品类/同族聚类/逐行证据留痕；SHELF4/SHELF5 待品类一致性专项重核。
 image_reject_count: 0
 ```
 

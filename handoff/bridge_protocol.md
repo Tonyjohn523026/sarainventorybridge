@@ -1,27 +1,27 @@
 # 豆包 ↔ Cursor 协同协议（先计划 · 小批抽查）
 
-更新：2026-09-15
+更新：2026-09-15（默认 batch_size=20）
 
 目标：防止偷懒（未全量查发票、未识图、按族瞎判）。流程固定为：
 
 ```
-豆包交计划 → Cursor 批计划 → 豆包做一小批(默认5件)
+豆包交计划 → Cursor 批计划 → 豆包做一小批(默认20件)
   → Cursor 抽查 → 通过则下一批 / 不通过则返工
   → 全部批次通过 → done
 ```
 
-互通文件：`D:\sara\库存管理\handoff\bridge.md`  
+互通：GitHub `Tonyjohn523026/sarainventorybridge` 的 `handoff/bridge.md`（本机 Excel 仍在 `D:\sara\库存管理`）  
 流程细则仍服从：`workflow.md`、`inventory_handoff_context.md`
 
 ---
 
 ## 给用户：怎么跟豆包说（可复制）
 
-请按 `handoff/bridge_protocol.md` 与 Cursor 协同，只用 `handoff/bridge.md`。
+请按 `handoff/bridge_protocol.md` 与 Cursor 协同，只用 `handoff/bridge.md`，改完必须 push GitHub。
 
 硬规则：
 1. **每次动手前**先在 bridge 写清「执行计划」（怎么识图、怎么全量查发票、本批范围），`status=plan_submitted`，等 Cursor 批准。**未批准禁止改主表**。
-2. 批准后一次只做 **5 个产品**（或 bridge 里的 batch_size），做完立刻 `status=batch_ready` 交检，**禁止攒一大批发**。
+2. 批准后一次只做 **20 个产品**（或 bridge 里的 `batch_size`，默认 20），做完立刻 `status=batch_ready` 交检，**禁止超过 batch_size 攒批发**。
 3. 看到 `needs_doubao_fix` / `plan_rejected` 按 issues 改；看到 `batch_continue` 再做下一批。
 4. 抽查会查：有没有逐张识图、检索是否词组+单词+缩写全覆盖、字典是否先补。
 
@@ -81,11 +81,11 @@ owner = cursor
 
 ### 2) 小批抽查（`batch_ready`）——隔几个产品查一次
 
-对**本批全部或抽样 ≥3 行**（批≤5 则尽量全查）：
+对本批抽查：**批≤10 尽量全查**；批更大则至少抽 **≥5 行或约 25%**（取较高者），优先查有图/有争议/新写回行：
 
 | 查什么 | 如何判偷懒 |
 |--------|------------|
-| 识图 | 有图行是否有识图结论/尺寸依据；图文明显不符却直接定性 |
+| 识图 | 有图行是否有识图结论/尺寸依据；图文明显不符却直接定性；**品类判定是否三重比对**（图片形状 / 图上刻字 / 主表品名，见 workflow「高精度识图标准」） |
 | 字典 | 新意语 PN 是否能在字典找到或本批已声明新增 |
 | 全量检索 | evidence/changelog 是否体现多关键词；原因是否像「随便搜一下」 |
 | 写回 | 命中/未命中/待定与淡蓝、条码规则是否一致 |

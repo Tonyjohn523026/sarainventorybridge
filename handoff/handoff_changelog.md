@@ -1,3 +1,8 @@
+### 2026-09-18 · 豆包规则固化：高精度识图标准（用户锁定 · 不改状态机）
+- 起因：SHELF3 NO209-217 共 9 行被拼图阶段误判为 CARTELLA 焊接底座，实为 90° 不锈钢弯头（GOMITO，EN 10253-4）。逐张原图复核确认：NO209 图印 1.5" SCH40、NO210 26,9X3,0、NO211 21/42.0、NO212 76,1×3、NO213 101.6×3.0、NO214 48,3×2、NO215 101.6X2.0、NO216 38.9×3.0（记录 88.9 不符）、NO217 114.3×2 304L。对照组 NO189-194 确为环形焊接底座，无误。
+- 固化：`workflow.md` 新增「高精度识图标准」6 条（三重比对 / 拼图仅定位、品类判定必须原图 / 同族聚类交叉验证 / 逐行证据留痕 / 主表品名与字典词条联动 / 已核销货柜 SHELF4/SHELF5 专项重核）；`bridge_protocol.md` 抽查表「识图」行补充三重比对；`bridge.md` policy_note 同步标注。
+- 待办：SHELF4 / SHELF5 按新标准做品类一致性专项重核（重点 CARTELLA/GOMITO/CURVA/TEE/RACCONDO/MANICOTTO 易混族），逐行证据留痕；SHELF3 NO209-217 修正待交 `plan_submitted`（Product Name → GOMITO 90° INOX、中文品名同步、NO209/NO216 尺寸修正、确认列按弯头重检发票）。
+
 ### 2026-09-18 16:50 · Cursor 批准㉒ 字典剩余空行分类闭环（plan_approved / owner=doubao / round=62）
 - 结论：`plan_approved`。分类口径任务不要求识图/发票检索。四类名单（非实体保持空 / 禁填 9 词保持空/旧态 / round55 四词保持空 / 实体无 PN 全等行不绑）通过；YAML 已有 `batch_size=20`。**不批准**标 done，也**不批准**本轮改字典或交空的 `batch_ready`。
 - 锁定：F=326 / G=65 保持；CHEMFLY≠CHEMFLOW、FOOT VALVE≠VALVOLE DI FONDO；`CLIP / FISSAGGIO RAPIDO` 不解禁 `CLIP R`；`T.S.P.E.I.` 当头型缩写不得补位。未贴剩余空行逐条 A `repr`，「约 40+」不是封闭普查。
