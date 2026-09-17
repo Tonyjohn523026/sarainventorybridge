@@ -305,17 +305,36 @@
 ## 当前状态
 
 ```
-status: plan_approved
-owner: doubao
-updated_at: 2026-09-17 16:20
-round: 36
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 17:30
+round: 37
 batch_size: 20
-batch_index: ⑨ 列7分类+短token 计划已批准 → 第一批=短token清理（黑名单清 F/E）+列7交检repr；禁止保持327/246现状直接交检；空行新填仍≤20/批；SHELF6 块5（NO81–100）仍挂起
-task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 清理后交检（具体物料词 F/E 可保留）
-awaiting: 豆包按 round36 plan_issues 做短 token 清理并贴 Python repr 后 `batch_ready` / owner=cursor。勿改主表、勿改代码。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、货柜号取清点 SHEET 映射；F 格式 `n` 或 `n-X`（具体物料可多值）；短 token 不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。
+batch_index: ⑩ 字典「实体/非实体」清理（round36 已批准短token黑名单清 F/E）→ 已完成并贴 repr；列7分类按用户改口「人工分」：紧固件保留 CONSUMABLE、其他两表留空
+task: 2026-09-17 字典再处理：非实体词清 E/F（材质/工艺/属性/标准/单位/头型/品牌/编码/状态），实体词补齐缺图缺位（按主表清点记录回填）
+awaiting: Cursor 抽查本轮字典处理（E/F 清理+补齐的 repr 证据见下），通过后继续 SHELF 核销；主表本轮未改
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。新规则（用户 2026-09-17）：写字典先判断是否实际物体——实体必填图片+货柜/面，非实体不填。列7分类人工分（豆包不再写）。batch_size=20 不取消。
 image_reject_count: 0
 ```
+
+### 豆包本轮字典处理（round37 · batch_ready · 2026-09-17 17:30）
+
+**依据**：用户 2026-09-17 新规则「写字典先判断是否实际物体——实体物料必填图片+货柜/面号，非实体词不需要这两项」+ round36 已批准短token清理（黑名单清 F/E）+ 用户改口「分类我会人工分」（列7：紧固件保留 CONSUMABLE、其他两表留空）。
+
+**处理范围**：仅 `D:\sara\库存管理\翻译字典.xlsx`（三表 E=图片、F=货柜/面），未动主表/代码。备份：`翻译字典_备份_20260917_dictrepair.xlsx`（改前）。
+
+**① 非实体词清空 E/F（repr 抽样，Python 实际落盘）**：
+- 紧固件字典清 28 行：R5 TESTA/R6 T.E./R7 T.C./R12 T.T./R13 SVASATA/R14 BOMBATA/R15 ROTONDA/R16 PIATTA/R17 CROCE/R18 TAGLIO/R19 INTAGLIO/R20 BRUGOLA/R21 ESAG./R22 ESAGONALE/R23 CIECO/R26 MEDIO/R27 AUTOBLOCC./R34 INOX/R35 ACCIAIO/R37 OTTONE/R38 RAME/R39 ALLUMINIO/R40 A 2/R41 A 4/R43 ZN./R44 ZINCATO/R45 ZINCATA/R47 UNI/R48 DIN/R57 MM. —— 头型/材质/表面/标准/单位术语，非实体
+- 其他字典（待定）清 44 行：R6 IMP./R7 E.U./R8 SA/R9 A SALDARE/R10 SPESSORATO/R11 RIDUZ./R12 RIDUZ.ECCE./R13 RIDUZ.CONC./R23 FEMM./R25 MICROFUSO/R26 CASSONE/R34 DA TAGLIARE/R35 M./R36 F./R37 GAS/R38 H17/R39 DN/R40 Ø/R43 S.S./R54 SALD/R55 GAS F/R56 GAS M/R59 DIRITTO/R62 OTTONE/R64 FEMMINA/R65 MASCHIO/R66 RAPIDO/R73 PTFE/R86 PTFE/R87 BSP/R93 PEROLO(品牌)/R95 IMBUSTATA/R96 CNAF/R99 SP./R100 CHEMFLY(系列)/R101 ECO(系列)/R103 FORG./R104 PESANTE/R105 PC(系列)/R132 TERMOCERAMICO/R173 MILLENNIUM(型号)/R174 ECOLED(型号)/R175 EUROPOINT(型号)/R182 SMCG(型号) —— 属性/材质/工艺/品牌/系列/型号
+- 其他表清 57 行：R9 FEMMINA/R10 MASCHIO/R11 INOX/R12 WOG/R13 DN/R14 PN/R16 TANKFLY(系列)/R20 A SFERA/R21 F.F./R22 ART./R25 DIAM./R26 A SALDARE/R27 F/F/R31 CORSA/R34 PPV-GF/R46 EPDM/R47 EPDM 70/R48 EN 681-1/R51 DN80/R52 PN16/R53 D20/R54 PVC-U/R55 A STORE(品牌)/R56 ISO 7005/R57 DIN 2501/R58 EN 1092/R60 XIV(型号)/R75 SALDATURA/R76 VERNICIATURA/R83 INCOLLO/R84 FILETTATO/R90 BARBIERE(品牌)/R93 TIPO B(型号)/R96 TANGIT(品牌)/R103 FKOVDA(型号)/R104 FKOVLM(型号)/R105 FKQJ(型号)/R106 PP-V/R107 GAS M/R109 NR2(型号)/R114 VXEFV(型号)/R123 FILETTATO/R124 IMP./R128 ZINCATO/R130 OET(品牌)/R131 WICLI(品牌)/R132 HI-GRIP(系列)/R134 GBS47(编码)/R135 HGI30(编码)/R136 W1 VITE/W4 VITE(型号)/R141 LEGNO/R146 TESTA/R147 GAMBO/R149 INTAGLIO/R151 BOMBATA/R152 TAGLIO —— 属性/材质/标准/品牌/型号/编码/状态
+
+**② 实体词补齐缺图缺位（按主表清点记录）**：
+- 紧固件：R9 T.S.E.I.→E=`=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF6\146.jpg","图146")`·F=`4-B`（SHELF6 NO146/148/181 vite testa svasata，W1-S5-B-C1-L8）；R11 T.B.E.I.→F=`1-D`（355 图=SHELF3 NO355 圆头内六角）；R52 UNI 5933→同 T.S.E.I. 图146·F=`4-B`；R55 DIN 1587→E=113.jpg·F=`4-A`（SHELF6 NO113-115 DADO CIECO，W1-S5-A-C3-L8）；R67 VITONE→F=`1-D`（366 图=SHELF3 NO366 外六角大螺钉）
+- 其他字典（待定）：R58 TUBO FLESSIBILE→F=`2-A`（图2=SHELF4 NO2 W1-S2-A-C5-L8）；R60 GEKA→F=`2-A`（图6=SHELF4 NO6 W1-S2-A-C5-L6）；R74 CLIP R→**修复 E 旧裸路径为 HYPERLINK 格式**·E=`=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF4\17.jpg","图17")`·F=`2-A`（SHELF4 NO17 Clip R，W1-S2-A-C5-L5）；R77 PORTA GOMMA→E=257.jpg·F=`1-B,2-A,2-B,4-C`（复用 PORTAGOMMA R76 同物数据）
+
+**③ 全表统计（清理后）**：紧固件字典 65 词条 E=27/F=27｜其他字典（待定）211 词条 E=127/F=126｜其他表 155 词条 E=75/F=75。实体词已保留图位，非实体已清。
+
+**④ 待后续清点补图补位（本轮无清点记录、无法编造）**：T.S.P.E.I./GOLFARE/FILIERA（紧固件）；MEZZO RACCORDO FILETTATO/MANDRINA/MASCHIO A MANDRINA/FEMMIA A MANDRINA/TAPPO A MORSETTO/STUD KIT/VALVOLA DI VUOTO/FOOT VALVE/RACCORDO FILETTATO/CARTUCCE FUSIBILE/REATTORE/FUSIBILE D01/CRIMP CONNECTOR/ASTA LAMPEGGIANTE/O-RING/T-SLOT/LUCE TARGA/CAVO ADR/LENTE GIALL/GOMMA FANALE/SIDEMARKER/KIT AUTOPORTANTE/CLIP/TASSELLO DUOPOWER/GOMMA CONICA/STRISCIA CATARIFRANGENTE/CANTONALE/COPERCHIO/SUPPORTO ANTIVIBRANTE/PORTA TABELLA/ADESIVO 系列（其他字典）；ALZA-ABBASSA/COMPONENTE COMANDO/FLANGIA PP-GF/BOCCHE TONE/TEE FEMMINA/CURVA FEMMINA/GUARNIZIONE PVC/BOC CAPORTO/GOMITO 90° FILETTATO/NIPPLO RIDOTTO FILETTATO/MANICOTTO DI RICAMBIO/CARTELLA SALDARE INOX/FLANGIA DISTANZIALE/COLLA/VALVOLA A STROZZAMENTO/VALVOLA A FARFALLA PNEUMATICA/ATTUATORE PNEUMATICO/FLANGIA MASCHIO/FLANGIA QUADRA/COLLARE PER TUBO（其他表）—— 均在后续货柜清点时严格补图+货架号/面号。
 
 ### Cursor 货柜检查结果（W1-SHELF5 NO1–333 · 初检 · Cursor 填）
 
