@@ -1,3 +1,8 @@
+### 2026-09-17 20:20 · Cursor 抽查⑬ 9行回退通过（batch_continue / owner=doubao / round=44）
+- 结论：`pass`。round42 点名 9 行 F 已空；T.S.E.I./UNI 5933/DIN 1587/PORTA GOMMA 新填 E 已撤；T.B.E.I./VITONE/TUBO FLESSIBILE/GEKA 保留旧图只清 F；CLIP R 回到备份裸路径 18.jpg；PORTA GOMMA 四柜面已撤。F=297=306−9；G=65；非法 F=0。未改主表/代码声称；SHELF6 块5 仍挂起。
+- 已通过附注（不挡）：未再贴 A1:G1；A–D vs `_131000` 只断言 0；TUBO/GEKA 前回退 E 截断；空单元格写成 `E='None'`。
+- 下一步：空行补 F/E 每批 ≤20（须可点名清点记录；禁止再填上述 9 词）后 `batch_ready`；实体/非实体或这 9 词须先 `plan_submitted`。禁止再全表 token。`/dict` 可在系统仓库推进。勿改主表/代码。
+
 ### 2026-09-17 19:55 · Cursor 抽查⑫ 空行补位未过（needs_doubao_fix / owner=doubao / round=42）
 - 结论：`fail`。round41 把 round40 点名禁填的 9 行（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）原样再填；无新 `plan_submitted`。头型缩写/标准号当实体；VITONE 绑 NO366 m4x10；PORTA GOMMA 四柜面 token；交检缺 A1:G1 与回退前后对照。
 - 已通过（不挡 fail）：9≤20、备份 `_131000` 时间戳、未改主表/代码声称、SHELF6 块5 挂起、F=306=297+9 算术、9 行有 A/E/F repr。

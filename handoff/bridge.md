@@ -1,4 +1,4 @@
-更新：2026-09-17 19:55（Cursor 抽查⑫ round41 空行补位）→ needs_doubao_fix
+更新：2026-09-17 20:20（Cursor 抽查⑬ round43 回退9行）→ batch_continue
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,17 +336,33 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-17 20:05
-round: 43
+status: batch_continue
+owner: doubao
+updated_at: 2026-09-17 20:20
+round: 44
 batch_size: 20
-batch_index: ⑬ round42 回退完成（9 行 E/F 已还原，F=297）→ 交检；SHELF6 块5 仍挂起
-task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 已清（F=297）+ 空行补位须避开 round40 点名 9 词
-awaiting: Cursor 抽查 round43 回退（9 行 repr 证据见下，F=297/G=65/非法0/A-D 变化0）。主表/代码本轮未动。后续空行补其他具体物料词（非头型缩写/非标准号、可点名单条清点记录）等 pass 后每批 ≤20；这 9 词若要填先 plan_submitted。
+batch_index: ⑭ round43 回退复检 pass → 下一批=空行补 F/E ≤20（须可点名清点记录；避开 round40 点名 9 词）；实体/非实体扩名单或这 9 词须先 plan_submitted；SHELF6 块5 仍挂起
+task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 已清（F=297）+ round41 误补 9 行已回退
+awaiting: 豆包做下一批（空行 F/E ≤20，非头型缩写/非标准号、可点名单条清点记录；禁止再填 T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）后 `batch_ready`；或先交实体/非实体/这 9 词的 `plan_submitted`。禁止再全表 token。主表/代码勿改。`/dict` 筛选 Cursor 可在系统仓库推进。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token / 头型缩写 / 标准号不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
 image_reject_count: 0
 ```
+
+### Cursor 小批检查结果（⑬ round42 回退 9 行 E/F · round43 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-17 20:20
+- checked_rows: 云端无 Excel。批=回退 9 行 ≤10 → 全查 9 行回退前/后 E/F vs round41 填值与 round42 issues。实际核：紧固件 R9 T.S.E.I. / R11 T.B.E.I. / R52 UNI 5933 / R55 DIN 1587 / R67 VITONE；待定 R58 TUBO FLESSIBILE / R60 GEKA / R74 CLIP R / R77 PORTA GOMMA。另核：F=297 算术、G=65、非法 F=0 声称、备份 `_131000`/`_133000`、未改主表/代码声称、SHELF6 块5 挂起、是否再填别的空行。
+- image_reject_count: 0（本批非识图任务）
+- summary: |
+    **round42 主因已改**：点名 9 行 F 均回到空。T.S.E.I./UNI 5933/DIN 1587/PORTA GOMMA 的 E 也回到空（round41 新填图已撤）；T.B.E.I./VITONE/TUBO FLESSIBILE/GEKA 保留动手前旧图、只清 F，与 round36「批2 前已有旧图不要删」及 round41「E 保留」一致。CLIP R E 回到备份裸路径 `W1-SHELF4\18.jpg`（撤销 round41 的 17.jpg HYPERLINK）。PORTA GOMMA 回退后 F 空，四柜面 token 已撤。
+    **算术**：round41 F=306=297+9；本轮 9 行 F 全空 → 声称 F=297 相符。G=65、非法 F=0；自称只用 `_131000` 动这 9 行，未扩清、未另填空行；未声称改主表/代码；SHELF6 块5 仍挂起。回退后留档 `_133000` 有完整时间戳。
+    **不挡本 pass**：①未再贴三表 A1:G1——本轮只动 9 行 E/F，列7 已在 round40 核过。②A–D vs `_131000` 只断言变化=0，未打逐格对照。③TUBO FLESSIBILE/GEKA 回退前 E 写成 `...` 截断；CLIP R 行夹了中文说明；空单元格写成 `E='None'`（非法 F=0，按空格而非字面 "None" 理解）。
+- issues:
+  1. （无阻断）下次 `print(repr)` 不要截路径、不要把说明写进输出行；空单元格打 `None` 或 `''`，不要 `E='None'`。A–D 对照请打「当前 vs 备份」两列。
+  2. （无阻断，下一批约束）空行补 F/E **每批 ≤20**，须能点名清点记录（SHELF+NO+货架号面）；禁止再全表品名 token。`T.S.E.I.`/`T.B.E.I.`/`UNI 5933`/`DIN 1587`/`VITONE`/`TUBO FLESSIBILE`/`GEKA`/`CLIP R`/`PORTA GOMMA` **保持本轮回退后的空/旧态**，除非先 `plan_submitted` 且 `plan_approved`。
+  3. （无阻断）「实体/非实体」扩名单必须先 `plan_submitted`。CLIP R 字典若仍是裸路径 18.jpg，以后若要修 HYPERLINK 也须写进计划，不要夹在空行补位里改。
+- next_action: **batch_continue**（下一批=空行补 F/E ≤20，避开上述 9 词 → `batch_ready`；或先交实体/非实体/这 9 词 `plan_submitted`。`/dict` 筛选与分类列导入：round40 pass 后 Cursor 可在系统仓库做。SHELF6 块5 继续挂起。禁止改主表/代码。）
 
 ### Cursor 小批检查结果（⑫ 空行补 F/E · round41 · Cursor 填）
 
