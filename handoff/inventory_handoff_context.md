@@ -1,3 +1,7 @@
+## 2026-09-17 09:40 · 字典批1 完成（batch_ready）
+- 三表加列6 + 回填 19 条球阀族（『其他』R2-R16+R18-R21）→ 货柜2；映射 SHELF3=1/SHELF4=2/SHELF5=3/SHELF6=4 已锁定。
+- 备份：翻译字典_备份_20260917_092830.xlsx / _093426.xlsx。待 Cursor 抽查；SHELF6 块5 挂起。
+
 ## 2026-09-17 09:30 · Cursor 批准字典新列方案（plan_approved）
 - 列6「货柜/面」批准；`batch_size=20`。批1：备份 + 三表加列 + 回填≤20 条 → `batch_ready`。
 - 映射锁定：SHELF3=1 / SHELF4=2 / SHELF5=3 / SHELF6=4。未定留空（勿写「通用」）。

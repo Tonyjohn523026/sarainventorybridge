@@ -87,6 +87,13 @@
 - 备份路径：改前备份到 `D:\sara\库存管理\翻译字典_备份_<时间戳>.xlsx`（改完本提案批准后执行）。
 - `dict_changed: yes`（批准后实际修改时置位并留痕）。
 
+**⑤ 批1 实施完成（2026-09-17 09:40 · dict_changed: yes · batch_ready）**
+- 备份：`D:\sara\库存管理\翻译字典_备份_20260917_092830.xlsx`（加列前）、`_20260917_093426.xlsx`（回填前）。
+- 三表加列6「货柜/面」：紧固件字典 / 其他字典（待定） / 其他 均已新增（表头样式与 1-5 列一致，筛选 A1:F[last]，分类行合并 A:F，F 列宽 16，冻结 A2）。
+- 批1 回填 19 条（≤20 上限）：『其他』R2-R16 + R18-R21 = 货柜2（SHELF4 NO151-170 球阀族补录，changelog 依据：VALVOLA/SFERA/VOLANTINO/CHIAVE/FEMMINA/MASCHIO/INOX/WOG/DN/PN/FARFALLA/TANKFLY/KIT GUARNIZIONE 31 词条批次）。
+- 其余词条 F 留空（=未定，不写「通用」）；后续按物料行「类型」绑定逐批回填（批2+ 先交计划）。
+- 待 Cursor：抽查批1；系统字典页导航按货柜/面筛选（豆包不改代码）。
+
 **④ 审批后动作**
 - 豆包：按批准方案改 翻译字典.xlsx（含备份、回填、留痕）。
 - Cursor：改系统字典页导航（按货柜/面筛选）。**豆包不改代码**。
@@ -114,14 +121,14 @@
 ## 当前状态
 
 ```
-status: plan_approved
-owner: doubao
-updated_at: 2026-09-17 09:30
-round: 27
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 09:40
+round: 28
 batch_size: 20
-batch_index: 字典列6「货柜/面」批1（备份+三表加列+回填≤20条）→ 待豆包执行后 batch_ready；SHELF6 块5（NO81–100）仍挂起
-task: 2026-09-17 字典按货架分类（SHELF+面）· 新列方案已批准；任务3 全货柜核销（SHELF6 块5 挂起）
-awaiting: 豆包按批准方案改 翻译字典.xlsx：备份 → 三表加列6「货柜/面」→ 回填≤20 条有把握词条 → status=batch_ready / owner=cursor。勿改主表、勿改代码。SHELF6 块5 待用户恢复。
+batch_index: 字典列6「货柜/面」批1 完成（备份+三表加列+回填19条球阀族）→ 待 Cursor 抽查；SHELF6 块5（NO81–100）仍挂起
+task: 2026-09-17 字典按货架分类（SHELF+面）· 批1 实施完成（用户 2026-09-17 拍板按新规则更新字典；Cursor 批准 plan_approved 后执行）
+awaiting: Cursor 抽查批1 回填（19 条=货柜2 球阀族）；SHELF6 块5 待用户恢复。后续批2+ 回填待 Cursor 批准（禁止一次回填全部）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、不动前5列、未定留空、货柜号取清点 SHEET 映射。
 image_reject_count: 0
 ```
