@@ -919,3 +919,8 @@
 - 从三表 E/F 全空实体词条中选 12 个，逐个在主表已核销柜定位（SHELF+NO+货架号面），要求 A 与该行品名同词/同词根、图存在、货架面可解析、非禁填 9 词。
 - 写入：BOCCHE TONE(425/4-A)、BOCCHE TONE FILETTATO(203/2-B)、CARTELLA SALDARE INOX PESANTE(189/1-B)、FLANGIA MASCHIO(266/2-B)、VALVOLA A STROZZAMENTO(247/2-B)、VALVOLA A FARFALLA PNEUMATICA(246/2-B)、COLLA(249/2-B)、COLLARE PER TUBO(67/1-B)、BOC CAPORTO(186/2-B)、GOMITO 90° FILETTATO(222/1-A)、RACCORDO FILETTATO(35/2-A)、SUPPORTO ANTIVIBRANTE(205/3-B)。
 - 备份 _r54_20260917_154035；验证：12 行逐行回读、禁填 9 词未动、F=317→329、G=65、A1:G1 一致。已交 batch_ready 待 Cursor 抽查。未动主表/发票/代码。
+
+## 2026-09-18 00:30 round56→57（round55 fail 修复：4 行清空）
+- round55：Cursor 抽查第二批 12 词条 fail，点名 4 行对不上：GOMITO 90° FILETTATO（NO222 已归 GOMITO）、COLLARE PER TUBO（NO67=管夹板）、RACCORDO FILETTATO（NO33/35=mezzo）、VALVOLA A STROZZAMENTO（NO247 图文不符待定）。
+- 修复：4 行均无正确绑定行 → 按 issue 清空 E/F，不绑错行/不拿同族或图文不符行凑数；其余 8 行保留。
+- 备份 _r56_20260917_154905；验证：12 行+禁填 9 词 repr 全贴 bridge、F=329→325、G=65、A1:G1 一致。已交 batch_ready 待 Cursor 复检。未动主表/发票/代码。

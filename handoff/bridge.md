@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-18 00:15
-round: 56
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-18 00:30
+round: 57
 batch_size: 20
-batch_index: ⑲ 字典空行补 F/E 第二批未过（GOMITO 90° FILETTATO / COLLARE PER TUBO / RACCORDO FILETTATO / VALVOLA A STROZZAMENTO 点名行对不上）
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第二批 12 词条抽查未过，待豆包只改 4 行
-awaiting: 豆包只改上述 4 行 E/F（改绑或清空）+ 贴 12 行与禁填 9 词 repr 后 batch_ready。其余 8 行可留。
+batch_index: ⑳ 字典空行补 F/E 第二批复检修复：round55 点名 4 行（GOMITO 90° FILETTATO/COLLARE PER TUBO/RACCORDO FILETTATO/VALVOLA A STROZZAMENTO）无正确绑定行→按 issue 清空 E/F；其余 8 行保留（F=325、G=65、禁填 9 词未动）
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：round55 fail 4 行已按 issue 清空，待 Cursor 复检
+awaiting: Cursor 复检 round57（12 行 A/E/F、禁填 9 词 A/E/F、F=325、A1:G1、备份 _r56_20260917_154905）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -565,6 +565,47 @@ SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 �
 **④ 全表 F/G 写死整数**：F 非空=**317→329**（+12）、G 非空=**65**（未动）。
 
 **⑤ 三表 A1:G1**：`['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面','分类（系统枚举）']` 三表一致。
+
+### 豆包 round57 修复：round55 点名 4 行清空（2026-09-18 00:30 · batch_ready）
+
+**改前备份**：`翻译字典_备份_20260917_r56_20260917_154905.xlsx`
+
+**修复动作**：4 个被点名词条均无正确绑定行 → 按 issue 1 清空 E/F（不绑错行、不拿同族/图文不符行凑数）：
+- `GOMITO 90° FILETTATO`：SHELF3/4/5/6 无品名含 GOMITO 90° FILETTATO 行（NO222=GOMITO FF 已归 `GOMITO`）→ 清空
+- `COLLARE PER TUBO`：无 PN=COLLARE PER TUBO 行（NO67=COLLARE INOX 管夹板）→ 清空
+- `RACCORDO FILETTATO`：仅 NO33/35 均=mezzo raccordo filettato（mezzo 已归 `MEZZO RACCORDO FILETTATO`）→ 清空
+- `VALVOLA A STROZZAMENTO`：NO247 品名虽为 Valvola a strozzamento 但图文不符待定（识图节流阀、发票 YAK 阻火网套件），issue 明令禁止识图套词条 → 清空
+
+**① round55 全部 12 行当前 A/E/F（print repr）**：
+```
+[其他] R37 A='BOCCHE TONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\425.jpg","图425")' F='4-A'
+[其他] R38 A='BOCCHE TONE FILETTATO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\203.jpg","图203")' F='2-B'
+[其他] R78 A='CARTELLA SALDARE INOX PESANTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\189.jpg","图189")' F='1-B'
+[其他] R120 A='FLANGIA MASCHIO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\266.jpg","图266")' F='2-B'
+[其他] R100 A='VALVOLA A STROZZAMENTO' E=None F=None
+[其他] R101 A='VALVOLA A FARFALLA PNEUMATICA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\246.jpg","图246")' F='2-B'
+[其他] R97 A='COLLA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\249.jpg","图249")' F='2-B'
+[其他] R127 A='COLLARE PER TUBO' E=None F=None
+[其他] R50 A='BOC CAPORTO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\186.jpg","图186")' F='2-B'
+[其他] R66 A='GOMITO 90° FILETTATO' E=None F=None
+[其他字典（待定）] R90 A='RACCORDO FILETTATO' E=None F=None
+[其他字典（待定）] R210 A='SUPPORTO ANTIVIBRANTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\205.jpg","图205")' F='3-B'
+```
+
+**② 禁填 9 词 A/E/F（未动）**：
+```
+[紧固件字典] R9 A='T.S.E.I.' E=None F=None
+[紧固件字典] R11 A='T.B.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\355.jpg","图355")' F=None
+[紧固件字典] R52 A='UNI 5933' E=None F=None
+[紧固件字典] R55 A='DIN 1587' E=None F=None
+[紧固件字典] R67 A='VITONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\366.jpg","图366")' F=None
+[其他字典（待定）] R58 A='TUBO FLESSIBILE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\2.jpg","图2")' F=None
+[其他字典（待定）] R60 A='GEKA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\6.jpg","图6")' F=None
+[其他字典（待定）] R74 A='CLIP R' E='D:\\sara\\库存管理\\图片\\W1-SHELF4\\18.jpg' F=None
+[其他字典（待定）] R77 A='PORTA GOMMA' E=None F=None
+```
+
+**③ 全表 F 非空=325（329-4）、G 非空=65**；三表 A1:G1 一致 `['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面','分类（系统枚举）']`。未动主表/发票/代码；SHELF6 块5 继续挂起。
 
 ### Cursor 小批检查结果（⑲ 字典空行补 F/E 第二批 12 词条 · round55 · Cursor 填）
 
