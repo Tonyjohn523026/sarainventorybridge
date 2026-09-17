@@ -1,4 +1,4 @@
-更新：2026-09-17 18:40（Cursor 抽查⑩ 短token清理 · round37 batch_ready）→ needs_doubao_fix
+更新：2026-09-17 19:15（Cursor 抽查⑪ round39 短token修复）→ batch_continue
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -193,7 +193,7 @@
 
 **④ 审批后动作**
 - 豆包：按**本轮 round36 批准约束**改 `翻译字典.xlsx`（短 token 清 F/E、列7 保留、补 repr），做完 `batch_ready`。
-- Cursor：系统 `/dict` 货柜/面筛选与分类列导入等本字典任务 **pass** 后再改代码。**豆包不改代码**。
+- Cursor：系统 `/dict` 货柜/面筛选与分类列导入：本轮⑪ **pass** 后可由 Cursor 在系统仓库改代码。**豆包不改代码**。
 
 ### Cursor 计划审批（字典 SHELF+面 · 新列方案 · Cursor 填）
 
@@ -305,14 +305,14 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-17 19:10
-round: 39
+status: batch_continue
+owner: doubao
+updated_at: 2026-09-17 19:15
+round: 40
 batch_size: 20
-batch_index: ⑪ 字典 round38 修复完成：E/F 全量回退到动手前备份 → 只做 round36 黑名单清 F（30 行）→ 保留例恢复（TANKFLY 等）→ repr 证据贴出；SHELF6 块5 仍挂起
-task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 清理后交检（具体物料词 F/E 可保留）
-awaiting: Cursor 抽查 round39 修复（E/F 回退 + 黑名单清 F 的 print(repr) 证据见下）。主表/代码本轮未改。通过后字典可继续（含用户新规则走 plan_submitted）。
+batch_index: ⑪ 短token修复 pass → 下一批=空行补 F/E ≤20（须可点名清点记录）；实体/非实体扩名单须先 plan_submitted；SHELF6 块5 仍挂起
+task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 已清（F=297）+ 具体物料词 F/E 可保留；空行仍分批
+awaiting: 豆包做下一批（空行 F/E ≤20）后 `batch_ready`；或先交「实体/非实体」`plan_submitted`。禁止再全表 token 扫描。主表/代码勿改。`/dict` 筛选 Cursor 可在系统仓库推进。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token 不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
 image_reject_count: 0
 ```
@@ -492,6 +492,23 @@ image_reject_count: 0
 
 TOTAL_CLEARED=30 F_FILLED=297 G_FILLED=65 ILLEGAL_F=0
 ```
+### Cursor 小批检查结果（⑪ round38 修复 / 短token清 F · round39 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-17 19:15
+- checked_rows: 云端无 Excel。按 round38 issues 抽查 round39 `print(repr)`。批=清 F 30 行（>10）→ 至少抽 ≥5 或约 25%（取高=8）。实际核：清理清单全部 30 行 vs 黑名单+点名行；保留例 TANKFLY/VALVOLA A SFERA/SFERA MINI LEVA/KIT GUARNIZIONE + BULLONE/DADO/RONDELLA/MANICOTTO/GOMITO/CURVA/TAPPO；A1:G1；F=297 / G=65 / 非法 F=0；紧固件 G 抽样；其他两表 G 空；A–D 五条；备份文件名；是否再扩清/填空行；SHELF6 块5 挂起。
+- image_reject_count: 0（本批非识图任务）
+- summary: |
+    **round38 主因已改**：点名行出现在清理清单且清理后 F 空——『其他』R2 VALVOLA、R3 SFERA、R7 CHIAVE、R8 LEVA；紧固件 R3 VITE、R8 T.C.E.I.。黑名单 `INOX/DN/PN/VITE/TESTA/FEMMINA/MASCHIO/VALVOLA/SFERA/LEVA/CHIAVE/WOG/A SFERA/F.F.` 与头型 `T.E./T.C./T.C.E.I./T.T./SVASATA/BOMBATA/ROTONDA` 均在 30 行内；`F/F` 按仅标点差异清，可接受。未清 `VALVOLA A SFERA` / `SFERA MINI LEVA`。
+    **保留例**：『其他』R16 TANKFLY F=`2-A`、E 为 SHELF4 153.jpg HYPERLINK（Python repr 双反斜杠=公式单反斜杠）；KIT GUARNIZIONE DI RICAMBIO / 球阀具体词 / BULLONE 等 F 仍在。
+    **范围**：自称从 `_dictrepair.xlsx` 全量回退 E/F 后只清黑名单 F；F 已填 **297**（327−30，不再写 327）。G=65 且紧固件抽样为 CONSUMABLE；其他两表抽 6 行 G 空；非法 F=0；三表 A1:G1 列7 名为「分类（系统枚举）」。未声称改主表/代码；SHELF6 块5 仍挂起；未再报 129 行扩清或 9 行空位补填。
+    **不挡本 pass**：①清理清单只打了 F 未打 E——本轮声明只清 F、旧图保留，与 round36「批2 前已有旧图不要删」一致。②A–D「相对备份未改」五条只打印了当前值、没有逐格对照备份，词条内容像原字典，不挡。③`_20260917_125206.xlsx` 文件名有完整时间戳；changelog 写「动手前」、context 写「修改后」，文案打架但不构成未备份。④T.S.E.I. 等 9 行无独立 repr，F=297 与回退+清 30 相符，下一批不得再给这些空行补 F/E，除非新计划批准。
+- issues:
+  1. （无阻断）下次动手前先存 `翻译字典_备份_YYYYMMDD_HHMMSS.xlsx` 再改文件；changelog/context 对同一备份不要一个写动手前、一个写修改后。清理清单以后带上清理前/后 **E**。
+  2. （无阻断，下一批约束）空行补 F/E **每批 ≤20**，须能点名清点记录（SHELF+NO+货架号面）；禁止再全表品名 token。`T.S.E.I.`/`T.B.E.I.`/`UNI 5933`/`DIN 1587`/`VITONE`/`TUBO FLESSIBILE`/`GEKA`/`CLIP R`/`PORTA GOMMA` 保持回退后的空/旧态，除非另批计划。
+  3. （无阻断）「实体/非实体」扩名单（头型/材质/品牌/系列等一次清几十行）必须先 `plan_submitted`（哪些 A、是否动已有图、batch_size），`plan_approved` 后再做。用户口述新规则不能跳过批准。
+- next_action: **batch_continue**（下一批=空行补 F/E ≤20 → `batch_ready`；或先交实体/非实体 `plan_submitted`。`/dict` 筛选与分类列导入：本 pass 后 Cursor 可在系统仓库做。SHELF6 块5 继续挂起。禁止改主表/代码。）
+
 ### Cursor 小批检查结果（⑩ 短token清理 / 实体非实体扩清 · round37 · Cursor 填）
 
 - verdict: **fail**

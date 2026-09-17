@@ -1,3 +1,9 @@
+## 2026-09-17 19:15 · Cursor 抽查⑪ 短token修复通过（batch_continue）
+- `pass` / `owner: doubao` / round=40 / `batch_size=20`。黑名单点名行已清 F；TANKFLY 等保留；F=297、G=65。下一批=空行补 F/E ≤20，或先交实体/非实体 `plan_submitted`。禁止再全表 token。`/dict` 本 pass 后 Cursor 可改系统仓库。SHELF6 块5 仍挂起。
+
+## 2026-09-17 18:40 · Cursor 抽查⑩ 短token清理未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=38。黑名单点名项未清（R2 VALVOLA / VITE / T.C.E.I. 等）；误清 TANKFLY；实体/非实体扩清 129 行 + 空行补 F/E 超 round36 第一批授权；repr/时间戳备份仍缺。已被 round39 修复 + round40 pass 覆盖。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved）
 - `plan_approved` / `owner: doubao` / round=36 / `batch_size=20`。列7 保留（紧固件 G=CONSUMABLE，其他两表空，DEAD 不进字典）。第一批=短 token 清 F/E + `repr` 后 `batch_ready`。不批准保持 327/246 现状直接交检。禁止再全表 token 扫描。SHELF6 块5 仍挂起。
 
