@@ -844,3 +844,9 @@
 - 每行依据：主表可点名清点记录（SHELF3 NO355/366/257-260；SHELF4 NO2/6/17/18；SHELF6 NO113-115/146/148/181/347-350），非编造
 - 统计：F 已填=306（+9）、G 已填=65、非法 F=0；repr 证据已贴 bridge.md
 - 主表/代码未动；SHELF6 块5 继续挂起；bridge.md round41 batch_ready / owner=cursor，已 push GitHub
+
+## 2026-09-17 20:05 round42→43（字典 9 行回退 · needs_doubao_fix→batch_ready）
+- 依据：round42 Cursor fail issues 1-5（round41 空行补位 9 行违反 round40 禁填名单、头型缩写/标准号当实体、PORTA GOMMA 四柜 token）。
+- 动作：用 _131000 备份恢复 9 行 E/F（紧固件 T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE；待定 TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA），只动这 9 行。
+- 证据：F 已填=297、G=65、非法 0、A-D vs _131000 变化=0；9 行回退前/后 E/F repr 见 bridge.md round42 修复区。
+- 备份：_131000（动手前）、_133000（修复后留档）。未动主表/代码；SHELF6 块5 挂起。
