@@ -1,3 +1,17 @@
+### 2026-09-17 09:10 | Cursor：系统交付摘要 + 字典按 SHELF/面新要求 + handoff 双写规则
+**用户要求**：把系统近期改动总结给豆包；字典也要按货架（SHELF）+ 面（A/B/C/D）分类；以后 handoff **本地与远端都要更新**。
+**系统已完成（Cursor / sarastocksystem）**：
+- 死库存从分类拆出 → 操作列单选「是死库存/非死库存」
+- 物料行「类型」列绑定字典词条：锁分类、字典改分类同步行、有类型则 BRCODE 不可回溯
+- 代码已 push：`https://gitlab.com/Tonyjohn523026/sarastocksystem.git`
+**handoff 规则（锁定）**：每次变更必须同时更新  
+  ① `D:\sara\库存管理\handoff\`  
+  ② GitHub `Tonyjohn523026/sarainventorybridge` 的 `handoff/` 并 **push**  
+**豆包待办（新）**：先交计划——`翻译字典.xlsx` 如何按 SHELF+面组织（Sheet/分组/列）；等 Cursor 批后再改 Excel；勿改代码。
+**未决**：字典 SHELF+面结构方案；系统字典页按货柜+面导航（Cursor 待结构定稿后做）。当前主表任务仍按 bridge「当前状态」继续（SHELF6 等）。
+
+---
+
 ### 2026-09-17 08:45 · SHELF6 块4（NO61-80）写回完成
 - 识图 20/20（NO61-80.jpg），判定 7 命中 + 13 死库存。命中：NO61 PEN1682/NO63 PEN1683（UNI5739 10X30/40）、NO64 PEN1652（5931 10X20）、NO65 PEN1464（DIN934 M10）、NO66 PEN1454（DIN982 自锁 M10）、NO67 PEN1561（平垫 M10）、NO69 PEN1556（GROWER M10）。死库存：NO62（10X35 无发票）、NO68（φ10x26 无发票）、NO70-80（m8 系列发票仅 T.B.E.I. 杯头 qty=0 或占位行）。
 - NO73 预填残留多行价格已清空；NO70/73/79/80 图头型与预填品名不符已留痕待校对。

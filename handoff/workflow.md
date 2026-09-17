@@ -1,5 +1,5 @@
 # 库存核销完整工作流程（SOP · 任何智能体接手照此执行）
-更新时间：2026-09-16 07:00（批次规则变更：小批交检 → 货柜级执行）
+更新时间：2026-09-17 09:10（handoff 双写硬规则 + 字典 SHELF/面新要求）
 
 > 目标：每次用户提新要求后，**有确定步骤、可验证、可追溯**地完成核销，最终效果稳定。
 > 核心原则：**先探查 → 先字典 → 全量匹配 → 清单确认 → 写回 → 验证 → 汇报 → 更新交接**。
@@ -8,7 +8,26 @@
 
 - **豆包**：按本 SOP 做 Excel 核销；开工前必须在 `handoff\bridge.md` 交计划；**一次执行完一个货柜后交检**（Cursor 抽查改为货柜级，见下方「批次与交接规则」）。
 - **Cursor**：系统开发 / 提交部署；审批豆包计划并抽查小批；**不替代豆包写主表**（除非用户点名）。
-- 翻译字典可在管理系统 `/dict` **只读查看**；**权威文件仍是** `D:\sara\库存管理\翻译字典.xlsx`（豆包维护）。
+- 翻译字典可在管理系统 `/dict` 查看/维护入口；**权威文件仍是** `D:\sara\库存管理\翻译字典.xlsx`（豆包维护 Excel）。
+- 系统代码仓库：`https://gitlab.com/Tonyjohn523026/sarastocksystem.git`（Cursor 维护）。
+
+---
+
+## handoff 双写（用户 2026-09-17 锁定，违反即返工）
+
+| 必须写 | 路径 |
+|--------|------|
+| 本地 | `D:\sara\库存管理\handoff\`（bridge / changelog / context / workflow） |
+| 远端 | `D:\sara\sarainventorybridge\handoff\` → push `https://github.com/Tonyjohn523026/sarainventorybridge` |
+
+流程：两边内容保持一致 → `git add handoff/ && git commit && git push origin main`。  
+**禁止只改本地不 push**；豆包以 GitHub `handoff/` 为互通权威。Cursor 系统交付说明也必须双写。
+
+---
+
+## 字典新要求（用户 2026-09-17，待计划）
+
+字典须按 **SHELF（货柜）+ 面（A/B/C/D）** 组织，与库存货柜导航一致。豆包先在 bridge 交结构方案（`plan_submitted`），Cursor 批准后再改 `翻译字典.xlsx`；勿先大批改。同类型不同尺寸：字典一条类型，尺寸在物料行。
 
 ---
 
@@ -28,7 +47,7 @@
 2. **执行记录详细双写（必做）**：每次块执行与货柜收口，必须把**详细记录**写入：
    - 本地 `D:\sara\库存管理\handoff\handoff_changelog.md`（权威变更日志）；
    - 远端 `D:\sara\sarainventorybridge\handoff\bridge.md`（「② 当前小批进度」→ 改为「当前货柜进度」区，逐块追加：行号→判定→依据→识图一句→关键词列表）与 `handoff_changelog.md`；
-   - 改完必 `git add handoff/ && git commit && git push origin main`（Cursor 才能收到）。
+   - **两边文件内容对齐**后，在 `sarainventorybridge` 目录：`git add handoff/ && git commit && git push origin main`（Cursor/豆包才能收到）。
 3. **Cursor 失联降级**：若 Cursor 轮询/抽查长时间无响应（watch 脚本未跑、会话关闭等），**不空等**——豆包继续按货柜级推进，把执行记录留在远端 handoff；用户点名让 Cursor 检查时再交检。
 4. **识图/检索/写回硬规则不变**：逐张识图（超 4000px 先缩 ≤2000px）、词组+单词+缩写全量检索、字典先补、条码非 PEN=死库存、未命中淡蓝+三句原因、近3年「已命中」同步含供应商。
 

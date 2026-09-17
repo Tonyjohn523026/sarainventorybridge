@@ -1,3 +1,9 @@
+## 2026-09-17 09:10 · Cursor 系统交付 + 字典 SHELF/面新要求 + handoff 双写
+- **系统**（`sarastocksystem` GitLab 已 push）：死库存操作列单选；物料「类型」绑字典（锁分类/同步/禁 BRCODE 回溯）；字典页 `/dict` 仍可用。
+- **handoff 双写锁定**：本地 `D:\sara\库存管理\handoff\` **与** GitHub `sarainventorybridge/handoff/` 必须同时更新并 **push**；禁止只改一边。
+- **新要求（待豆包交计划）**：`翻译字典.xlsx` 按 **SHELF（货柜）+ 面 A/B/C/D** 组织；先 plan_submitted，Cursor 批后再改 Excel；系统导航 Cursor 后做。
+- 主表进度：仍按下方 SHELF6 最新块记录继续。
+
 ## 2026-09-17 08:45 · SHELF6 块4 完成（NO61-80）
 - SHELF6 进度：NO1-80 完成（命中 41/死库存 39），近3年至 seq 300（R181）。
 - 块4 判例：UNI5739 10X30/40 命中（PEN1682/1683）；5931 内六角 10X20 命中（PEN1652）；DI10/DAI10/RI10/RGI10 均命中（PEN1464/1454/1561/1556）；m8 系列（brugola/altoparlante/intaglio）发票均无真实命中（T.B.E.I. 杯头 8X20/25/30 qty=0 头型不同）。
