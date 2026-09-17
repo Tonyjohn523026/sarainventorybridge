@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-17 23:20
-round: 52
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 23:40
+round: 53
 batch_size: 20
-batch_index: ⑰ 字典空行补 F/E 抽查未过（MASCHIO A MANDRINA / FEMMIA A MANDRINA 点名行对不上）→ 只改这 2 行再 batch_ready
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 18/20 点名可核；2 行绑错货位
-awaiting: 豆包按 round52 issues 只改 MASCHIO A MANDRINA / FEMMIA A MANDRINA 后 `batch_ready`。其余 18 行可留。禁填 9 词仍勿动。
+batch_index: ⑰ 字典空行补 F/E 复检：MASCHIO→NO51 / FEMMIA→NO54 改绑完成（F 仍 317、G 65、禁填 9 词未动）
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 20 词条点名清点已核（round52 两行改绑后复交）
+awaiting: Cursor 抽查 round53（20 行逐行 A/E/F、禁填 9 词 A/E/F、F=317/G=65、A1:G1、A-D vs _r50_145550 对照=0）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -442,6 +442,58 @@ CURVA FEMMINA | W1-SHELF4 NO=209 | W1-S2-B-C3-L7 | 2-B
 ```
 
 **整体回归**：F 非空总数 297→**317**（+20）；禁填 9 词（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）E/F 均未动（E=None F=None 或保留旧 E、F=None）；本轮 20 个写入 F 全部为合法 `货柜-面` 格式（23 个"非法格式"均为既有历史数据如 `2,3-A` 裸数字=整柜，非本轮引入，未修改）。A-D 列未动。
+
+### 豆包 round53 字典 round52 issues 修复（2026-09-17 23:40 · batch_ready）
+
+**依据**：round52 fail issue1（MASCHIO A MANDRINA 绑 NO37 是 MANDRINA、FEMMIA A MANDRINA 绑 NO48 与 MANDRINA 共用）→ 按 issue 改绑，其余 18 行不动、禁填 9 词不动。
+
+**执行**：
+- `MASCHIO A MANDRINA`：NO37 → 改绑 **W1-SHELF4 NO51**（Product Name=`MASCHIO A MANDRINA`，货架 `W1-S2-A-C4-L3` → 货柜 2 面 A），E=51.jpg，F=`2-A`
+- `FEMMIA A MANDRINA`：NO48 → 改绑 **W1-SHELF4 NO54**（Product Name=`FEMMIA A MANDRINA`，货架 `W1-S2-A-C4-L2` → 货柜 2 面 A），E=54.jpg，F=`2-A`
+- 图片 51.jpg / 54.jpg 均验证存在；改前备份 `翻译字典_备份_20260917_r52_20260917_151602.xlsx`
+
+**① 本批 20 行逐行 Sheet|行号|A|E|F（print repr）**：
+```
+[其他字典（待定）] R75 A='MEZZO RACCORDO FILETTATO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\33.jpg","图33")' F='2-A'
+[其他字典（待定）] R78 A='MANDRINA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\48.jpg","图48")' F='2-A'
+[其他字典（待定）] R79 A='MASCHIO A MANDRINA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\51.jpg","图51")' F='2-A'
+[其他字典（待定）] R80 A='FEMMIA A MANDRINA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\54.jpg","图54")' F='2-A'
+[其他字典（待定）] R81 A='TAPPO A MORSETTO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\47.jpg","图47")' F='2-A'
+[其他字典（待定）] R82 A='STUD KIT' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\40.jpg","图40")' F='2-A'
+[其他字典（待定）] R122 A='CARTUCCE FUSIBILE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\37.jpg","图37")' F='3-A'
+[其他字典（待定）] R134 A='FUSIBILE D01' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\44.jpg","图44")' F='3-A'
+[其他字典（待定）] R144 A='ASTA LAMPEGGIANTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\78.jpg","图78")' F='3-A'
+[其他字典（待定）] R146 A='O-RING / ANELLO GOMMA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\76.jpg","图76")' F='2-A'
+[其他字典（待定）] R158 A='LENTE GIALL' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\94.jpg","图94")' F='3-A'
+[其他字典（待定）] R162 A='GOMMA FANALE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\103.jpg","图103")' F='3-A'
+[其他字典（待定）] R165 A='SIDEMARKER LATERALE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\80.jpg","图80")' F='3-A'
+[其他字典（待定）] R190 A='GOMMA CONICA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\150.jpg","图150")' F='3-C'
+[其他字典（待定）] R199 A='STRISCIA CATARIFRANGENTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\175.jpg","图175")' F='3-B'
+[其他字典（待定）] R222 A='TERMOMETRO ADESIVO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\223.jpg","图223")' F='3-B'
+[其他] R24 A='ALZA-ABBASSA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\154.jpg","图154")' F='2-A'
+[其他] R33 A='FLANGIA PP-GF' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\195.jpg","图195")' F='2-B'
+[其他] R40 A='TEE FEMMINA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\208.jpg","图208")' F='2-B'
+[其他] R42 A='CURVA FEMMINA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\209.jpg","图209")' F='2-B'
+```
+
+**② 禁填 9 词 A/E/F（相对动手前未动）**：
+```
+[紧固件字典] R9 A='T.S.E.I.' E=None F=None
+[紧固件字典] R11 A='T.B.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\355.jpg","图355")' F=None
+[紧固件字典] R52 A='UNI 5933' E=None F=None
+[紧固件字典] R55 A='DIN 1587' E=None F=None
+[紧固件字典] R67 A='VITONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\366.jpg","图366")' F=None
+[其他字典（待定）] R58 A='TUBO FLESSIBILE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\2.jpg","图2")' F=None
+[其他字典（待定）] R60 A='GEKA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\6.jpg","图6")' F=None
+[其他字典（待定）] R74 A='CLIP R' E='D:\\sara\\库存管理\\图片\\W1-SHELF4\\18.jpg' F=None
+[其他字典（待定）] R77 A='PORTA GOMMA' E=None F=None
+```
+
+**③ 全表 F/G 写死整数**：F 非空总数=**317**（改绑不增不减）、G 非空总数=**65**。
+
+**④ 三表 A1:G1**：`['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面','分类（系统枚举）']` 三表一致。
+
+**⑤ A-D 当前 vs 备份 `_r50_20260917_145550` 抽样 8 条**（含改绑的 R79/R80）：全部一致，变化总数=**0**。
 
 ### Cursor 小批检查结果（⑰ 字典空行补 F/E 20 词条 · round51 · Cursor 填）
 

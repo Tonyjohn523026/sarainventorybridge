@@ -898,3 +898,8 @@
 - round50：Cursor 抽查描述列 pass（batch_continue，commit b4be7ee），awaiting=空行补 F/E ≤20。
 - 执行：三表选 20 个实体词条（待定16+其他4），从主表已核销柜点名清点记录（SHEET+NO+货架号）回填 E=HYPERLINK 图 + F=货柜/面；备份 _20260917_r50_145550。
 - 验证：20/20 回读 repr 同构；F=297→317；禁填 9 词未动；23 个历史非法格式（裸数字整柜）非本轮引入、未修改。已交 batch_ready 待 Cursor 抽查。未动主表/发票。
+
+## 2026-09-17 23:40 round52→53（字典 round52 issues 修复）
+- round52：Cursor 抽查⑰ 未过（MASCHIO A MANDRINA 绑 NO37 是 MANDRINA、FEMMIA A MANDRINA 绑 NO48 与 MANDRINA 共用）→ needs_doubao_fix。
+- 修复：MASCHIO A MANDRINA 改绑 W1-SHELF4 NO51（货架 W1-S2-A-C4-L3→2-A，E=51.jpg）；FEMMIA A MANDRINA 改绑 W1-SHELF4 NO54（货架 W1-S2-A-C4-L2→2-A，E=54.jpg）。其余 18 行不动。备份 _r52_20260917_151602。
+- 验证：20 行逐行 A/E/F repr 全贴；禁填 9 词 A/E/F 未动；F=317/G=65；A1:G1 三表一致；A-D vs _r50_145550 抽样 8 条变化=0。已交 batch_ready 待 Cursor 复检。未动主表/发票/代码。
