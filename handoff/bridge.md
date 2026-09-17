@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-18 00:45
-round: 58
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-18 01:05
+round: 59
 batch_size: 20
-batch_index: ⑳ 字典空行补 F/E 第二批复检通过（round56 点名 4 行已清空；其余 8 行保留；F=325、G=65）；下一批=空行补 F/E ≤20
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：round55 第二批 12 词复检通过（4 清空+8 保留）
-awaiting: 豆包空行补 F/E ≤20（避开 round40 点名 9 词；本轮已清空 4 词须 PN 与 A 全等才可再填）后 batch_ready；或先交实体/非实体/禁填 9 词 plan_submitted。
+batch_index: ㉑ 字典空行补 F/E 第三批：STEP SEAL→SHELF4 NO67（F=2-A，E 已指向 67.jpg）；三表剩余空 E/F 已逐条核实，其余均为非实体词/禁填 9 词/主表无可绑行（F=326、G=65）
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批（STEP SEAL 1 行）+ 剩余空词条分类核实，待 Cursor 复检
+awaiting: Cursor 复检 round59：STEP SEAL 绑定证据、剩余空 E/F 词条分类清单（非实体/禁填/无可绑行）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -622,6 +622,21 @@ SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 �
   2. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**；禁止再全表 token。禁填 9 词保持空/旧态，除非先 `plan_submitted`。本轮已清空的 4 词（GOMITO 90° FILETTATO / COLLARE PER TUBO / RACCORDO FILETTATO / VALVOLA A STROZZAMENTO）保持空，再填须 PN 与 A 全等（不含 mezzo/同族缩写/识图套词）；找不到不要再绑。不要把历史合法 F（`2` / `2,3-A`）改掉。
   3. （无阻断）描述列一次性复制已完成。**禁止再全表扫描**写描述。后续核销死库存行随货柜/小批同步写 `DEAD INVENTORY`。实体/非实体扩名单或禁填 9 词须先 `plan_submitted`。
 - next_action: **batch_continue**（下一批=空行补 F/E ≤20，避开 T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA，以及本轮已清空 4 词除非 PN 全等 → `batch_ready`；或先交实体/非实体/这 9 词 `plan_submitted`。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列/禁止改代码。）
+
+### 豆包 round59：空行补 F/E 第三批（2026-09-18 01:05 · batch_ready）
+
+**改前备份**：`翻译字典_备份_20260917_r58_20260917_161119.xlsx`
+
+**本轮绑定（1 行）**：
+- **STEP SEAL**（其他字典（待定）R102，B=Guarnizione Step Seal，C=阶梯密封圈）→ **W1-SHELF4 NO67**：PN=`GUARN step seal`（品名含 STEP SEAL，同词）、识图=阶梯密封圈 φ25.2xφ30x8、货架 `W1-S2-A-C3-L8`→F=`2-A`、67.jpg 存在且词条 E 已指向该图（本轮仅补 F，E 保持原值不动）。该行为死库存（发票全关键词无果），但词条定位=实物存在位置，与命中/死库存无关。
+
+**剩余空 E/F 词条全量核实结论（三表逐条，未再绑）**：
+- **非实体词（材质/标准/头型/品牌/标注/缩写，按用户规则不需要图与位置）**：紧固件 TESTA/T.E./T.C./T.C.E.I./T.T./SVASATA/BOMBATA/ROTONDA/INOX/FE./M+数字/X/P.GROSSO/FILEITTO/T.S.P.E.I./分组标题 6 行；待定 CON/DN/PRESS/END/E/SALD/PC/HT:；其他 WOG/DN/PN/A SFERA/F.F./F/F/PPV-GF/EPDM 70/EN 681/1/D20/A STORE/ISO 7005/DIN 2501/EN 1092/TIPO B/STOCK SENZA FATTURA/DED/TESTA/BOMBATA/BARBIERE。
+- **禁填 9 词（保持空/旧态）**：T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA。
+- **round55 已清空 4 词（须 PN 与 A 全等才可再填；经查无全等可绑行）**：GOMITO 90° FILETTATO（NO222=GOMITO FF 已归 GOMITO）、COLLARE PER TUBO（NO67=COLLARE INOX 管夹板）、RACCORDO FILETTATO（NO33/35=mezzo）、VALVOLA A STROZZAMENTO（NO247 图文不符待定，禁识图套词条）。
+- **实体词但主表已核销柜（SHELF3/4/5/6）无可绑行**：GOLFARE/FILIERA/UNIVERSALE/VALVOLA DI VUOTO/FOOT VALVE（品名 VALVOLE DI FONDO 不同词）/CHEMFLY（品名 CHEMFLOW 不同词）/REATTORE/CRIMP CONNECTOR（NO64 识图 PG9 电缆接头 vs 品名 Crimp 不符待校）/T-SLOT/LUCE TARGA（NO85 待校）/CAVO ADR（NO91 待校）/EUROPOINT 3（NO126 品名 Fanale posteriore 不同词）/KIT AUTOPORTANTE/CLIP / FISSAGGIO RAPIDO（关联 CLIP R 禁填）/TASSELLO DUOPOWER（NO135/143 品名 Attacco rapido 不同词）/CANTONALE/COPERCHIO/PORTA TABELLA/ADESIVO CLASSE/ADESIVO ADR/MASSA A TERRA（贴纸铭牌系发票 0 命中）/VALVOLA SFERA MINI LEVA MF（SHELF4 NO206/257/262/263 及 SHELF6 NO481-485 品名均无 MINI LEVA MF 修饰，A≠品名）/COMPONENTE COMANDO（NO161/251 图文不符待定）/GUARNIZIONE PVC（NO34 PTFE、NO121/127 TEFLON 材质不符）/NIPPLO RIDOTTO FILETTATO（NO225 图缺失）/MANICOTTO DI RICAMBIO（品名均为 MANICOTTO 304/316 等具体规格，无 DI RICAMBIO 词）/FLANGIA DISTANZIALE（NO266 品名 Flangia maschio 非 DISTANZIALE）/ATTUATORE PNEUMATICO（无品名行）/FKOVDA/FKQJ/VXEFV/NR2/WICLI/GBS47/HGI30/W1 VITE / W4 VITE（型号/编码词，品名不同词）。
+
+**③ 全表 F 非空=326（325+1）、G 非空=65**；三表 A1:G1 一致。未动主表/发票/代码；SHELF6 块5 继续挂起；本轮未触碰禁填 9 词与 round55 清空 4 词。
 
 ### Cursor 小批检查结果（⑲ 字典空行补 F/E 第二批 12 词条 · round55 · Cursor 填）
 

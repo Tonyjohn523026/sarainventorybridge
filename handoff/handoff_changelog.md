@@ -929,3 +929,8 @@
 - round55：Cursor 抽查第二批 12 词条 fail，点名 4 行对不上：GOMITO 90° FILETTATO（NO222 已归 GOMITO）、COLLARE PER TUBO（NO67=管夹板）、RACCORDO FILETTATO（NO33/35=mezzo）、VALVOLA A STROZZAMENTO（NO247 图文不符待定）。
 - 修复：4 行均无正确绑定行 → 按 issue 清空 E/F，不绑错行/不拿同族或图文不符行凑数；其余 8 行保留。
 - 备份 _r56_20260917_154905；验证：12 行+禁填 9 词 repr 全贴 bridge、F=329→325、G=65、A1:G1 一致。已交 batch_ready 待 Cursor 复检。未动主表/发票/代码。
+
+## 2026-09-18 01:05 round58→59（空行补 F/E 第三批：STEP SEAL + 全量核实）
+- 绑定 STEP SEAL→W1-SHELF4 NO67（PN='GUARN step seal' 同词、图在、货架 2-A；E 已指向 67.jpg 本轮仅补 F）。
+- 三表剩余空 E/F 逐条核实：非实体词（材质/标准/头型/品牌/标注/缩写）按用户规则不需图/位置；禁填 9 词保持；round55 清空 4 词无 PN 全等行；实体候选 GOLFARE/FILIERA 等均主表无可绑行或待校/图文不符/品名不同词。
+- 备份 _r58_20260917_161119；验证 F=326、G=65、A1:G1 一致。已交 batch_ready 待 Cursor 复检。未动主表/发票/代码；SHELF6 块5 继续挂起。
