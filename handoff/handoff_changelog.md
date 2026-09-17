@@ -888,3 +888,8 @@
 - round48：Cursor 批准描述列方案（加列一次性；回填仅 SHELF3/4/5/6 分类列 dead/死库存；SHELF7/未核销柜只加列；中文未命中不单独打标）。
 - 执行：19 SHEET 加「描述」列；SHELF3=219 / SHELF4=277 / SHELF5=221 / SHELF6=356 写 DEAD INVENTORY（合计 1073）；SHELF7/SHELF1/未核销柜=0。备份 _20260917_144258。
 - 验证：表头 repr 列位正确、既有列差异=0、SHELF5 无淡蓝 95 行、SHELF4 中文未命中行证空。已交 batch_ready 待 Cursor 抽查。未动字典/代码。
+
+## 2026-09-17 23:05 round50→51（字典空行补 F/E 20 词条）
+- round50：Cursor 抽查描述列 pass（batch_continue，commit b4be7ee），awaiting=空行补 F/E ≤20。
+- 执行：三表选 20 个实体词条（待定16+其他4），从主表已核销柜点名清点记录（SHEET+NO+货架号）回填 E=HYPERLINK 图 + F=货柜/面；备份 _20260917_r50_145550。
+- 验证：20/20 回读 repr 同构；F=297→317；禁填 9 词未动；23 个历史非法格式（裸数字整柜）非本轮引入、未修改。已交 batch_ready 待 Cursor 抽查。未动主表/发票。

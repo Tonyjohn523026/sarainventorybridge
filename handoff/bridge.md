@@ -336,15 +336,15 @@
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-17 22:50
-round: 50
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 23:05
+round: 51
 batch_size: 20
-batch_index: ⑯ 描述列第一批抽查 pass（19表加列 + SHELF3/4/5/6 分类复制 1073；SHELF7/1=0）
-task: 2026-09-17 主表「描述」列一次性复制已过。字典：列7 保留 + 短 token 已清（F=297）；下一批=空行补 F/E ≤20
-awaiting: 豆包空行补 F/E ≤20（避开 round40 点名 9 词）后 `batch_ready`；或先交实体/非实体/SHELF4 分类未更新行 `plan_submitted`。禁止再全表扫描描述列。SHELF6 块5 挂起。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位：列名「描述」；非死库存留空；只复制已核销柜分类列的 dead/死库存，中文「未命中」不单独打标；SHELF7/未核销柜只加列不回填。后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行/实体扩名单规则不变。用户口述不覆盖批准。
+batch_index: ⑰ 字典空行补 F/E：20 词条实体词（待定16 + 其他4）已点名清点记录回填图片+货柜/面；F=297→317；禁填9词未动
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 20 词条完成（本轮）
+awaiting: Cursor 抽查 round51 字典补填（20 词条列表、图片/货柜面来源行、禁填9词未动、F 格式）。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行/实体扩名单规则不变：写字典先判断是否实体（实体必填图+货柜/面、非实体不需要）；同一物料可多货柜（F 多值）。用户口述不覆盖批准。
 image_reject_count: 0
 ```
 
@@ -398,6 +398,50 @@ W1-SHELF10-17 / W7-ZA / W8-ZA: 描述列表头=无 DEAD INVENTORY 值=0
 - **与系统操作列「是死库存」及分类列 `dead inventory` 对齐**：系统侧「是死库存/非死库存」操作列维持不变；`描述`列是死库存的显式文本标记（值=DEAD INVENTORY），与分类列 `dead inventory` 语义一致、不同列不冲突。
 - **后续核销谁写该列**：豆包在核销流程中，判定死库存的行同步写入 `描述`=DEAD INVENTORY（与淡蓝+分类列并行）。
 - **执行时机**：plan_approved 后一次性加列+回填（或按批准的分批方式），改前先备份（完整时间戳），改后回读 repr 证据贴 bridge。
+
+### 豆包 round51 字典空行补 F/E 20 词条（2026-09-17 23:05 · batch_ready）
+
+**依据**：round50 batch_continue awaiting「空行补 F/E ≤20（避开 round40 点名 9 词）」+ round36-44 字典规则（实体词必填图+货柜/面、非实体不需要、F 多值、禁填 9 词）。
+
+**执行**：从三表 E/F 全空词条中选 **20 个实体物料词条**（非头型/材质/标准等非实体词），每个从主表已核销柜（SHELF3/4/5/6）**点名清点记录**（SHEET+NO+货架号面）回填：
+- E 列图片超链接 `=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF{n}\<NO>.jpg","图<NO>")`（图片文件均已验证存在）
+- F 列货柜/面（格式与既有字典一致，如 `2-A`；从 Shelf number 解析，兼容 `W1-`/`W2-` 前缀）
+- 动手前备份 `翻译字典_备份_20260917_r50_20260917_145550.xlsx`
+
+**20 词条明细（词条 | 来源行 SHEET NO= | 货架号 | 写入 F）**：
+```
+MEZZO RACCORDO FILETTATO | W1-SHELF4 NO=33 | W2-S2-A-C4-L7 | 2-A
+MANDRINA | W1-SHELF4 NO=48 | W1-S2-A-C4-L3 | 2-A
+MASCHIO A MANDRINA | W1-SHELF4 NO=37 | W1-S2-A-C4-L6 | 2-A
+FEMMIA A MANDRINA | W1-SHELF4 NO=48 | W1-S2-A-C4-L3 | 2-A
+TAPPO A MORSETTO | W1-SHELF4 NO=47 | W1-S2-A-C4-L3 | 2-A
+STUD KIT | W1-SHELF4 NO=40 | W1-S2-A-C4-L5 | 2-A
+CARTUCCE FUSIBILE | W1-SHELF5 NO=37 | W1-S3-A-C5-L4 | 3-A
+FUSIBILE D01 | W1-SHELF5 NO=44 | W1-S3-A-C5-L3 | 3-A
+ASTA LAMPEGGIANTE | W1-SHELF5 NO=78 | W1-S3-A-C3-L10 | 3-A
+O-RING / ANELLO GOMMA | W1-SHELF4 NO=76 | W1-S2-A-C3-L6 | 2-A
+LENTE GIALL | W1-SHELF5 NO=94 | W1-S3-A-C2-L8 | 3-A
+GOMMA FANALE | W1-SHELF5 NO=103 | W1-S3-A-C2-L6 | 3-A
+SIDEMARKER LATERALE | W1-SHELF5 NO=80 | W1-S3-A-C3-L8 | 3-A
+GOMMA CONICA | W1-SHELF5 NO=150 | W1-S3-C-C1-L4 | 3-C
+STRISCIA CATARIFRANGENTE | W1-SHELF5 NO=175 | W1-S3-B-C1-L4 | 3-B
+TERMOMETRO ADESIVO | W1-SHELF5 NO=223 | W1-S3-B-C3-L2 | 3-B
+ALZA-ABBASSA | W1-SHELF4 NO=154 | W1-S2-A-C1-L10 | 2-A
+FLANGIA PP-GF | W1-SHELF4 NO=195 | W1-S2-B-C3-L10 | 2-B
+TEE FEMMINA | W1-SHELF4 NO=208 | W1-S2-B-C3-L8 | 2-B
+CURVA FEMMINA | W1-SHELF4 NO=209 | W1-S2-B-C3-L7 | 2-B
+```
+
+**回读验证 print(repr)**（抽样）：
+```
+[其他字典（待定）] R75 A='MEZZO RACCORDO FILETTATO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\33.jpg","图33")' F='2-A'
+[其他字典（待定）] R134 A='FUSIBILE D01' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\44.jpg","图44")' F='3-A'
+[其他字典（待定）] R199 A='STRISCIA CATARIFRANGENTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\175.jpg","图175")' F='3-B'
+[其他] R40 A='TEE FEMMINA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\208.jpg","图208")' F='2-B'
+（20/20 已逐条回读，均为同构）
+```
+
+**整体回归**：F 非空总数 297→**317**（+20）；禁填 9 词（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）E/F 均未动（E=None F=None 或保留旧 E、F=None）；本轮 20 个写入 F 全部为合法 `货柜-面` 格式（23 个"非法格式"均为既有历史数据如 `2,3-A` 裸数字=整柜，非本轮引入，未修改）。A-D 列未动。
 
 ### 豆包 round49 描述列执行完成（2026-09-17 22:25 · batch_ready）
 
