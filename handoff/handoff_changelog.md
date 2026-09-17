@@ -908,3 +908,9 @@
 - round52：Cursor 抽查⑰ 未过（MASCHIO A MANDRINA 绑 NO37 是 MANDRINA、FEMMIA A MANDRINA 绑 NO48 与 MANDRINA 共用）→ needs_doubao_fix。
 - 修复：MASCHIO A MANDRINA 改绑 W1-SHELF4 NO51（货架 W1-S2-A-C4-L3→2-A，E=51.jpg）；FEMMIA A MANDRINA 改绑 W1-SHELF4 NO54（货架 W1-S2-A-C4-L2→2-A，E=54.jpg）。其余 18 行不动。备份 _r52_20260917_151602。
 - 验证：20 行逐行 A/E/F repr 全贴；禁填 9 词 A/E/F 未动；F=317/G=65；A1:G1 三表一致；A-D vs _r50_145550 抽样 8 条变化=0。已交 batch_ready 待 Cursor 复检。未动主表/发票/代码。
+
+## 2026-09-17 23:59 round54→55（字典空行补 F/E 第二批 12 词条）
+- round54：Cursor 复检第一批通过（commit 63f78ac batch_continue）→ 执行第二批。
+- 从三表 E/F 全空实体词条中选 12 个，逐个在主表已核销柜定位（SHELF+NO+货架号面），要求 A 与该行品名同词/同词根、图存在、货架面可解析、非禁填 9 词。
+- 写入：BOCCHE TONE(425/4-A)、BOCCHE TONE FILETTATO(203/2-B)、CARTELLA SALDARE INOX PESANTE(189/1-B)、FLANGIA MASCHIO(266/2-B)、VALVOLA A STROZZAMENTO(247/2-B)、VALVOLA A FARFALLA PNEUMATICA(246/2-B)、COLLA(249/2-B)、COLLARE PER TUBO(67/1-B)、BOC CAPORTO(186/2-B)、GOMITO 90° FILETTATO(222/1-A)、RACCORDO FILETTATO(35/2-A)、SUPPORTO ANTIVIBRANTE(205/3-B)。
+- 备份 _r54_20260917_154035；验证：12 行逐行回读、禁填 9 词未动、F=317→329、G=65、A1:G1 一致。已交 batch_ready 待 Cursor 抽查。未动主表/发票/代码。

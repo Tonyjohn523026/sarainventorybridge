@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-17 23:55
-round: 54
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 23:59
+round: 55
 batch_size: 20
-batch_index: ⑰ 字典空行补 F/E 复检通过（MASCHIO→NO51/51.jpg、FEMMIA→NO54/54.jpg；F=317、G=65）；下一批=空行补 F/E ≤20
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第一批 20 词条复检通过（round53/54）
-awaiting: 豆包空行补 F/E ≤20（避开 round40 点名 9 词；A 必须等于该 NO 品名）后 batch_ready；或先交实体/非实体/禁填 9 词 plan_submitted。
+batch_index: ⑱ 字典空行补 F/E 第二批 12 词条（品名同词确认；F=317→329、G=65、禁填 9 词未动）
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第二批 12 词条完成，待 Cursor 抽查
+awaiting: Cursor 抽查 round55（12 行逐行 A/E/F、禁填 9 词 A/E/F、F=329/G=65、A1:G1、A-D vs _r54_154035 对照=0）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -510,6 +510,61 @@ CURVA FEMMINA | W1-SHELF4 NO=209 | W1-S2-B-C3-L7 | 2-B
   2. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**；禁止再全表 token。禁填 9 词保持空/旧态，除非先 `plan_submitted`。SIDEMARKER 下次优先绑补录该词时的那条 NO。不要把历史合法 F（`2` / `2,3-A`）改掉。
   3. （无阻断）描述列一次性复制已完成。**禁止再全表扫描**写描述。后续核销死库存行随货柜/小批同步写 `DEAD INVENTORY`。实体/非实体扩名单或禁填 9 词须先 `plan_submitted`。
 - next_action: **batch_continue**（下一批=空行补 F/E ≤20，避开 T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA → `batch_ready`；或先交实体/非实体/这 9 词 `plan_submitted`。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列/禁止改代码。）
+
+### 豆包 round55 字典空行补 F/E 第二批（2026-09-17 23:59 · batch_ready）
+
+**范围**：三表 E/F 全空实体词条中选 12 个，逐个在主表已核销柜定位（SHELF+NO+货架号面），要求 A 与该行品名同词/同词根、图存在、货架面可解析、非禁填 9 词。
+
+**改前备份**：`翻译字典_备份_20260917_r54_20260917_154035.xlsx`
+
+**① 本批 12 行逐行 Sheet|行号|A|E|F（print repr）**：
+```
+[其他] R37 A='BOCCHE TONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\425.jpg","图425")' F='4-A'
+[其他] R38 A='BOCCHE TONE FILETTATO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\203.jpg","图203")' F='2-B'
+[其他] R78 A='CARTELLA SALDARE INOX PESANTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\189.jpg","图189")' F='1-B'
+[其他] R120 A='FLANGIA MASCHIO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\266.jpg","图266")' F='2-B'
+[其他] R100 A='VALVOLA A STROZZAMENTO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\247.jpg","图247")' F='2-B'
+[其他] R101 A='VALVOLA A FARFALLA PNEUMATICA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\246.jpg","图246")' F='2-B'
+[其他] R97 A='COLLA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\249.jpg","图249")' F='2-B'
+[其他] R127 A='COLLARE PER TUBO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\67.jpg","图67")' F='1-B'
+[其他] R50 A='BOC CAPORTO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\186.jpg","图186")' F='2-B'
+[其他] R66 A='GOMITO 90° FILETTATO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\222.jpg","图222")' F='1-A'
+[其他字典（待定）] R90 A='RACCORDO FILETTATO' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\35.jpg","图35")' F='2-A'
+[其他字典（待定）] R210 A='SUPPORTO ANTIVIBRANTE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF5\\205.jpg","图205")' F='3-B'
+```
+
+**② 绑定依据（词条A ↔ 主表行 品名/中文品名 同词核验）**：
+```
+BOCCHE TONE <- SHELF6 NO425 BOCCHETTONE 镀锌活接(三件套内丝)1/2"
+BOCCHE TONE FILETTATO <- SHELF4 NO203 Bocchettone filettato φ95 PVC 死库存
+CARTELLA SALDARE INOX PESANTE <- SHELF3 NO189 CARTELLA INOX 重型不锈钢焊接底座(命中PEN2101)
+FLANGIA MASCHIO <- SHELF4 NO266 Flangia maschio PVC φ200 死库存
+VALVOLA A STROZZAMENTO <- SHELF4 NO247 Valvola a strozzamento φ40 待定(识图节流阀)
+VALVOLA A FARFALLA PNEUMATICA <- SHELF4 NO246 Valvola a farfalla D90 FIP气动蝶阀 死库存
+COLLA <- SHELF4 NO249 Colla per pvc 死库存
+COLLARE PER TUBO <- SHELF3 NO67 COLLARE INOX 不锈钢管夹板80mm 未命中
+BOC CAPORTO <- SHELF4 NO186 Boccaporto rapido φ210 快开密封盖 死库存
+GOMITO 90° FILETTATO <- SHELF3 NO222 GOMITO FF 双内丝不锈钢弯头1"316 未命中
+RACCORDO FILETTATO <- SHELF4 NO35 mezzo raccordo filettato φ50x24.2 死库存
+SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 待校(识图一致)
+```
+
+**③ 禁填 9 词 A/E/F（相对动手前未动）**：
+```
+[紧固件字典] R9 A='T.S.E.I.' E=None F=None
+[紧固件字典] R11 A='T.B.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\355.jpg","图355")' F=None
+[紧固件字典] R52 A='UNI 5933' E=None F=None
+[紧固件字典] R55 A='DIN 1587' E=None F=None
+[紧固件字典] R67 A='VITONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\366.jpg","图366")' F=None
+[其他字典（待定）] R58 A='TUBO FLESSIBILE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\2.jpg","图2")' F=None
+[其他字典（待定）] R60 A='GEKA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\6.jpg","图6")' F=None
+[其他字典（待定）] R74 A='CLIP R' E='D:\\sara\\库存管理\\图片\\W1-SHELF4\\18.jpg' F=None
+[其他字典（待定）] R77 A='PORTA GOMMA' E=None F=None
+```
+
+**④ 全表 F/G 写死整数**：F 非空=**317→329**（+12）、G 非空=**65**（未动）。
+
+**⑤ 三表 A1:G1**：`['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面','分类（系统枚举）']` 三表一致。
 
 ### Cursor 小批检查结果（⑰ 字典空行补 F/E 20 词条 · round51 · Cursor 填）
 
