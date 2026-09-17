@@ -1,3 +1,8 @@
+### 2026-09-17 23:55 · Cursor 抽查⑱ 字典空行补 F/E 复检通过（batch_continue / owner=doubao / round=54）
+- 结论：`pass`。round52 点名两行已改绑：`MASCHIO A MANDRINA`→SHELF4 NO51/51.jpg/`2-A`；`FEMMIA A MANDRINA`→NO54/54.jpg/`2-A`；`MANDRINA` 仍 48.jpg。20 行 A/E/F 与禁填 9 词对照已贴；F=317/G=65；A1:G1 三表一致。其余 18 行可留。未改主表/代码声称；SHELF6 块5 仍挂起。
+- 已通过附注（不挡）：A–D vs `_r50_145550` 只断言 0；NO51 货架串与 NO48 相同（E 已是 51.jpg）；SIDEMARKER 仍绑 NO80。
+- 下一步：空行补 F/E 每批 ≤20（避开 round40 点名 9 词；A 必须等于该 NO 品名）后 `batch_ready`；实体/非实体或这 9 词须先 `plan_submitted`。禁止再全表 token / 描述列扫描。`/dict` 可在系统仓库推进。勿改代码。
+
 ### 2026-09-17 23:20 · Cursor 抽查⑰ 字典空行补 F/E 未过（needs_doubao_fix / owner=doubao / round=52）
 - 结论：`fail`。20≤20、避开禁填 9 词、F=297→317 算术对；18/20 点名可核（MEZZO RACCORDO/MANDRINA/TAPPO A MORSETTO/STUD KIT/ASTA LAMPEGGIANTE/LENTE GIALL/GOMMA FANALE/GOMMA CONICA/STRISCIA CATARIFRANGENTE/TERMOMETRO/ALZA-ABBASSA/FLANGIA PP-GF/TEE FEMMINA/CURVA FEMMINA 等）。**硬伤**：`MASCHIO A MANDRINA` 绑 SHELF4 NO37（实为 MANDRINA，应为 NO51）；`FEMMIA A MANDRINA` 绑 NO48 且与 `MANDRINA` 共用 48.jpg（实为 MANDRINA DN20，应为 NO54）。交检只贴 4/20 `repr`，禁填 9 词未贴对照。
 - 已通过（不挡 fail）：batch 上限、货柜按 SHEET 映射、HYPERLINK 单反斜杠方向、未改主表/代码声称、SHELF6 块5 挂起。

@@ -1,3 +1,6 @@
+## 2026-09-17 23:55 · Cursor 抽查⑱ 字典空行补 F/E 复检通过（batch_continue）
+- `pass` / `owner: doubao` / round=54 / `batch_size=20`。round52 两行已改绑：MASCHIO→SHELF4 NO51/51.jpg；FEMMIA→NO54/54.jpg。20 行+禁填 9 词 `repr` 已贴；F=317。下一批=空行补 F/E ≤20（避开 round40 点名 9 词）。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 23:20 · Cursor 抽查⑰ 字典空行补 F/E 未过（needs_doubao_fix）
 - `fail` / `owner: doubao` / round=52 / `batch_size=20`。空行补 20 词中 18 条点名可核；`MASCHIO A MANDRINA` 误绑 SHELF4 NO37（应为 NO51），`FEMMIA A MANDRINA` 误绑 NO48 且与 MANDRINA 共用图（应为 NO54）。只改这 2 行后 `batch_ready`。禁填 9 词仍勿动。SHELF6 块5 仍挂起。
 
