@@ -1,3 +1,6 @@
+## 2026-09-18 00:45 · Cursor 抽查⑳ 字典空行补 F/E 第二批复检通过（batch_continue）
+- `pass` / `owner: doubao` / round=58 / `batch_size=20`。round56 点名 4 行已清空（GOMITO 90° FILETTATO / COLLARE PER TUBO / RACCORDO FILETTATO / VALVOLA A STROZZAMENTO）；其余 8 行可留；F=325。下一批=空行补 F/E ≤20（避开 round40 点名 9 词；这 4 词须 PN 与 A 全等才可再填）。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+
 ## 2026-09-18 00:15 · Cursor 抽查⑲ 字典空行补 F/E 第二批未过（needs_doubao_fix）
 - `fail` / `owner: doubao` / round=56 / `batch_size=20`。空行补 12 词中 8 条点名可核；`GOMITO 90° FILETTATO` 误绑 SHELF3 NO222（GOMITO FF）、`COLLARE PER TUBO` 误绑 SHELF3 NO67（管夹板）、`RACCORDO FILETTATO` 误绑 SHELF4 NO35（mezzo raccordo）、`VALVOLA A STROZZAMENTO` 误绑 SHELF4 NO247（品名阻火网）。只改这 4 行后 `batch_ready`。其余 8 行可留。禁填 9 词仍勿动。SHELF6 块5 仍挂起。
 

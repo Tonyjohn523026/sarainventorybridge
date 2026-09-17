@@ -1,4 +1,4 @@
-更新：2026-09-18 00:15（Cursor 抽查⑲ 字典空行补 F/E 第二批未过）→ needs_doubao_fix
+更新：2026-09-18 00:45（Cursor 抽查⑳ 字典空行补 F/E 第二批复检通过）→ batch_continue
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-18 00:30
-round: 57
+status: batch_continue
+owner: doubao
+updated_at: 2026-09-18 00:45
+round: 58
 batch_size: 20
-batch_index: ⑳ 字典空行补 F/E 第二批复检修复：round55 点名 4 行（GOMITO 90° FILETTATO/COLLARE PER TUBO/RACCORDO FILETTATO/VALVOLA A STROZZAMENTO）无正确绑定行→按 issue 清空 E/F；其余 8 行保留（F=325、G=65、禁填 9 词未动）
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：round55 fail 4 行已按 issue 清空，待 Cursor 复检
-awaiting: Cursor 复检 round57（12 行 A/E/F、禁填 9 词 A/E/F、F=325、A1:G1、备份 _r56_20260917_154905）。
+batch_index: ⑳ 字典空行补 F/E 第二批复检通过（round56 点名 4 行已清空；其余 8 行保留；F=325、G=65）；下一批=空行补 F/E ≤20
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：round55 第二批 12 词复检通过（4 清空+8 保留）
+awaiting: 豆包空行补 F/E ≤20（避开 round40 点名 9 词；本轮已清空 4 词须 PN 与 A 全等才可再填）后 batch_ready；或先交实体/非实体/禁填 9 词 plan_submitted。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -606,6 +606,22 @@ SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 �
 ```
 
 **③ 全表 F 非空=325（329-4）、G 非空=65**；三表 A1:G1 一致 `['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面','分类（系统枚举）']`。未动主表/发票/代码；SHELF6 块5 继续挂起。
+
+### Cursor 小批检查结果（⑳ 字典空行补 F/E 第二批复检 · round57 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-18 00:45
+- checked_rows: 云端无 Excel。批=12>10 → 至少抽 ≥5 或约 25%（取高=5）。实际对照 changelog/bridge 历史清点核全部 12 条「词条 A ↔ SHEET+NO+E/F」；优先 round56 点名 4 行是否已清空或改绑正确；另核其余 8 行未改、禁填 9 词 A/E/F vs round44 回退后态、F=329→325 算术、A1:G1、备份 `_r56_154905`、`batch_size=20`。
+- image_reject_count: 0（本批非识图任务；复检 round56 点名清点记录对不上 / 交检证据）
+- summary: |
+    **round56 主因已改**：①`GOMITO 90° FILETTATO` E=None F=None，不再绑 SHELF3 NO222/222.jpg（GOMITO FF，图已给 `GOMITO`）。②`COLLARE PER TUBO` E=None F=None，不再绑 SHELF3 NO67（COLLARE INOX 管夹板）。③`RACCORDO FILETTATO` E=None F=None，不再绑 SHELF4 NO35（mezzo，已给 `MEZZO RACCORDO FILETTATO`）。④`VALVOLA A STROZZAMENTO` E=None F=None，不再绑 SHELF4 NO247（品名阻火网、识图节流阀待定）。四词均无 PN 全等行，按 issue 清空、未拿同族凑数。⑤本批 12 行逐行 A/E/F `repr` 已贴；禁填 9 词 A/E/F 已贴且与 round44/53/56 回退后态一致。⑥F 写死 **325**=329−4、G=**65**；三表 A1:G1 列7 仍在。⑦备份 `_r56_20260917_154905` 有完整时间戳；自称其余 8 行未动、未改主表/代码；SHELF6 块5 仍挂起。
+    其余 8 行点名与 round56 已核一致：`FLANGIA MASCHIO`↔SHELF4 NO266；`VALVOLA A FARFALLA PNEUMATICA`↔NO246；`COLLA`↔NO249；`BOC CAPORTO`↔NO186；`CARTELLA SALDARE INOX PESANTE`↔SHELF3 NO189；`SUPPORTO ANTIVIBRANTE`↔SHELF5 NO205；`BOCCHE TONE`↔自称 SHELF6 NO425；`BOCCHE TONE FILETTATO`↔SHELF4 NO203。货柜按 SHEET 映射，HYPERLINK 为 Python 双反斜杠。
+    **不挡本 pass**：①未贴 A–D 当前 vs `_r54_154035` ≥5 格实值（只靠 F 算术+12 行 repr）。②`BOCCHE TONE FILETTATO` 块12 只写 Bocchettone φ95、未写 filettato（round56 已不挡）。③`BOCCHE TONE`↔SHELF6 NO425 无独立块留痕（SHELF6 块5 仍挂起，round56 已允许其余 8 行可留）。④空单元格写成 `E=None`（按空格理解）。
+- issues:
+  1. （无阻断）下次 A–D 对照请打「当前 vs 动手前备份」至少 5 格实值，不要只写总数/算术。点名货架号请用该 NO 自己的货架。
+  2. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**；禁止再全表 token。禁填 9 词保持空/旧态，除非先 `plan_submitted`。本轮已清空的 4 词（GOMITO 90° FILETTATO / COLLARE PER TUBO / RACCORDO FILETTATO / VALVOLA A STROZZAMENTO）保持空，再填须 PN 与 A 全等（不含 mezzo/同族缩写/识图套词）；找不到不要再绑。不要把历史合法 F（`2` / `2,3-A`）改掉。
+  3. （无阻断）描述列一次性复制已完成。**禁止再全表扫描**写描述。后续核销死库存行随货柜/小批同步写 `DEAD INVENTORY`。实体/非实体扩名单或禁填 9 词须先 `plan_submitted`。
+- next_action: **batch_continue**（下一批=空行补 F/E ≤20，避开 T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA，以及本轮已清空 4 词除非 PN 全等 → `batch_ready`；或先交实体/非实体/这 9 词 `plan_submitted`。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列/禁止改代码。）
 
 ### Cursor 小批检查结果（⑲ 字典空行补 F/E 第二批 12 词条 · round55 · Cursor 填）
 

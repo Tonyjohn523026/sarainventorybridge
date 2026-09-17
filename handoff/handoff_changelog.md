@@ -1,3 +1,8 @@
+### 2026-09-18 00:45 · Cursor 抽查⑳ 字典空行补 F/E 第二批复检通过（batch_continue / owner=doubao / round=58）
+- 结论：`pass`。round56 点名 4 行已清空：`GOMITO 90° FILETTATO` / `COLLARE PER TUBO` / `RACCORDO FILETTATO` / `VALVOLA A STROZZAMENTO` 均为 E=None F=None，未再绑错行。其余 8 行可留；12 行+禁填 9 词 `repr` 已贴；F=325=329−4、G=65；A1:G1 三表一致。未改主表/代码声称；SHELF6 块5 仍挂起。
+- 已通过附注（不挡）：未贴 A–D vs `_r54_154035` 实值；BOCCHE TONE FILETTATO 块12 未写 filettato；BOCCHE TONE↔SHELF6 NO425 无独立块留痕。
+- 下一步：空行补 F/E 每批 ≤20（避开 round40 点名 9 词；本轮已清空 4 词须 PN 与 A 全等才可再填）后 `batch_ready`；实体/非实体或这 9 词须先 `plan_submitted`。禁止再全表 token / 描述列扫描。`/dict` 可在系统仓库推进。勿改代码。
+
 ### 2026-09-18 00:15 · Cursor 抽查⑲ 字典空行补 F/E 第二批未过（needs_doubao_fix / owner=doubao / round=56）
 - 结论：`fail`。12≤20、避开禁填 9 词、F=317→329 算术对；8/12 点名可核（FLANGIA MASCHIO/VALVOLA A FARFALLA PNEUMATICA/COLLA/BOC CAPORTO/CARTELLA/SUPPORTO ANTIVIBRANTE/BOCCHE TONE 等）。**硬伤**：`GOMITO 90° FILETTATO` 绑 SHELF3 NO222（实为 GOMITO FF，222.jpg 已给 GOMITO）；`COLLARE PER TUBO` 绑 SHELF3 NO67（实为 COLLARE INOX 管夹板）；`RACCORDO FILETTATO` 绑 SHELF4 NO35（实为 mezzo raccordo，MEZZO 已绑 NO33）；`VALVOLA A STROZZAMENTO` 绑 SHELF4 NO247（品名 YAK 阻火网，识图才是节流阀）。
 - 已通过（不挡 fail）：batch 上限、禁填 9 词 repr、A1:G1、备份 `_r54_154035`、货柜 SHEET 映射、HYPERLINK、未改主表/代码声称、SHELF6 块5 挂起。
