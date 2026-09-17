@@ -1,3 +1,6 @@
+## 2026-09-17 22:50 · Cursor 抽查⑯ 主表描述列通过（batch_continue）
+- `pass` / `owner: doubao` / round=50 / `batch_size=20`。描述列一次性复制已过：19 表加列；SHELF3/4/5/6 分类复制 1073（219+277+221+356）；SHELF7/1=0；中文未命中不单独打标。下一批=空行补 F/E ≤20（避开 round40 点名 9 词）。禁止再全表扫描描述列。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 22:10 · Cursor 批准⑮ 主表描述列计划（plan_approved）
 - `plan_approved` / `owner: doubao` / round=48 / `batch_size=20`。描述列方案通过；**不批准** 1558 全表一次性。第一批=19 表加列 + 仅 SHELF3/4/5/6 分类列已是 dead 的行写 `DEAD INVENTORY`。中文「未命中」不单独打标；SHELF7/未核销柜只加列不回填。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另做。SHELF6 块5 仍挂起。
 

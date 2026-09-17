@@ -1,4 +1,4 @@
-更新：2026-09-17 22:10（Cursor 批准⑮ round47 主表描述列计划）→ plan_approved
+更新：2026-09-17 22:50（Cursor 抽查⑯ round49 主表描述列）→ batch_continue
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,15 +336,15 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-17 22:25
-round: 49
+status: batch_continue
+owner: doubao
+updated_at: 2026-09-17 22:50
+round: 50
 batch_size: 20
-batch_index: ⑮ 描述列已按 round48 约束执行：19 SHEET 加列；仅 SHELF3/4/5/6 分类列 dead/死库存 → DEAD INVENTORY（1073 行）；SHELF7/SHELF1/未核销柜只加列
-task: 2026-09-17 主表「描述」列：已执行待抽查（repr 证据见下）。字典：列7 保留 + 短 token 已清（F=297）
-awaiting: Cursor 抽查 round49 描述列（表头 repr / 每 SHEET 条数 / 死库存与非死库存抽样 / SHELF5 无淡蓝 95 行 / 既有列变化=0）。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列：列名「描述」；非死库存留空；只复制已核销柜分类列的 dead/死库存，中文「未命中」不单独打标；SHELF7/未核销柜只加列不回填。batch_size=20 不取消（新核销行仍随货柜批写）。字典空行/实体扩名单规则不变。用户口述不覆盖批准。
+batch_index: ⑯ 描述列第一批抽查 pass（19表加列 + SHELF3/4/5/6 分类复制 1073；SHELF7/1=0）
+task: 2026-09-17 主表「描述」列一次性复制已过。字典：列7 保留 + 短 token 已清（F=297）；下一批=空行补 F/E ≤20
+awaiting: 豆包空行补 F/E ≤20（避开 round40 点名 9 词）后 `batch_ready`；或先交实体/非实体/SHELF4 分类未更新行 `plan_submitted`。禁止再全表扫描描述列。SHELF6 块5 挂起。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位：列名「描述」；非死库存留空；只复制已核销柜分类列的 dead/死库存，中文「未命中」不单独打标；SHELF7/未核销柜只加列不回填。后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行/实体扩名单规则不变。用户口述不覆盖批准。
 image_reject_count: 0
 ```
 
@@ -443,6 +443,22 @@ W1-SHELF7 R4 NO=1 描述=None
 ```
 
 **说明**：SHELF4 描述已填 277 = 分类列 col8 Classification + col18 分类 任一含 dead/死库存的行（含 col18「死库存」252 与 col8 dead inventory 并集），中文品名「未命中」未单独打标（R54-56 证空）。未动字典/代码；SHELF6 块5 挂起。
+
+### Cursor 小批检查结果（⑯ 主表「描述」列 · round49 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-17 22:50
+- checked_rows: 云端无 Excel。批=19 SHEET 加列 + 自称回填 SHELF3=219 / SHELF4=277 / SHELF5=221 / SHELF6=356（合计 **1073**），SHELF7/SHELF1/未核销柜=0。按协议应抽 ≥5 或约 25%（取高）；无主表只能核 bridge 证据。实际核：表头列位（SHELF3 全行 + 其余列号）、每柜条数与 1073 算术、死库存分层 12 行（SHELF3 NO10/346、SHELF4 NO21/74/163/303、SHELF5 NO1/199、SHELF6 NO1/190/234/482）、非死库存证空 4 行（SHELF4 NO51/52/53、SHELF7 NO1）、SHELF5 无淡蓝 95、备份 `_144258`、既有列变化=0 声称、是否照 round48 约束（禁 1558 / 禁中文补标 / 禁 SHELF7·1 回填）。
+- image_reject_count: 0（本批非识图任务）
+- summary: |
+    **round48 约束已落地**：①19 表已加「描述」（SHELF3=col13 全表头可见；标准 col19 / SHELF5/6/7 col20）。②只对 SHELF3/4/5/6 分类列含 `dead`/`死库存` 的行写 `DEAD INVENTORY`；全表合计写死 **1073=219+277+221+356**，**不是 1558**。③SHELF7=0、SHELF1=0、SHELF2/10-17/W7/W8=0。④中文「未命中」不单独打标：SHELF4 NO51/52/53（批5 已写未命中但分类未更新）描述=`None`。⑤SHELF5 分类=dead 无淡蓝 95 行：描述已填、未补淡蓝。⑥动手前备份 `_20260917_144258.xlsx` 完整时间戳（晚于 round48 批准 22:10）；既有列 vs 该备份变化=0。⑦未声称改字典/代码；SHELF6 块5 仍挂起。
+    死库存抽样 12 行分类均含 dead/死库存且描述=`DEAD INVENTORY`（含 SHELF4 双列并集：NO21 `dead inventory`+FINISHING、NO74 `None`+`死库存`）。SHELF3=219 / SHELF5=221 / SHELF6=356 与 round45 分类口径一致；SHELF4 294→277（少 17）符合去掉中文补标。条数差与 round45 自称「35 行分类未更新」不完全相等，按本轮「col8∪col18」并集可解释（部分行 col8 已是 dead）。
+    **不挡本 pass**：①多数 SHEET 表头用 `[...'分类','描述']` 省略，仅 SHELF3 打全行。②非死库存抽样 4 条（不足 5），未点名待定行。③云端无法核 25% 的 1073 行，以分层抽样+约束对照为准。
+- issues:
+  1. （无阻断）下次 `print(repr)` 请打各 SHEET **完整表头行**，不要 `...`。非死库存请再补 ≥1 条待定行（分类非 dead、描述空）。既有列对照可再贴 1–2 格「当前 vs `_144258`」示例，不要只写总数=0。
+  2. （无阻断，留给用户）SHELF4 分类未更新、仅中文「未命中」的行（至少 NO51/52/53，round45 曾报 35 行）描述列按批准留空。若要填须另交计划改分类列，或点名 NO 请用户拍板。不要为填描述去改既有列。
+  3. （无阻断，下一批约束）描述列一次性复制已完成。**禁止再全表扫描**写描述。后续核销死库存行随货柜/小批同步写 `DEAD INVENTORY`。字典空行补 F/E **每批 ≤20**，须能点名清点记录；避开 `T.S.E.I.`/`T.B.E.I.`/`UNI 5933`/`DIN 1587`/`VITONE`/`TUBO FLESSIBILE`/`GEKA`/`CLIP R`/`PORTA GOMMA`。实体/非实体扩名单须先 `plan_submitted`。
+- next_action: **batch_continue**（下一批=空行补 F/E ≤20，避开上述 9 词 → `batch_ready`；或先交实体/非实体/SHELF4 分类未更新行 `plan_submitted`。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列/禁止改代码。）
 
 ### Cursor 计划审批（⑮ 主表「描述」列 · round47 计划 · Cursor 填）
 
