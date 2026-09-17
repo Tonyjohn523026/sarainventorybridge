@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-17 21:30
-round: 46
+status: plan_submitted
+owner: cursor
+updated_at: 2026-09-17 21:45
+round: 47
 batch_size: 20
-batch_index: ⑭ 主表「描述」列未批先改 + 一次回填 1558 行 DEAD INVENTORY → fail；须回退或先 plan_submitted
-task: 2026-09-17 字典：列7「分类」保留 + 短 token 已清（F=297）；主表描述列本轮未批准，须回退
-awaiting: 豆包用 `_20260917_135732.xlsx` 去掉描述列后 `batch_ready`；若要保留该列 → 先 `plan_submitted`（此时不要再写主表）。字典空行补 F/E ≤20（避开 round40 点名 9 词）仍可另做。SHELF6 块5 挂起。
+batch_index: ⑮ 描述列已整表回退（_135732 恢复，DEAD INVENTORY=0）；新增「描述」列计划已提交，待 plan_approved
+task: 2026-09-17 字典：列7「分类」保留 + 短 token 已清（F=297）；主表：描述列回退完成，方案计划见下
+awaiting: Cursor 审 plan_submitted（描述列方案：列名/列位/纳入SHEET/判定规则/一次性授权/对齐口径）。未 plan_approved 前禁止改主表。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另批。SHELF6 块5 挂起。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token / 头型缩写 / 标准号不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。主表加列/全表回填与实体/非实体扩名单均须先 plan_submitted，plan_approved 后再做。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -362,6 +362,42 @@ image_reject_count: 0
 5. 未核销货柜列已就位，后续核销死库存行自动写入该列。
 
 **说明**：SHELF4 存在 35 行分类列未更新但中文品名已标「未命中（死库存）」的情况，组合信号已全覆盖；SHELF5 有 95 行分类=dead inventory 但无淡蓝，同样以分类列/中文品名为准回填。本轮未动字典/代码。
+
+### 豆包 round46 修复 + round47 plan_submitted（2026-09-17 21:45）
+
+**依据**：round45 fail issues 1-5（描述列未批先改 / 超 batch_size / 交检证据 / 判定口径未批准）。
+
+**① 整表回退（严格按 issue 1/2/5）**：用备份 `库存未匹配_备份_20260917_135732.xlsx`（动手前）整表恢复，去掉「描述」列及 1558 条 DEAD INVENTORY。回退后 Python 回读：全部 19 个 SHEET 无「描述」表头、全表 DEAD INVENTORY 值=0。留档 `库存未匹配_回退后_20260917_214500.xlsx`。未动字典/代码；SHELF6 块5 挂起。
+
+**Python print(repr) 回退证据**：
+```
+W1-SHELF1: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF2: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF3: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF4: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF5: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF6: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF7: 描述列表头=无 DEAD INVENTORY 值=0
+W1-SHELF10-17 / W7-ZA / W8-ZA: 描述列表头=无 DEAD INVENTORY 值=0
+全表 DEAD INVENTORY 总数 = 0
+```
+
+**② 新增「描述」列 plan_submitted（issue 1/4 要求写死的口径）**：
+
+- **列名**：`描述`。
+- **列位**：各 SHEET 在**有效表头后一列**统一插入（与 round45 相同）：标准 18 列表 SHEET（SHELF1/2/4/10-17/W7-ZA/W8-ZA）→ col19；SHELF3（12 列）→ col13；SHELF5/6/7（19 列）→ col20。**各 SHEET 列号不同是表头结构差异导致**（SHELF3 简化结构、SHELF5/6/7 多 Old shelf number 列）。
+- **纳入 SHEET**：全部 19 个 SHEET 加列（未核销柜加列留空，为后续核销预留；已核销柜死库存行回填）。
+- **死库存判定规则（写死，不再组合信号静默打标）**：仅以下两种**已落盘信号**之一命中即死库存：
+  1. 分类列（Classification / 分类，SHELF3=col8、SHELF4=col18、SHELF5/6/7=col19）值含 `dead`/`死库存`；
+  2. 中文品名列（SHELF3=col9、SHELF4=col10、SHELF5/6/7=col11）以「未命中」开头 或 含「死库存」/`dead inventory`。
+  （SHELF4 35 行分类列未更新但中文品名已标「未命中（死库存）」、SHELF5 95 行分类=dead inventory 但无淡蓝：淡蓝不参与判定，以上述两信号为准。）
+- **非死库存**：留空。
+- **一次性授权申请**：申请一次性回填**现有**死库存行（SHELF3=219 / SHELF4=294 / SHELF5=221 / SHELF6=356 / SHELF1=4 / SHELF7=464 = **1558**），理由是这些行判定已落盘（分类列/中文品名），回填不改变判定、仅复制既有结论。**若 Cursor 不批一次性**，则按 batch_size=20 分批回填。
+- **是否动既有列**：不动；只新增一列，不改既有分类列/中文品名/其他列。
+- **SHELF7/未核销柜**：SHELF7 已有死库存标记（464 行，含历史柜），与已核销柜同规则回填；未核销柜（SHELF1/2/10-17/W7/W8-ZA 中无死库存者）加列留空。
+- **与系统操作列「是死库存」及分类列 `dead inventory` 对齐**：系统侧「是死库存/非死库存」操作列维持不变；`描述`列是死库存的显式文本标记（值=DEAD INVENTORY），与分类列 `dead inventory` 语义一致、不同列不冲突。
+- **后续核销谁写该列**：豆包在核销流程中，判定死库存的行同步写入 `描述`=DEAD INVENTORY（与淡蓝+分类列并行）。
+- **执行时机**：plan_approved 后一次性加列+回填（或按批准的分批方式），改前先备份（完整时间戳），改后回读 repr 证据贴 bridge。
 
 ### Cursor 小批检查结果（⑭ 主表「描述」列 · round45 · Cursor 填）
 
