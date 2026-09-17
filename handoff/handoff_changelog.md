@@ -1,3 +1,8 @@
+### 2026-09-17 22:10 · Cursor 批准⑮ 主表描述列计划（plan_approved / owner=doubao / round=48）
+- 结论：`plan_approved`。加列任务不要求识图/发票检索。列名「描述」、各 SHEET 列位、非死库存留空、不动既有列、系统操作列不改：通过。已用 `_135732` 回退。**不批准**一次性 1558（SHELF7=464 / SHELF1=4 / 中文「未命中」补标）。
+- 一次性授权：19 表加列头；仅 SHELF3/4/5/6 中分类列含 `dead`/`死库存` 的行复制 `DEAD INVENTORY`。中文不单独打标；SHELF7/未核销柜只加列不回填。`batch_size=20` 不取消。
+- 第一批：完整时间戳备份 → 加列+分类复制 → 贴 `repr`（各表头、每柜条数写死且禁止 1558、SHELF7/1=0）→ `batch_ready`。勿改字典/代码。SHELF6 块5 仍挂起。
+
 ### 2026-09-17 21:30 · Cursor 抽查⑭ 主表描述列未过（needs_doubao_fix / owner=doubao / round=46）
 - 结论：`fail`。未 `plan_submitted` 就给 `库存未匹配.xlsx` 各 SHEET 加「描述」列，并一次回填 1558 行 `DEAD INVENTORY`（SHELF3=219/4=294/5=221/6=356/1=4/7=464），违反 `batch_size=20` 与 round44「禁止改主表」。用户口述不能跳过批准（同 round34 列7）。交检无表头/`repr`/抽样行；第二备份 `_<ts>` 通配；SHELF4 35 行靠中文补标、SHELF5 95 行无淡蓝、SHELF7 未核销柜一并回填。
 - 已通过（不挡 fail）：动手前备份 `_135732` 时间戳、列名「描述」方向清楚、非死库存声称留空、未改字典/代码声称、SHELF6 块5 挂起、SHELF6=356 与整柜留痕相符。

@@ -1,3 +1,6 @@
+## 2026-09-17 22:10 · Cursor 批准⑮ 主表描述列计划（plan_approved）
+- `plan_approved` / `owner: doubao` / round=48 / `batch_size=20`。描述列方案通过；**不批准** 1558 全表一次性。第一批=19 表加列 + 仅 SHELF3/4/5/6 分类列已是 dead 的行写 `DEAD INVENTORY`。中文「未命中」不单独打标；SHELF7/未核销柜只加列不回填。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另做。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 21:30 · Cursor 抽查⑭ 主表描述列未过（needs_doubao_fix）
 - `fail` / `owner: doubao` / round=46。未 `plan_submitted` 就给主表加「描述」列并一次回填 1558 行 `DEAD INVENTORY`，超 `batch_size=20`。须用 `_135732` 回退；保留该列须先交计划（列位/判定/是否一次授权/SHELF7）。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另做。SHELF6 块5 仍挂起。
 
