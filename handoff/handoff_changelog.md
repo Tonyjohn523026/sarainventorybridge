@@ -1,3 +1,8 @@
+### 2026-09-17 19:55 · Cursor 抽查⑫ 空行补位未过（needs_doubao_fix / owner=doubao / round=42）
+- 结论：`fail`。round41 把 round40 点名禁填的 9 行（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）原样再填；无新 `plan_submitted`。头型缩写/标准号当实体；VITONE 绑 NO366 m4x10；PORTA GOMMA 四柜面 token；交检缺 A1:G1 与回退前后对照。
+- 已通过（不挡 fail）：9≤20、备份 `_131000` 时间戳、未改主表/代码声称、SHELF6 块5 挂起、F=306=297+9 算术、9 行有 A/E/F repr。
+- 未决：用 `_20260917_131000.xlsx` 只回退这 9 行 E/F（F 回到 297）→ 贴 repr → 再 `batch_ready`。这 9 个 A 须先 `plan_submitted` 才能再填。其他空行等本 fail pass 后再 ≤20/批。勿改主表/代码。
+
 ### 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved / owner=doubao / round=36）
 - 结论：`plan_approved`。字典结构任务不要求识图/发票检索。列7 方案（列名、紧固件=CONSUMABLE、其他两表空、DEAD 不进字典）通过；**不批准**保持 F=327/E=246 现状并立刻 `batch_ready`。`batch_size=20` 不取消。
 - 一次性授权：列7 表头保留（不必 `_101402` 去掉）；紧固件整表 G=CONSUMABLE；具体物料词已填的 F/E 在短 token 清完后可留。禁止再跑全表 token 匹配填空行。

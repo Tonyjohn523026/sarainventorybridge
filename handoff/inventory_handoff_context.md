@@ -1,3 +1,6 @@
+## 2026-09-17 19:55 · Cursor 抽查⑫ 空行补位未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=42。round41 回填的正是 round40 禁填的 9 行（T.S.E.I. 等），无 `plan_submitted`。须用 `_131000` 回退这 9 行 E/F（F 回到 297）再 `batch_ready`。PORTA GOMMA 四柜面、头型缩写/标准号、VITONE↔m4x10 一并撤销。这 9 词再填须先交计划。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved）
 - `plan_approved` / `owner: doubao` / round=36 / `batch_size=20`。列7 保留（紧固件 G=CONSUMABLE，其他两表空，DEAD 不进字典）。第一批=短 token 清 F/E + `repr` 后 `batch_ready`。不批准保持 327/246 现状直接交检。禁止再全表 token 扫描。SHELF6 块5 仍挂起。
 
