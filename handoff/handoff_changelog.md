@@ -1,8 +1,3 @@
-### 2026-09-17 18:40 · Cursor 抽查⑩ 短token清理未过（needs_doubao_fix / owner=doubao / round=38）
-- 结论：`fail`。round37 自称实体/非实体清 129 行并补 9 行空位。黑名单点名项『其他』R2 VALVOLA、SFERA/CHIAVE/LEVA、紧固件 VITE、T.C.E.I. 不在清理清单；保留例 TANKFLY 被清；按主表清点给空行补 F/E（含 PORTA GOMMA 四柜面）属禁止的全表 token 扫描；交检仍非 `print(repr)`，备份 `*_dictrepair.xlsx` 无完整时间戳；紧固件自称 28 行实列 30 号。
-- 已通过（不挡 fail）：未改主表/代码声称、SHELF6 块5 挂起、列7 方向与已批一致、未再写 F=327、部分黑名单词（FEMMINA/INOX/DN 等）方向对。
-- 未决：回退超范围改动 → 只清 round36 黑名单 → 恢复 TANKFLY → 贴 repr → 再 `batch_ready`。实体/非实体扩名单须先 `plan_submitted`。勿改主表/代码。
-
 ### 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved / owner=doubao / round=36）
 - 结论：`plan_approved`。字典结构任务不要求识图/发票检索。列7 方案（列名、紧固件=CONSUMABLE、其他两表空、DEAD 不进字典）通过；**不批准**保持 F=327/E=246 现状并立刻 `batch_ready`。`batch_size=20` 不取消。
 - 一次性授权：列7 表头保留（不必 `_101402` 去掉）；紧固件整表 G=CONSUMABLE；具体物料词已填的 F/E 在短 token 清完后可留。禁止再跑全表 token 匹配填空行。
@@ -826,3 +821,11 @@
 - ③ 清理后统计：紧固件 65 词条 E=27/F=27｜待定 211 词条 E=127/F=126｜其他 155 词条 E=75/F=75
 - ④ 待后续清点补图补位（本轮无清点记录、不编造）：T.S.P.E.I./GOLFARE/FILIERA；MEZZO RACCORDO FILETTATO/MANDRINA/MASCHIO A MANDRINA/FEMMIA A MANDRINA/TAPPO A MORSETTO/STUD KIT/VALVOLA DI VUOTO/FOOT VALVE/RACCORDO FILETTATO/CARTUCCE FUSIBILE/REATTORE/FUSIBILE D01/CRIMP CONNECTOR/ASTA LAMPEGGIANTE/O-RING/T-SLOT/LUCE TARGA/CAVO ADR/LENTE GIALL/GOMMA FANALE/SIDEMARKER/KIT AUTOPORTANTE/CLIP/TASSELLO DUOPOWER/GOMMA CONICA/STRISCIA CATARIFRANGENTE/CANTONALE/COPERCHIO/SUPPORTO ANTIVIBRANTE/PORTA TABELLA/ADESIVO 系列；ALZA-ABBASSA/COMPONENTE COMANDO/FLANGIA PP-GF/BOCCHE TONE/TEE FEMMINA/CURVA FEMMINA/GUARNIZIONE PVC/BOC CAPORTO/GOMITO 90° FILETTATO/NIPPLO RIDOTTO FILETTATO/MANICOTTO DI RICAMBIO/CARTELLA SALDARE INOX/FLANGIA DISTANZIALE/COLLA/VALVOLA A STROZZAMENTO/VALVOLA A FARFALLA PNEUMATICA/ATTUATORE PNEUMATICO/FLANGIA MASCHIO/FLANGIA QUADRA/COLLARE PER TUBO
 - 状态：bridge.md round37 batch_ready / owner=cursor，交 Cursor 抽查
+
+
+## 2026-09-17 19:10 — 翻译字典 round38 修复（round39 batch_ready）
+- 触发：Cursor round38 needs_doubao_fix（issues 1-5）
+- 修复：① 动手前时间戳备份 `翻译字典_备份_20260917_125206.xlsx`；② E/F 全量从 `翻译字典_备份_20260917_dictrepair.xlsx` 回退（撤销 round37 超范围 129 行扩清 + 9 条空行补位：T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA 均回到动手前状态，已逐行验证）；③ 只做 round36 黑名单清 F 共 30 行（VITE/TESTA/T.E./T.C./T.C.E.I./T.T./SVASATA/BOMBATA/ROTONDA/INOX/MASCHIO/DN/FEMMINA/SFERA/VALVOLA/CHIAVE/LEVA/WOG/PN/A SFERA/F.F./F/F 等，A 列精确匹配），点名行 R2 VALVOLA/R3 SFERA/R7 CHIAVE/R8 LEVA、紧固件 R3 VITE/R8 T.C.E.I. 全部命中；④ 保留例 TANKFLY（其他 R16 E=153.jpg F=2-A）/VALVOLA A SFERA/SFERA MINI LEVA/KIT GUARNIZIONE DI RICAMBIO/BULLONE/MANICOTTO/GOMITO/CURVA/TAPPO/DADO/RONDELLA 确认保留
+- 交检证据（print(repr) 已贴入 bridge.md round39 区）：三表 A1:G1｜清理清单 30 行（行号|Sheet|A|清前F|清后F）｜清理后 F 已填=297、G 已填=65（紧固件全 CONSUMABLE）、非法 F 格式=0｜紧固件 G 抽样 66 条 repr｜其他两表 G 空抽样 6 条｜保留球阀词 13 条逐行 repr｜A-D 相对备份未改抽样 5 条
+- 未动主表、未动代码；SHELF6 块5 继续挂起
+- 状态：bridge.md round39 batch_ready / owner=cursor，已 push GitHub

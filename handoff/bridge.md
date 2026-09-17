@@ -305,15 +305,15 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-17 18:40
-round: 38
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 19:10
+round: 39
 batch_size: 20
-batch_index: ⑩ 字典短token清理交检未过 → 按 round36 黑名单重做（勿扩成实体/非实体全表）；恢复误清的 TANKFLY；撤回本批空行补 F/E；补 Python repr
+batch_index: ⑪ 字典 round38 修复完成：E/F 全量回退到动手前备份 → 只做 round36 黑名单清 F（30 行）→ 保留例恢复（TANKFLY 等）→ repr 证据贴出；SHELF6 块5 仍挂起
 task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 清理后交检（具体物料词 F/E 可保留）
-awaiting: 豆包按 round38 issues 用时间戳备份回退超范围改动，只清 round36 黑名单并贴 print(repr) 后再 `batch_ready` / owner=cursor。勿改主表、勿改代码。SHELF6 块5 仍挂起。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token 不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted。
+awaiting: Cursor 抽查 round39 修复（E/F 回退 + 黑名单清 F 的 print(repr) 证据见下）。主表/代码本轮未改。通过后字典可继续（含用户新规则走 plan_submitted）。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token 不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
 image_reject_count: 0
 ```
 
@@ -336,6 +336,162 @@ image_reject_count: 0
 
 **④ 待后续清点补图补位（本轮无清点记录、无法编造）**：T.S.P.E.I./GOLFARE/FILIERA（紧固件）；MEZZO RACCORDO FILETTATO/MANDRINA/MASCHIO A MANDRINA/FEMMIA A MANDRINA/TAPPO A MORSETTO/STUD KIT/VALVOLA DI VUOTO/FOOT VALVE/RACCORDO FILETTATO/CARTUCCE FUSIBILE/REATTORE/FUSIBILE D01/CRIMP CONNECTOR/ASTA LAMPEGGIANTE/O-RING/T-SLOT/LUCE TARGA/CAVO ADR/LENTE GIALL/GOMMA FANALE/SIDEMARKER/KIT AUTOPORTANTE/CLIP/TASSELLO DUOPOWER/GOMMA CONICA/STRISCIA CATARIFRANGENTE/CANTONALE/COPERCHIO/SUPPORTO ANTIVIBRANTE/PORTA TABELLA/ADESIVO 系列（其他字典）；ALZA-ABBASSA/COMPONENTE COMANDO/FLANGIA PP-GF/BOCCHE TONE/TEE FEMMINA/CURVA FEMMINA/GUARNIZIONE PVC/BOC CAPORTO/GOMITO 90° FILETTATO/NIPPLO RIDOTTO FILETTATO/MANICOTTO DI RICAMBIO/CARTELLA SALDARE INOX/FLANGIA DISTANZIALE/COLLA/VALVOLA A STROZZAMENTO/VALVOLA A FARFALLA PNEUMATICA/ATTUATORE PNEUMATICO/FLANGIA MASCHIO/FLANGIA QUADRA/COLLARE PER TUBO（其他表）—— 均在后续货柜清点时严格补图+货架号/面号。
 
+
+### 豆包 round38→39 修复（2026-09-17 19:10 · batch_ready）
+
+**修复动作（严格按 round38 issues 1-5）**：
+1. 动手前新备份（完整时间戳）：`D:\sara\库存管理\翻译字典_备份_20260917_125206.xlsx`（修改后状态留档）
+2. E/F **全量回退**：从 `翻译字典_备份_20260917_dictrepair.xlsx`（round37 动手前）恢复三表全部 E/F → 撤销超范围 129 行扩清 + 撤销 9 条空行补位（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA 均回到动手前空/旧态，已验证）
+3. **只做 round36 黑名单清 F**（A 列精确匹配，大小写不敏感、允许仅标点差异；E 旧图保留）：`INOX` `DN` `PN` `VITE` `TESTA` `FEMMINA` `MASCHIO` `VALVOLA` `SFERA` `LEVA` `CHIAVE` `WOG` `A SFERA` `F.F.` + 头型 `T.E.`/`T.C.`/`T.C.E.I.`/`T.T.`/`SVASATA`/`BOMBATA`/`ROTONDA` → 共清 **30 行**，点名行全部命中
+4. 保留例恢复确认：`TANKFLY`（其他 R16，E=153.jpg·F=2-A）/ `VALVOLA A SFERA` / `SFERA MINI LEVA` / `KIT GUARNIZIONE DI RICAMBIO` / `BULLONE` / `MANICOTTO` / `GOMITO` / `CURVA` / `TAPPO` / `DADO` / `RONDELLA` 均保留 E/F
+5. 未动主表、未动代码；未再做全表 token 扫描/实体分类扩清
+
+**Python print(repr) 证据**（实际落盘输出）：
+```
+=== A1:G1 ===
+紧固件字典: ['意大利语原文 / 缩写', '扩展名（全称）', '中文翻译', '同义词 / 变体（防厂商写法差异）', '图片（库存实拍图）', '货柜/面', '分类（系统枚举）']
+其他字典（待定）: ['意大利语原文 / 缩写', '扩展名（全称）', '中文翻译', '同义词 / 变体（防厂商写法差异）', '图片（库存实拍图）', '货柜/面', '分类（系统枚举）']
+其他: ['意大利语原文 / 缩写', '扩展名（全称）', '中文翻译', '同义词 / 变体（防厂商写法差异）', '图片（库存实拍图）', '货柜/面', '分类（系统枚举）']
+
+=== 清理清单（30 行） ===
+行号=3 | Sheet=紧固件字典 | A='VITE' | 清理前F='1-D,2-A,2-B,2-C,3-A,3-B,3-C,3-D,4-A,4-B,4-C' | 清理后F=''
+行号=5 | Sheet=紧固件字典 | A='TESTA' | 清理前F='1-D,2,3-C,3-D,4-A,4-B,4-C' | 清理后F=''
+行号=6 | Sheet=紧固件字典 | A='T.E.' | 清理前F='1-C,1-D,2,3-A,3-B,3-C,4-A,4-B' | 清理后F=''
+行号=7 | Sheet=紧固件字典 | A='T.C.' | 清理前F='4-A' | 清理后F=''
+行号=8 | Sheet=紧固件字典 | A='T.C.E.I.' | 清理前F='4-A' | 清理后F=''
+行号=12 | Sheet=紧固件字典 | A='T.T.' | 清理前F='1-C' | 清理后F=''
+行号=13 | Sheet=紧固件字典 | A='SVASATA' | 清理前F='2-C,3,4-A,4-B,4-C' | 清理后F=''
+行号=14 | Sheet=紧固件字典 | A='BOMBATA' | 清理前F='2,3-D,4-B' | 清理后F=''
+行号=15 | Sheet=紧固件字典 | A='ROTONDA' | 清理前F='1-D' | 清理后F=''
+行号=34 | Sheet=紧固件字典 | A='INOX' | 清理前F='1-A,1-B,1-D,2-A,2-B,2-C,3-A,3-B,3-C,4-A,4-B,4-C' | 清理后F=''
+行号=73 | Sheet=紧固件字典 | A='MASCHIO' | 清理前F='1-B,1-C,2-A,2-B,4-A,4-B,4-C' | 清理后F=''
+行号=39 | Sheet=其他字典（待定） | A='DN' | 清理前F='1-A,1-B,2-A,2-B' | 清理后F=''
+行号=64 | Sheet=其他字典（待定） | A='FEMMINA' | 清理前F='1-A,1-B,2-A,2-B,3-A,4-A,4-B,4-C' | 清理后F=''
+行号=65 | Sheet=其他字典（待定） | A='MASCHIO' | 清理前F='1-B,1-C,2-A,2-B,4-A,4-B,4-C' | 清理后F=''
+行号=98 | Sheet=其他字典（待定） | A='SFERA' | 清理前F='2-A,2-B,4-B' | 清理后F=''
+行号=2 | Sheet=其他 | A='VALVOLA' | 清理前F='1-A,1-B,2-A,2-B,3-B,4-B' | 清理后F=''
+行号=3 | Sheet=其他 | A='SFERA' | 清理前F='2-A,2-B,4-B' | 清理后F=''
+行号=7 | Sheet=其他 | A='CHIAVE' | 清理前F='2-A' | 清理后F=''
+行号=8 | Sheet=其他 | A='LEVA' | 清理前F='2-A,2-B,4-B' | 清理后F=''
+行号=9 | Sheet=其他 | A='FEMMINA' | 清理前F='1-A,1-B,2-A,2-B,3-A,4-A,4-B,4-C' | 清理后F=''
+行号=10 | Sheet=其他 | A='MASCHIO' | 清理前F='1-B,1-C,2-A,2-B,4-A,4-B,4-C' | 清理后F=''
+行号=11 | Sheet=其他 | A='INOX' | 清理前F='1-A,1-B,1-D,2-A,2-B,2-C,3-A,3-B,3-C,4-A,4-B,4-C' | 清理后F=''
+行号=12 | Sheet=其他 | A='WOG' | 清理前F='2' | 清理后F=''
+行号=13 | Sheet=其他 | A='DN' | 清理前F='1-A,1-B,2-A,2-B' | 清理后F=''
+行号=14 | Sheet=其他 | A='PN' | 清理前F='2-A' | 清理后F=''
+行号=20 | Sheet=其他 | A='A SFERA' | 清理前F='2-A,2-B,4-B' | 清理后F=''
+行号=21 | Sheet=其他 | A='F.F.' | 清理前F='2-A' | 清理后F=''
+行号=27 | Sheet=其他 | A='F/F' | 清理前F='2-A' | 清理后F=''
+行号=146 | Sheet=其他 | A='TESTA' | 清理前F='1-D,2,3-C,3-D,4-A,4-B,4-C' | 清理后F=''
+行号=151 | Sheet=其他 | A='BOMBATA' | 清理前F='2,3-D,4-B' | 清理后F=''
+
+=== 全表统计 ===
+清理后全表 F 已填条数 = 297
+清理后全表 G 已填条数 = 65
+非法 F 格式 = 0
+
+=== 紧固件 G 抽样 ===
+行号=3 | A='VITE' | G='CONSUMABLE'
+行号=4 | A='BULLONE' | G='CONSUMABLE'
+行号=5 | A='TESTA' | G='CONSUMABLE'
+行号=6 | A='T.E.' | G='CONSUMABLE'
+行号=7 | A='T.C.' | G='CONSUMABLE'
+行号=8 | A='T.C.E.I.' | G='CONSUMABLE'
+行号=9 | A='T.S.E.I.' | G='CONSUMABLE'
+行号=10 | A='T.S.P.E.I.' | G='CONSUMABLE'
+行号=11 | A='T.B.E.I.' | G='CONSUMABLE'
+行号=12 | A='T.T.' | G='CONSUMABLE'
+行号=13 | A='SVASATA' | G='CONSUMABLE'
+行号=14 | A='BOMBATA' | G='CONSUMABLE'
+行号=15 | A='ROTONDA' | G='CONSUMABLE'
+行号=16 | A='PIATTA' | G='CONSUMABLE'
+行号=17 | A='CROCE' | G='CONSUMABLE'
+行号=18 | A='TAGLIO' | G='CONSUMABLE'
+行号=19 | A='INTAGLIO' | G='CONSUMABLE'
+行号=20 | A='BRUGOLA' | G='CONSUMABLE'
+行号=21 | A='ESAG.' | G='CONSUMABLE'
+行号=22 | A='ESAGONALE' | G='CONSUMABLE'
+行号=23 | A='CIECO' | G='CONSUMABLE'
+行号=25 | A='DADO' | G='CONSUMABLE'
+行号=26 | A='MEDIO' | G='CONSUMABLE'
+行号=27 | A='AUTOBLOCC.' | G='CONSUMABLE'
+行号=28 | A='GHIERA' | G='CONSUMABLE'
+行号=30 | A='RONDELLA' | G='CONSUMABLE'
+行号=31 | A='PIANA' | G='CONSUMABLE'
+行号=32 | A='GROWER' | G='CONSUMABLE'
+行号=34 | A='INOX' | G='CONSUMABLE'
+行号=35 | A='ACCIAIO' | G='CONSUMABLE'
+行号=36 | A='FE.' | G='CONSUMABLE'
+行号=37 | A='OTTONE' | G='CONSUMABLE'
+行号=38 | A='RAME' | G='CONSUMABLE'
+行号=39 | A='ALLUMINIO' | G='CONSUMABLE'
+行号=40 | A='A 2' | G='CONSUMABLE'
+行号=41 | A='A 4' | G='CONSUMABLE'
+行号=43 | A='ZN.' | G='CONSUMABLE'
+行号=44 | A='ZINCATO' | G='CONSUMABLE'
+行号=45 | A='ZINCATA' | G='CONSUMABLE'
+行号=47 | A='UNI' | G='CONSUMABLE'
+行号=48 | A='DIN' | G='CONSUMABLE'
+行号=49 | A='UNI 5737' | G='CONSUMABLE'
+行号=50 | A='UNI 5739' | G='CONSUMABLE'
+行号=51 | A='UNI 5931' | G='CONSUMABLE'
+行号=52 | A='UNI 5933' | G='CONSUMABLE'
+行号=53 | A='DIN 934' | G='CONSUMABLE'
+行号=54 | A='DIN 982' | G='CONSUMABLE'
+行号=55 | A='DIN 1587' | G='CONSUMABLE'
+行号=57 | A='MM.' | G='CONSUMABLE'
+行号=58 | A='M + 数字' | G='CONSUMABLE'
+行号=59 | A='X' | G='CONSUMABLE'
+行号=60 | A='P.GROSSO' | G='CONSUMABLE'
+行号=61 | A='FILEITTO' | G='CONSUMABLE'
+行号=63 | A='GOLFARE' | G='CONSUMABLE'
+行号=64 | A='RIVETTO' | G='CONSUMABLE'
+行号=65 | A='COPIGLIA' | G='CONSUMABLE'
+行号=66 | A='PERNO' | G='CONSUMABLE'
+行号=67 | A='VITONE' | G='CONSUMABLE'
+行号=68 | A='AUTOFILETTANTE' | G='CONSUMABLE'
+行号=69 | A='TASSELLO' | G='CONSUMABLE'
+行号=70 | A='FASCETTA' | G='CONSUMABLE'
+行号=71 | A='MORSETTO' | G='CONSUMABLE'
+行号=72 | A='FILIERA' | G='CONSUMABLE'
+行号=73 | A='MASCHIO' | G='CONSUMABLE'
+行号=74 | A='RACCORDO' | G='CONSUMABLE'
+
+=== 其他两表 G 空抽样 ===
+行号=3 | Sheet=其他字典（待定） | A='REGGITUBO' | G=None
+行号=4 | Sheet=其他字典（待定） | A='REGGIT.LEG.' | G=None
+行号=5 | Sheet=其他字典（待定） | A='MANICOTTO' | G=None
+行号=2 | Sheet=其他 | A='VALVOLA' | G=None
+行号=3 | Sheet=其他 | A='SFERA' | G=None
+行号=4 | Sheet=其他 | A='VALVOLA A SFERA' | G=None
+
+=== 保留球阀/保留例词条 ===
+行号=16 | Sheet=其他 | A='TANKFLY' | C='PEROLO 蝶阀系列名' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\153.jpg","图153")' | F='2-A' | G=None
+行号=4 | Sheet=紧固件字典 | A='BULLONE' | C='螺栓' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\377.jpg","图377")' | F='1-C,3-A,3-B,3-C' | G='CONSUMABLE'
+行号=4 | Sheet=紧固件字典 | A='BULLONE' | C='螺栓' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\377.jpg","图377")' | F='1-C,3-A,3-B,3-C' | G='CONSUMABLE'
+行号=25 | Sheet=紧固件字典 | A='DADO' | C='螺母' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\370.jpg","图370")' | F='1-D,2,3-A,3-B,3-C,4-A,4-B,4-C' | G='CONSUMABLE'
+行号=30 | Sheet=紧固件字典 | A='RONDELLA' | C='垫圈' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\332.jpg","图332")' | F='2,3-A,3-B,4-A,4-B' | G='CONSUMABLE'
+行号=5 | Sheet=其他字典（待定） | A='MANICOTTO' | C='管箍；套筒接头' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\124.jpg","图124")' | F='1-A,1-B,2-A,2-B,4-A,4-B,4-C' | G=None
+行号=14 | Sheet=其他字典（待定） | A='CURVA' | C='弯头' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\146.jpg","图146")' | F='1-A,1-B,4-B' | G=None
+行号=22 | Sheet=其他字典（待定） | A='TAPPO' | C='堵头' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\99.jpg","图99")' | F='1-A,1-C,2-A,2-B,4-A,4-B,4-C' | G=None
+行号=45 | Sheet=其他字典（待定） | A='GOMITO' | C='弯头；肘形接头' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\146.jpg","图146")' | F='1-A,2-B,4-B' | G=None
+行号=4 | Sheet=其他 | A='VALVOLA A SFERA' | C='球阀' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\156.jpg","图156")' | F='2-A,2-B,4-B' | G=None
+行号=5 | Sheet=其他 | A='SFERA MINI LEVA' | C='迷你手柄球阀' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\166.jpg","图166")' | F='2-A' | G=None
+行号=16 | Sheet=其他 | A='TANKFLY' | C='PEROLO 蝶阀系列名' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\153.jpg","图153")' | F='2-A' | G=None
+行号=17 | Sheet=其他 | A='KIT GUARNIZIONE DI RICAMBIO' | C='替换密封垫套件' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\153.jpg","图153")' | F='2-A' | G=None
+行号=35 | Sheet=其他 | A='MANICOTTO' | C='套筒/管箍接头' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\20.jpg","图20")' | F='1-A,1-B,2-A,2-B,4-A,4-B,4-C' | G=None
+行号=41 | Sheet=其他 | A='CURVA' | C='弯头' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\138.jpg","图138")' | F='1-A,1-B,4-B' | G=None
+行号=86 | Sheet=其他 | A='GOMITO' | C='Curva' | E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\222.jpg","图222")' | F='1-A,2-B,4-B' | G=None
+
+=== A-D 相对备份未改抽样 ===
+行号=2 | Sheet=紧固件字典 | A='— 螺丝类（Vite / Bullone）—' | A-D=['— 螺丝类（Vite / Bullone）—', None, None, None]
+行号=3 | Sheet=紧固件字典 | A='VITE' | A-D=['VITE', 'Vite', '螺丝；螺钉', '螺丝；螺钉；Screw；Vis']
+行号=4 | Sheet=紧固件字典 | A='BULLONE' | A-D=['BULLONE', 'Bullone', '螺栓', '螺栓；Bolt']
+行号=5 | Sheet=紧固件字典 | A='TESTA' | A-D=['TESTA', 'Testa', '头部；头型', '头；Head']
+行号=6 | Sheet=紧固件字典 | A='T.E.' | A-D=['T.E.', 'Testa Esagonale', '外六角头（六角头）', '六角头；Hex Head；Esagonale']
+
+TOTAL_CLEARED=30 F_FILLED=297 G_FILLED=65 ILLEGAL_F=0
+```
 ### Cursor 小批检查结果（⑩ 短token清理 / 实体非实体扩清 · round37 · Cursor 填）
 
 - verdict: **fail**
