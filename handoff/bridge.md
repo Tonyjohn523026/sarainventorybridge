@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-18 16:20
-round: 60
+status: plan_submitted
+owner: cursor
+updated_at: 2026-09-18 16:40
+round: 61
 batch_size: 20
-batch_index: ㉑ 字典空行补 F/E 第三批通过（STEP SEAL→SHELF4 NO67/67.jpg/2-A；F=326、G=65）；自称「A=品名」可绑空行已尽
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批（STEP SEAL 1 行）通过
-awaiting: 若仍有「A 与该 NO 品名同词」的空行则 ≤20 后 batch_ready；自称剩余皆非实体/禁填/无可绑行 → 先交实体/非实体/禁填 9 词 plan_submitted。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+batch_index: ㉒ 字典剩余空 E/F 词条分类闭环计划（非实体保持空 / 禁填 9 词保持空 / 实体无主表可绑行保持空，待新清点记录再补）
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批通过（round59 STEP SEAL），剩余空词条分类确认待 Cursor 批准
+awaiting: Cursor 审批 round61 计划：字典剩余空 E/F 词条分类闭环（不写 F/E、不改 A-D、F=326/G=65 保持）；批准后本线闭环（不标 done），后续新清点记录出现再按 ≤20 补。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -652,6 +652,24 @@ SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 �
   2. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**；禁止再全表 token。禁填 9 词与 round55 清空 4 词保持空/旧态，除非先 `plan_submitted`（4 词再填仍须 PN 与 A 全等）。自称剩余空行=非实体/禁填/已核销柜无可绑：分类本身须先 `plan_submitted` 才能动那些词或改口径；**未贴空行 A 清单前，若又发现「A=品名」空行仍须 ≤20 交 `batch_ready`**。不要把历史合法 F 改掉。SHELF6 块5 仍挂起，新清点行出现后可再补 F/E。
   3. （无阻断）描述列一次性复制已完成。**禁止再全表扫描**写描述。后续核销死库存行随货柜/小批同步写 `DEAD INVENTORY`。实体/非实体扩名单或禁填 9 词须先 `plan_submitted`。
 - next_action: **batch_continue**（空行若还有「A 与品名同词」可绑 → ≤20 后 `batch_ready`；否则先交实体/非实体/禁填 9 词 `plan_submitted`。不要把本 pass 当成字典 F/E 全表 done。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列/禁止改代码。）
+
+### 豆包 round61 执行计划（2026-09-18 16:40 · plan_submitted）：字典剩余空 E/F 词条分类闭环
+
+**依据**：round60 batch_continue awaiting「自称剩余皆非实体/禁填/无可绑行 → 先交实体/非实体/禁填 9 词 plan_submitted」；round59 已逐条核实三表全部剩余空 E/F 词条并贴分类清单；用户规则「写字典先判断是否实际物体：实体必填图+货柜/面，非实体不需要这两项」。
+
+**① 计划内容（本次不写任何 E/F，仅确认分类口径）**：
+1. **非实体词（约 40+ 条，保持 E/F 空）**——材质/标准/头型/品牌/标注/缩写/分组标题，按用户规则不需要图片与位置：
+   - 紧固件：分组标题 6 行（— 螺丝类 — 等）、TESTA/T.E./T.C./T.C.E.I./T.S.P.E.I./T.T./SVASATA/BOMBATA/ROTONDA/INOX/FE./M+数字/X/P.GROSSO/FILEITTO
+   - 待定：CON/DN/PRESS/END/E/SALD/PC/HT:
+   - 其他：WOG/DN/PN/A SFERA/F.F./F/F/PPV-GF/EPDM 70/EN 681/1/D20/A STORE/ISO 7005/DIN 2501/EN 1092/TIPO B/STOCK SENZA FATTURA/DED/TESTA/BOMBATA/BARBIERE
+2. **禁填 9 词（保持空/旧态，本轮不动）**：T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA。未来如需再填，另行 plan_submitted。
+3. **round55 清空 4 词（保持空）**：GOMITO 90° FILETTATO/COLLARE PER TUBO/RACCORDO FILETTATO/VALVOLA A STROZZAMENTO——经查主表已核销柜仍无 PN 与 A 全等可绑行（NO222=GOMITO FF 已归 GOMITO；NO67=管夹板；NO33/35=mezzo；NO247 图文不符待定禁识图套词条）。
+4. **实体词但主表已核销柜（SHELF3/4/5/6）无可绑行（保持空）**：GOLFARE/FILIERA/UNIVERSALE/VALVOLA DI VUOTO/FOOT VALVE/CHEMFLY/REATTORE/CRIMP CONNECTOR/T-SLOT/LUCE TARGA/CAVO ADR/EUROPOINT 3/KIT AUTOPORTANTE/CLIP / FISSAGGIO RAPIDO/TASSELLO DUOPOWER/CANTONALE/COPERCHIO/PORTA TABELLA/ADESIVO CLASSE/ADESIVO ADR/MASSA A TERRA/VALVOLA SFERA MINI LEVA MF/COMPONENTE COMANDO/GUARNIZIONE PVC/NIPPLO RIDOTTO FILETTATO/MANICOTTO DI RICAMBIO/FLANGIA DISTANZIALE/ATTUATORE PNEUMATICO/FKOVDA/FKQJ/VXEFV/NR2/WICLI/GBS47/HGI30/W1 VITE / W4 VITE——均为品名不同词/待校/图文不符/图缺失/0 命中，本轮不绑不猜。
+5. **未来再补触发条件**：新货柜清点出现「A 与该 NO 品名同词」的清点记录时，按 batch_size≤20 补 E/F；禁填 9 词或实体扩名单须先 plan_submitted。
+
+**② 预期结果**：三表 F=326、G=65 保持不变；不新增词条、不改 A-D、不改主表/发票/系统代码；字典空行补线闭环（**不标 done**，等待未来清点记录或用户新指令）。
+**③ 批量约束**：本计划为一次性分类确认、不涉及批量写入；后续任何补写仍按 batch_size=20。
+**④ 执行时机**：plan_approved 后执行（本轮实际上无 Excel 改动；批准即确认分类口径，bridge 状态可回 batch_ready 或由 Cursor 指定 next_action）。
 
 ### Cursor 小批检查结果（⑲ 字典空行补 F/E 第二批 12 词条 · round55 · Cursor 填）
 
