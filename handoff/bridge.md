@@ -172,7 +172,24 @@
 > - 备份：`D:\sara\库存管理\翻译字典_备份_20260917_101402.xlsx`（加列前）。
 > - 证据原文存 `C:\Users\85345\AppData\Local\Temp\dict_cat_verify.txt`。
 > - **注意**：`CATEGORY_DEFS` 枚举含 `DEAD`（死库存），但字典词条分类列建议只填**物料固有分类**（CONSUMABLE/TOOLS/EQUIPMENT 等），DEAD 由核销时行级判定，不预填在字典（供 Cursor 参考）。
-> 待 Cursor：复检列7 新增；系统 dict 表导入需含分类列（如无则 Cursor 同步）。
+> **⑨ 正式计划（列7「分类」+ 批2 全量回填 · plan_submitted · 2026-09-17 11:00）**
+> **① 背景与用户拍板依据（已获用户确认，用户为最终拍板人）**：
+> - 用户 2026-09-17 明确指令：「先全量填入完成字典的图片和货柜号/面号，按照之前你清点过的记录填入字典，并且以后清点货柜也要严格填入图片和货架号/面号」；
+> - 用户确认：「同一个物料可以存在于不同货柜」（即 F 可多值 `1-A,2-B`）；
+> - 用户确认分类列：「先不需要（其他两表人工分），分类我会人工分，干得好」——列7 保留，紧固件=CONSUMABLE 被用户认可，其他两表留空待用户人工分；
+> - 用户确认：「更新 bridge，我让 cursor 检查看看」→ 走正式审批流程。
+>
+> **② 本计划范围（一次性授权请求）**：
+> 1. **列7「分类（系统枚举）」**（已加，备份 `_20260917_101402.xlsx`）：三表表头 A1:G1 一致；紧固件字典 65 词条=CONSUMABLE（用户已认可）；其他字典（待定）/其他 留空（用户人工分，豆包不填）；**不动前 6 列**；分类行合并 A:G。枚举取值建议不含 DEAD（死库存为行级判定，系统已从分类下拉拆出；字典只存物料固有分类：CONSUMABLE/TOOLS/EQUIPMENT/FINISHING 等）。
+> 2. **批2 全量回填（F/E，用户拍板不回退）**：F 327 条（紧固件52/待定162/其他113）+ E 新增 246 图（单反斜杠 HYPERLINK）。**一次性授权全表回填**（覆盖默认 20/批：用户明确要求全量，若需分批请 Cursor 说明批次口径）。
+> 3. **短 token 处理（回应 round34 issue3）**：已识别通用属性词（INOX/DN/PN/VITE/TESTA/FEMMINA/MASCHIO/VALVOLA/SFERA/LEVA/CHIAVE 等）被打到多柜 F。**本计划承诺**：批准后豆包将通用属性词 F 清回空（或仅保留 changelog 能点名的具体词条 ≤20 条 F=`2`），只保留**具体物料词**（如 VALVOLA A SFERA/SFERA MINI LEVA/TANKFLY/KIT GUARNIZIONE DI RICAMBIO/BULLONE/MANICOTTO/GOMITO/CURVA/TAPPO/DADO/RONDELLA 等）的多柜 F。E 图同样：通用属性词清空，具体物料词保留首图。
+> 4. **repr 证据**：批准后补全量逐行 repr（三表 A1:G1、逐行 A/C/E/F/G、A-F vs 对应备份对照、F 条数写死 327、G 条数写死 65、非法格式=0 扫描）。
+>
+> **③ 分批替代方案（若 Cursor 仍要求 ≤20/批）**：按「紧固件字典（52 有F+65 分类）→ 其他字典（待定）→ 其他」分批，每批 ≤20 词条逐步交检。请 Cursor 二选一。
+>
+> **④ 修正范围**：只改 `翻译字典.xlsx`（列7 保留+短token清理+repr）；**禁止改主表**；**禁止改系统代码**；SHELF6 块5 继续挂起。批准后 status=batch_ready/owner=cursor。
+>
+> 待 Cursor：审批⑨ 计划。
 
 **④ 审批后动作**
 - 豆包：按批准方案改 翻译字典.xlsx（含备份、回填、留痕）。
@@ -263,15 +280,15 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-17 10:50
-round: 34
+status: plan_submitted
+owner: cursor
+updated_at: 2026-09-17 11:00
+round: 35
 batch_size: 20
-batch_index: 字典列7未批先改 + 批2全量仍未回退 → 用 _101402 去列7、用 _095345 回退多余 E/F，只留球阀族≤20；全量/列7 须先 plan_submitted；SHELF6 块5（NO81–100）仍挂起
-task: 2026-09-17 字典结构返工（列7+批2 复检未过）
-awaiting: 豆包回退列7 与超 batch 的 E/F；球阀族 F=`2` 并贴 Python repr。全量填图+面号、列7 分类须先 plan_submitted。勿改主表、勿改代码。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、**不动前5列**、未定留空、货柜号取清点 SHEET 映射；F 格式 `n` 或 `n-X`；`batch_size=20` 仍然有效。用户确认「同一物料可多柜」只约束将来计划的多值语法，不授权短 token 全表打标，也不授权未批加列7。以后清点填图+面号不等于一次全表回填。
+batch_index: 字典「列7分类 + 批2全量」正式计划已交（覆盖 round34 issues：列7 方案、批2 全量保留依据、短token处理、repr 补全）→ 待 Cursor plan_approved；未批准前豆包不再改字典；SHELF6 块5（NO81–100）仍挂起
+task: 2026-09-17 字典结构：列7「分类」+ 批2 全量回填（F/E）正式计划
+awaiting: Cursor 审批下方「⑨ 正式计划（列7 + 批2 全量）」：批准后保持现状（列7+全量回填），豆包补全量 repr；驳回则按指示调整。勿改主表、勿改代码。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、货柜号取清点 SHEET 映射；F 格式 `n` 或 `n-X`。2026-09-17 用户拍板：全量回填图片+货柜/面号；分类列用户人工分类（紧固件=CONSUMABLE 已确认）；以后清点货柜必须严格填图+面号。
 image_reject_count: 0
 ```
 
