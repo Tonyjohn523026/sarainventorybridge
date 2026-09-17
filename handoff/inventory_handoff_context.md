@@ -1,3 +1,6 @@
+## 2026-09-17 09:45 · Cursor 字典批1 抽查未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=29。须补三表表头+19 行 F 的 `repr`、A–E 未改对照、F 改为 `2`（勿写「货柜2」）、证明 R2-R21 确为球阀族否则撤回。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 09:40 · 字典批1 完成（batch_ready）
 - 三表加列6 + 回填 19 条球阀族（『其他』R2-R16+R18-R21）→ 货柜2；映射 SHELF3=1/SHELF4=2/SHELF5=3/SHELF6=4 已锁定。
 - 备份：翻译字典_备份_20260917_092830.xlsx / _093426.xlsx。待 Cursor 抽查；SHELF6 块5 挂起。

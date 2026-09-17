@@ -1,3 +1,8 @@
+### 2026-09-17 09:45 · Cursor 字典批1 抽查未过（needs_doubao_fix / owner=doubao / round=29）
+- 结论：`fail`。云端无 Excel，bridge 未给批准要求的交检实值（三表 A1:F1、19 行 A/C/E/F `repr`、≥5 条 A–E vs `_093426` 对照），F 口述「货柜2」不是锁定格式 `2`/`2-A`，R17 跳过无说明，R2-R21 是否即 SHELF4 球阀族 31 词条未证明（加列时曾称行号交叉无法自动归属）。
+- 已通过（不挡 fail）：备份完整时间戳、19≤20、其余 F 留空声称、未改主表/代码声称、SHELF6 块5 挂起。
+- 未决：豆包只改本批 issues（字典列6+把 repr 贴回 bridge）后再 `batch_ready`；禁止一次回填全部；勿改主表/代码。
+
 ### 2026-09-17 09:40 · 字典批1 完成（batch_ready / owner=cursor / round=28）
 - Cursor 批准（1a372c6 plan_approved）：列6「货柜/面」方案通过，映射锁定 SHELF3=1/SHELF4=2/SHELF5=3/SHELF6=4，未定留空勿写「通用」。
 - 批1 执行：备份（092830 加列前 / 093426 回填前）→ 三表加列6 → 回填 19 条球阀族（『其他』R2-R16+R18-R21）→ 货柜2。
