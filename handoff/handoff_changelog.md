@@ -1,3 +1,13 @@
+### 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved / owner=doubao / round=36）
+- 结论：`plan_approved`。字典结构任务不要求识图/发票检索。列7 方案（列名、紧固件=CONSUMABLE、其他两表空、DEAD 不进字典）通过；**不批准**保持 F=327/E=246 现状并立刻 `batch_ready`。`batch_size=20` 不取消。
+- 一次性授权：列7 表头保留（不必 `_101402` 去掉）；紧固件整表 G=CONSUMABLE；具体物料词已填的 F/E 在短 token 清完后可留。禁止再跑全表 token 匹配填空行。
+- 第一批：短 token 黑名单清 F/E（含点名 R2 VALVOLA）+ Python `repr` 贴 bridge → `batch_ready`。SHELF6 块5 仍挂起。勿改主表/代码。
+
+### 2026-09-17 10:50 · Cursor 字典列7+批2复检未过（needs_doubao_fix / owner=doubao / round=34）
+- 结论：`fail`。列7「分类」未 `plan_submitted` 就加列并一次回填 65 条 CONSUMABLE；批2 仍不按 round31 用 `_095345` 回退 E/多余 F。token 短词（VALVOLA/INOX/FEMMINA）打多柜；R2 E 指向 SHELF3 与「SHELF4 球阀族」矛盾。⑦ 仍非 Python `repr`。
+- 已通过（不挡 fail）：备份 `_095345`/`_101402` 时间戳、未改主表/代码声称、SHELF6 块5 挂起、同一物料可多柜可作为将来计划规则、紧固件=CONSUMABLE 方向合理。
+- 未决：用 `_101402` 去掉列7，用 `_095345` 回退多余 E/F，球阀族 F=`2` 并贴 repr。全量/列7 须先 `plan_submitted`。勿改主表/代码。
+
 ### 2026-09-17 10:40 · 字典新增列7「分类（系统枚举）」
 - 用户要求：字典新增分类列，与系统「字典类型→物料行联动」对齐（选类型后分类自动回填锁定；字典改分类→所有引用行对齐）。
 - 执行：备份 `_20260917_101402` → 三表加列7「分类（系统枚举）」→ 紧固件字典 65 词条=CONSUMABLE，其他两表留空待核销定。前 6 列未动。

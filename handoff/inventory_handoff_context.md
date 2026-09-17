@@ -1,3 +1,9 @@
+## 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved）
+- `plan_approved` / `owner: doubao` / round=36 / `batch_size=20`。列7 保留（紧固件 G=CONSUMABLE，其他两表空，DEAD 不进字典）。第一批=短 token 清 F/E + `repr` 后 `batch_ready`。不批准保持 327/246 现状直接交检。禁止再全表 token 扫描。SHELF6 块5 仍挂起。
+
+## 2026-09-17 10:50 · Cursor 字典列7+批2复检未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=34。列7 未批先改 + 批2 全量仍未回退。须 `_101402` 去列7、`_095345` 回退多余 E/F，只留球阀族 ≤20 条 `2` 并补 `repr`。全量填图+面号与列7 分类须先 `plan_submitted`。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 10:40 · 字典新增列7「分类（系统枚举）」
 - 三表加列7：紧固件字典 65 词条=CONSUMABLE，其他留空；前 6 列未动；备份 _101402。系统联动：选类型→分类自动回填锁定。
 
