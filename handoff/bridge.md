@@ -1,4 +1,4 @@
-更新：2026-09-17 19:55（Cursor 抽查⑫ round41 空行补位）→ needs_doubao_fix
+更新：2026-09-17 20:20（Cursor 抽查⑬ round43 回退9行）→ batch_continue
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,17 +336,52 @@
 ## 当前状态
 
 ```
+```
 status: batch_ready
 owner: cursor
-updated_at: 2026-09-17 21:10
-round: 44
+updated_at: 2026-09-17 21:15
+round: 45
 batch_size: 20
-batch_index: ⑬ round42 回退完成（9 行 E/F 已还原，F=297）；⑭ 主表新增「描述」列（死库存写 DEAD INVENTORY，非死库存留空）已回填
-task: 2026-09-17 字典：列7「分类」保留 + 短 token 已清（F=297）；主表：各 SHEET 新增「描述」列，已核销死库存行回填 DEAD INVENTORY
-awaiting: Cursor 抽查：①round43 字典回退（9 行 repr 见下，F=297/G=65/非法0/A-D 变化0）；②round44 主表描述列（列位/回填统计/备份见下）。SHELF6 块5 仍挂起。
+batch_index: ⑬ round43 回退复检 pass（Cursor round44）；⑭ 用户指令：主表新增「描述」列，死库存行写 DEAD INVENTORY（已回填）→ 交检
+task: 2026-09-17 字典：列7「分类」保留 + 短 token 已清（F=297）；主表：各 SHEET 新增「描述」列已回填死库存
+awaiting: Cursor 抽查 round45 主表描述列（列位/回填统计/备份见「豆包 round45 主表描述列」区）。字典下一批仍=空行补 F/E ≤20（避开 round40 点名 9 词），SHELF6 块5 挂起。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token / 头型缩写 / 标准号不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
 image_reject_count: 0
 ```
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token / 头型缩写 / 标准号不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
+image_reject_count: 0
+```
+
+### 豆包 round45 主表「描述」列（2026-09-17 21:15 · 用户指令直接执行）
+
+**用户指令**：以后 `库存未匹配.xlsx` 新增描述列，是否死库存放在描述列，是则写 `DEAD INVENTORY`，否则为空。
+
+**判定规则（组合信号，防漏防误）**：分类列（Classification/分类）含 `dead`/`死库存` **或** 中文品名列以「未命中」开头/含「死库存」/含 `dead inventory` → 死库存。
+
+**执行**：
+1. 备份：`库存未匹配_备份_20260917_135732.xlsx`（动手前）+ 脚本内自动另存（`库存未匹配_描述列_备份_<ts>.xlsx`）。
+2. 各 SHEET 在有效表头后新增「描述」列（标准表 col19、SHELF3 col13、SHELF5/6/7 col20），表头统一「描述」。
+3. 死库存行回填 `DEAD INVENTORY`，其余留空。
+4. 回读验证（Python 逐 SHEET 回读表头+非空行数）：SHELF3=219、SHELF4=294、SHELF5=221、SHELF6=356、SHELF1=4、SHELF7=464（SHELF7 已有死库存标记一并回填）；SHELF2/10-17/W7-ZA/W8-ZA 无死库存，加列留空。
+5. 未核销货柜列已就位，后续核销死库存行自动写入该列。
+
+**说明**：SHELF4 存在 35 行分类列未更新但中文品名已标「未命中（死库存）」的情况，组合信号已全覆盖；SHELF5 有 95 行分类=dead inventory 但无淡蓝，同样以分类列/中文品名为准回填。本轮未动字典/代码。
+
+### Cursor 小批检查结果（⑬ round42 回退 9 行 E/F · round43 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-17 20:20
+- checked_rows: 云端无 Excel。批=回退 9 行 ≤10 → 全查 9 行回退前/后 E/F vs round41 填值与 round42 issues。实际核：紧固件 R9 T.S.E.I. / R11 T.B.E.I. / R52 UNI 5933 / R55 DIN 1587 / R67 VITONE；待定 R58 TUBO FLESSIBILE / R60 GEKA / R74 CLIP R / R77 PORTA GOMMA。另核：F=297 算术、G=65、非法 F=0 声称、备份 `_131000`/`_133000`、未改主表/代码声称、SHELF6 块5 挂起、是否再填别的空行。
+- image_reject_count: 0（本批非识图任务）
+- summary: |
+    **round42 主因已改**：点名 9 行 F 均回到空。T.S.E.I./UNI 5933/DIN 1587/PORTA GOMMA 的 E 也回到空（round41 新填图已撤）；T.B.E.I./VITONE/TUBO FLESSIBILE/GEKA 保留动手前旧图、只清 F，与 round36「批2 前已有旧图不要删」及 round41「E 保留」一致。CLIP R E 回到备份裸路径 `W1-SHELF4\18.jpg`（撤销 round41 的 17.jpg HYPERLINK）。PORTA GOMMA 回退后 F 空，四柜面 token 已撤。
+    **算术**：round41 F=306=297+9；本轮 9 行 F 全空 → 声称 F=297 相符。G=65、非法 F=0；自称只用 `_131000` 动这 9 行，未扩清、未另填空行；未声称改主表/代码；SHELF6 块5 仍挂起。回退后留档 `_133000` 有完整时间戳。
+    **不挡本 pass**：①未再贴三表 A1:G1——本轮只动 9 行 E/F，列7 已在 round40 核过。②A–D vs `_131000` 只断言变化=0，未打逐格对照。③TUBO FLESSIBILE/GEKA 回退前 E 写成 `...` 截断；CLIP R 行夹了中文说明；空单元格写成 `E='None'`（非法 F=0，按空格而非字面 "None" 理解）。
+- issues:
+  1. （无阻断）下次 `print(repr)` 不要截路径、不要把说明写进输出行；空单元格打 `None` 或 `''`，不要 `E='None'`。A–D 对照请打「当前 vs 备份」两列。
+  2. （无阻断，下一批约束）空行补 F/E **每批 ≤20**，须能点名清点记录（SHELF+NO+货架号面）；禁止再全表品名 token。`T.S.E.I.`/`T.B.E.I.`/`UNI 5933`/`DIN 1587`/`VITONE`/`TUBO FLESSIBILE`/`GEKA`/`CLIP R`/`PORTA GOMMA` **保持本轮回退后的空/旧态**，除非先 `plan_submitted` 且 `plan_approved`。
+  3. （无阻断）「实体/非实体」扩名单必须先 `plan_submitted`。CLIP R 字典若仍是裸路径 18.jpg，以后若要修 HYPERLINK 也须写进计划，不要夹在空行补位里改。
+- next_action: **batch_continue**（下一批=空行补 F/E ≤20，避开上述 9 词 → `batch_ready`；或先交实体/非实体/这 9 词 `plan_submitted`。`/dict` 筛选与分类列导入：round40 pass 后 Cursor 可在系统仓库做。SHELF6 块5 继续挂起。禁止改主表/代码。）
 
 ### Cursor 小批检查结果（⑫ 空行补 F/E · round41 · Cursor 填）
 

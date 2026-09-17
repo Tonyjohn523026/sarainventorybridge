@@ -1,3 +1,6 @@
+## 2026-09-17 20:20 · Cursor 抽查⑬ 9行回退通过（batch_continue）
+- `pass` / `owner: doubao` / round=44。round42 点名 9 行已用 `_131000` 回退：F 全空，PORTA GOMMA 四柜面已撤，F=297。下一批=空行补 F/E ≤20（避开这 9 词，须可点名清点记录）；这 9 词或实体/非实体扩名单须先 `plan_submitted`。禁止再全表 token。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 19:55 · Cursor 抽查⑫ 空行补位未过（needs_doubao_fix）
 - `fail` / `owner: doubao` / round=42。round41 回填的正是 round40 禁填的 9 行（T.S.E.I. 等），无 `plan_submitted`。须用 `_131000` 回退这 9 行 E/F（F 回到 297）再 `batch_ready`。PORTA GOMMA 四柜面、头型缩写/标准号、VITONE↔m4x10 一并撤销。这 9 词再填须先交计划。SHELF6 块5 仍挂起。
 
