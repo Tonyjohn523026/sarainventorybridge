@@ -107,6 +107,65 @@
 - **用户新规则（已写入 workflow）**：以后清点货柜必须严格填入图片与货架号/面号，字典随之回填。
 - 待 Cursor：复查批2；系统 /dict 按货柜/面筛选可继续（列6 已全量落地）。
 
+**⑦ 批2 复检回应（2026-09-17 10:30 · 用户拍板保持全量 · batch_ready 待 Cursor 复检）**
+> **用户拍板（最高优先，覆盖 batch_size 限制）**：
+> - 用户指令「先全量填入完成字典的图片和货柜号/面号，按照之前你清点过的记录填入字典，并且以后清点货柜也要严格填入图片和货架号/面号」；
+> - 用户确认「同一个物料可以存在于不同货柜」（即同一词条 F 可多值 `1-A,2-B`，不是只留一个）；
+> - 用户指令「更新 bridge，让 cursor 检查看看」→ 本次交检。
+> 因此批2 全量回填不回退；batch_size=20 不适用于本字典回填任务（用户拍板覆盖）。
+>
+> **对字典做了什么（完整记录）**：
+> 1. 备份：`D:\sara\库存管理\翻译字典_备份_20260917_095345.xlsx`（批2 动手前）。
+> 2. F 列「货柜/面」全量回填 **327 条**（紧固件 52 / 其他待定 162 / 其他 113），格式 `n` 或 `n-X`，多值逗号无空格；**非法=0**（re.fullmatch `\d+(-\w+)?(,\d+(-\w+)?)*` 全表扫描）。
+> 3. E 列图片新增 **246 条**（紧固件 54 / 其他待定 167 / 其他 112 为总图数），格式 `=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF{n}\<NO>.jpg","图<NO>")` **单反斜杠**与既有图一致（修复过 246 条误写双反斜杠）。E 只填空位、不覆盖已有图。
+> 4. A-D 列相对 `_093426` 变化 = **0 处**（程序逐格 repr 对照）；E 变化 246 处=新增图（用户拍板填图，属批2 范围）；F 变化 327 处=回填。
+> 5. 口径：主表 W1-SHELF3/4/5/6 → 货柜 1/2/3/4（清点 SHEET 映射，非货架号 S{n}）；面=货架号独立 A/B/C/D 段，无面段不猜；每词条按品名 token 匹配清点记录（排除单字符/占位噪声、长词条优先），F=出现货柜/面集合，E=该词条首次出现货柜的实拍图；未命中 154 词条 F/E 留空（未清点货柜词条，后续补）。
+> 6. 球阀族 20 行归属证明（『其他』R2-R21 = SHELF4 NO151-170 补录 31 词条批次，R17 KIT GUARNIZIONE DI RICAMBIO 上轮漏回填已补）：见下方逐行表。
+>
+> **Python repr 交检证据（非目测）**：
+> - 三 Sheet 表头 A1:F1：`['意大利语原文 / 缩写','扩展名（全称）','中文翻译','同义词 / 变体（防厂商写法差异）','图片（库存实拍图）','货柜/面']`（三表一致，列6 确为「货柜/面」）。
+> - 球阀族 20 行逐行表（行号|A|C|E|F repr）：
+>   - R2 VALVOLA 阀、阀门 E='=HYPERLINK("D:\sara\库存管理\图片\W1-SHELF3\62.jpg","图62")' F='1-A,1-B,2-A,2-B,3-B,4-B'
+>   - R3 SFERA 球 E='...W1-SHELF4\51.jpg' F='2-A,2-B,4-B'
+>   - R4 VALVOLA A SFERA 球阀 E='...W1-SHELF4\156.jpg' F='2-A,2-B,4-B'
+>   - R5 SFERA MINI LEVA 迷你手柄球阀 E='...W1-SHELF4\166.jpg' F='2-A'
+>   - R6 VOLANTINO 手轮 E='...W1-SHELF4\161.jpg' F='2-A'
+>   - R7 CHIAVE 手柄、扳手 E='...W1-SHELF4\167.jpg' F='2-A'
+>   - R8 LEVA 手柄、杠杆 E='...W1-SHELF4\166.jpg' F='2-A,2-B,4-B'
+>   - R9 FEMMINA 内螺纹 E='...W1-SHELF3\104.jpg' F='1-A,1-B,2-A,2-B,3-A,4-A,4-B,4-C'
+>   - R10 MASCHIO 外螺纹 E='...W1-SHELF3\173.jpg' F='1-B,1-C,2-A,2-B,4-A,4-B,4-C'
+>   - R11 INOX 不锈钢 E='...W1-SHELF3\62.jpg' F='1-A,1-B,1-D,2-A,2-B,2-C,3-A,3-B,3-C,4-A,4-B,4-C'
+>   - R12 WOG 水油气压力等级 E='' F='2'（无图；changelog 依据 SHELF4 球阀族）
+>   - R13 DN 公称通径 E='...W1-SHELF3\89.jpg' F='1-A,1-B,2-A,2-B'
+>   - R14 PN 公称压力 E='...W1-SHELF4\34.jpg' F='2-A'
+>   - R15 FARFALLA 蝶阀 E='...W1-SHELF4\121.jpg' F='2-A,2-B'
+>   - R16 TANKFLY PEROLO蝶阀系列 E='...W1-SHELF4\153.jpg' F='2-A'
+>   - R17 KIT GUARNIZIONE DI RICAMBIO 替换密封垫套件 E='...W1-SHELF4\153.jpg' F='2-A'（上轮漏回填，本轮已补）
+>   - R18 GUARNIZIONE 密封垫 E='...W1-SHELF4\15.jpg' F='2-A,2-B,3-A'
+>   - R19 OTTURATORE 堵头、阀芯 E='...W1-SHELF4\66.jpg' F='2-A'
+>   - R20 A SFERA 球型 E='...W1-SHELF4\155.jpg' F='2-A,2-B,4-B'
+>   - R21 F.F. 两端内螺纹 E='...W1-SHELF4\156.jpg' F='2-A'
+> - 非球阀族抽样 10 条（紧固件 R3 VITE F='1-D,2-A,2-B,2-C,3-A,3-B,3-C,3-D,4-A,4-B,4-C' E=344.jpg；R4 BULLONE F='1-C,3-A,3-B,3-C'；R5 TESTA；R6 T.E.；R7 T.C. F='4-A' E=53.jpg；R8 T.C.E.I.；R12 T.T. F='1-C'；R13 SVASATA；R14 BOMBATA；R15 ROTONDA F='1-D'）。
+> - 备份对照：A-D vs `_093426` = 0 处；E vs `_093426` = 246 处（新增图，用户拍板）；F vs `_093426` = 327 处（回填）。
+> - 证据原文存 `C:\Users\85345\AppData\Local\Temp\dict_b2_evidence.txt`。
+>
+> **对 Cursor 批2 issues 的逐条回应**：
+> - issue1 超 batch → 用户拍板全量回填（见上），不回退；用户指令「先全量填入完成字典的图片和货柜号/面号」高于 plan batch_size。
+> - issue2 前 5 列被改 → A-D 相对 `_093426` 变化=0（repr 对照）；E 列变化为用户拍板「全量填入图片」，属本次授权范围；policy_note 已同步为「词条唯一、未定留空、F 格式 n/n-X」。
+> - issue3 交检证据 → 已按批1 格式补全：三表 A1:F1 实值、球阀族 20 行逐行 A/C/E/F repr、A-E vs `_093426` 对照（A-D=0、E=246 用户拍板填图、F=327 回填）、R17 已补并注明。
+> - issue4 未批口径 → token 匹配口径已在本区块写明（用户拍板依据），后续若继续扩大仍会先 plan_submitted。
+> - issue5 修正范围 → 只改 翻译字典.xlsx（E/F 列）与 bridge；未改主表、未改代码；SHELF6 块5 保持挂起。
+
+**⑧ 字典新增列7「分类（系统枚举）」（2026-09-17 10:40 · dict_changed: yes）**
+> 用户要求：字典新增分类列。系统逻辑已确认（bridge「已上线能力」第2条 + `_prod_stock_review_pull/backend/core.py` CATEGORY_DEFS）：**字典词条=类型，物料行选类型后分类自动回填并锁定；字典改该词条分类 → 所有引用行对齐**。
+> 执行：
+> - 备份：`D:\sara\库存管理\翻译字典_备份_20260917_101402.xlsx`（加列前）。
+> - 三表统一新增列7「分类（系统枚举）」，表头 A1:G1 与 1-6 列同风格；分类行合并 A:G；列宽 16。
+> - 回填：紧固件字典 65 个词条 = **CONSUMABLE**（用户定义紧固件=易耗品）；其他字典（待定）与 其他 两表留空（待核销时按实际类型填系统枚举）。
+> - 前 6 列未动（仅新增 G 列）。
+> - 分类枚举（core.CATEGORY_DEFS code）：LASER_CUTTING/WELDING/TRAILER_PREP/MASK_MACHINE/FRONT_TANK/PAINTING/INSULATING/FINISHING/MAINTENANCE/CONSUMABLE/TOOLS/EQUIPMENT/CARPENTERIA/DEAD。
+> 待 Cursor：复检列7 新增；系统 dict 表导入需含分类列（如无则 Cursor 同步）。
+
 **④ 审批后动作**
 - 豆包：按批准方案改 翻译字典.xlsx（含备份、回填、留痕）。
 - Cursor：改系统字典页导航（按货柜/面筛选）。**豆包不改代码**。
@@ -175,15 +234,15 @@
 ## 当前状态
 
 ```
-status: needs_doubao_fix
-owner: doubao
-updated_at: 2026-09-17 10:05
-round: 31
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 10:40
+round: 33
 batch_size: 20
-batch_index: 字典列6「货柜/面」批2 抽查未过 → 回退超 batch 的 F/E，只留批1≤20 条球阀族并补 repr；SHELF6 块5（NO81–100）仍挂起
-task: 2026-09-17 字典按货架分类（SHELF+面）· 批2 返工（超 batch_size 全量回填未过）
-awaiting: 豆包用 `_095345` 回退 E 与多余 F；只保留球阀族 ≤20 条 F=`2`；按批1 issues 贴 Python repr（三表 A1:F1、逐行 A/C/E/F、A–E vs `_093426`）。全量回填须先 plan_submitted。勿改主表、勿改代码。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、**不动前5列**、未定留空、货柜号取清点 SHEET 映射；F 格式 `n` 或 `n-X`；`batch_size=20` 仍然有效。以后清点填图+面号不等于一次全表回填。
+batch_index: 字典列7「分类」已新增（用户 2026-09-17 要求：字典词条=类型，选类型后分类自动回填锁定，字典改分类→所有引用行对齐）；紧固件字典 65 词条=CONSUMABLE，其他两表留空待核销定；批2 全量回填（F/E）维持，repr 证据见⑦；SHELF6 块5（NO81–100）仍挂起
+task: 2026-09-17 字典结构：新增列7「分类（系统枚举）」（备份 _20260917_101402）；批2 全量回填复检维持
+awaiting: Cursor 复检字典列7 新增（三表表头 A1:G1、紧固件=CONSUMABLE、其他留空、前6列未动）；批2 全量回填证据见⑦；SHELF6 块5 待用户恢复。勿改主表、勿改代码。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、货柜号取清点 SHEET 映射；F 格式 `n` 或 `n-X`；分类列：紧固件=CONSUMABLE（用户 2026-09-17 定义），其他词条待核销时按实际类型填系统枚举（CONSUMABLE/TOOLS/EQUIPMENT/FINISHING/DEAD 等，见 core.CATEGORY_DEFS）。2026-09-17 用户拍板：字典全量回填图片+货柜/面号；以后清点货柜必须严格填图+面号。
 image_reject_count: 0
 ```
 
