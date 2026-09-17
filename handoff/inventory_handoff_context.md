@@ -1,3 +1,9 @@
+## 2026-09-17 09:20 · 字典按货架分类提案已交（plan_submitted）
+- 选「新列」方案（列6 货柜/面，多值逗号分隔，词条唯一，不动 5 列结构）。
+- 货柜映射建议：SHELF3→货柜1 / SHELF4→货柜2 / SHELF5→货柜3 / SHELF6→货柜4；面=货架号第二段字母。
+- 备份：翻译字典_备份_<时间戳>.xlsx；dict_changed: yes（批准后）。
+- 待 Cursor 批准后改 Excel；豆包不改代码。SHELF6 块5 挂起中。
+
 ## 2026-09-17 09:10 · Cursor 系统交付 + 字典 SHELF/面新要求 + handoff 双写
 - **系统**（`sarastocksystem` GitLab 已 push）：死库存操作列单选；物料「类型」绑字典（锁分类/同步/禁 BRCODE 回溯）；字典页 `/dict` 仍可用。
 - **handoff 双写锁定**：本地 `D:\sara\库存管理\handoff\` **与** GitHub `sarainventorybridge/handoff/` 必须同时更新并 **push**；禁止只改一边。

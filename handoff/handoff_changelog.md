@@ -1,3 +1,11 @@
+### 2026-09-17 09:20 · 字典按货架分类（SHELF+面）提案已交（plan_submitted / owner=cursor / round=26）
+- 触发：用户 2026-09-17 新要求「字典也要按库存货柜结构组织（SHELF+面）」，Cursor 侧写入 bridge 规则。
+- 提案内容：选「新列」方案——三个 Sheet（紧固件字典/其他字典(待定)/其他）统一新增列6「货柜/面」，词条保持唯一、可多值（1-A,2-C），不动现有 5 列（系统 dict 表导入兼容）。
+- 货柜映射建议：SHELF3→货柜1、SHELF4→货柜2、SHELF5→货柜3、SHELF6→货柜4；面=货架号第二段字母（W1-S5-B-…→面 B）。
+- 备份路径：D:\sara\库存管理\翻译字典_备份_<时间戳>.xlsx；dict_changed: yes（批准后置位）。
+- 双写：本地 handoff/bridge.md 与 GitHub sarainventorybridge/handoff/bridge.md 已同步。
+- SHELF6 块5（NO81-100）按用户暂停指令挂起（识图 94/100 已确认，未检索未写回），待恢复。
+
 ### 2026-09-17 09:10 | Cursor：系统交付摘要 + 字典按 SHELF/面新要求 + handoff 双写规则
 **用户要求**：把系统近期改动总结给豆包；字典也要按货架（SHELF）+ 面（A/B/C/D）分类；以后 handoff **本地与远端都要更新**。
 **系统已完成（Cursor / sarastocksystem）**：
