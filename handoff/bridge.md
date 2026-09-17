@@ -338,12 +338,12 @@
 ```
 status: batch_ready
 owner: cursor
-updated_at: 2026-09-17 20:05
-round: 43
+updated_at: 2026-09-17 21:10
+round: 44
 batch_size: 20
-batch_index: ⑬ round42 回退完成（9 行 E/F 已还原，F=297）→ 交检；SHELF6 块5 仍挂起
-task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 已清（F=297）+ 空行补位须避开 round40 点名 9 词
-awaiting: Cursor 抽查 round43 回退（9 行 repr 证据见下，F=297/G=65/非法0/A-D 变化0）。主表/代码本轮未动。后续空行补其他具体物料词（非头型缩写/非标准号、可点名单条清点记录）等 pass 后每批 ≤20；这 9 词若要填先 plan_submitted。
+batch_index: ⑬ round42 回退完成（9 行 E/F 已还原，F=297）；⑭ 主表新增「描述」列（死库存写 DEAD INVENTORY，非死库存留空）已回填
+task: 2026-09-17 字典：列7「分类」保留 + 短 token 已清（F=297）；主表：各 SHEET 新增「描述」列，已核销死库存行回填 DEAD INVENTORY
+awaiting: Cursor 抽查：①round43 字典回退（9 行 repr 见下，F=297/G=65/非法0/A-D 变化0）；②round44 主表描述列（列位/回填统计/备份见下）。SHELF6 块5 仍挂起。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token / 头型缩写 / 标准号不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
 image_reject_count: 0
 ```
@@ -2118,6 +2118,20 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 **A–D vs `_131000`**：9 点名行 + 抽样 6 条（VITE/BULLONE/DADO/MANICOTTO/CURVA/VALVOLA A SFERA）逐格 repr 对照，变化处 = **0**。
 **备份**：回退前留档 `翻译字典_备份_20260917_131000.xlsx`（round41 动手前）；回退后留档 `翻译字典_备份_20260917_133000.xlsx`（round42 修复后）。
 **未动**：主表、代码；SHELF6 块5 继续挂起。
+### 豆包 round44 主表「描述」列（2026-09-17 21:10 · 用户指令直接执行）
+
+**用户指令**：以后 `库存未匹配.xlsx` 新增描述列，是否死库存放在描述列，是则写 `DEAD INVENTORY`，否则为空。
+
+**判定规则（组合信号，防漏防误）**：分类列（Classification/分类）含 `dead`/`死库存` **或** 中文品名列以「未命中」开头/含「死库存」/含 `dead inventory` → 死库存。
+
+**执行**：
+1. 备份：`库存未匹配_备份_20260917_135732.xlsx`（动手前）+ `库存未匹配_描述列_备份_<ts>.xlsx`（脚本内自动另存）。
+2. 各 SHEET 在有效表头后新增「描述」列（标准表 col19、SHELF3 col13、SHELF5/6/7 col20），表头统一写「描述」。
+3. 死库存行回填 `DEAD INVENTORY`，其余留空。
+4. 已核销货柜回填数（Python 回读验证）：SHELF3=219、SHELF4=294、SHELF5=221、SHELF6=356、SHELF1=4、SHELF7=464（SHELF7 已有死库存标记，一并回填）；SHELF2/10-17/W7-ZA/W8-ZA 无死库存，加列留空。
+5. 未核销货柜列已就位，后续核销死库存行自动写入该列。
+
+**说明**：SHELF4 存在 35 行分类列未更新但中文品名已标「未命中（死库存）」的情况，判定以组合信号为准已全部覆盖；SHELF5 有 95 行分类=dead inventory 但无淡蓝，同样以分类列/中文品名为准回填。
 ## 当前状态（2026-09-17 12:05 豆包更新）
 
 - status: **shelf6_done**（整柜级交付，留痕供 Cursor 复检；用户已拍板 Cursor 暂不复检、豆包直接完成整柜留痕）
