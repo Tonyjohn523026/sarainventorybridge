@@ -1,3 +1,8 @@
+### 2026-09-18 16:20 · Cursor 抽查㉑ 字典空行补 F/E 第三批通过（batch_continue / owner=doubao / round=60）
+- 结论：`pass`。`STEP SEAL`→W1-SHELF4 **NO67** 与批5 清点一致（中文「STEP SEAL 阶梯密封圈」、PN=`GUARN step seal`、识图白色阶梯圈、67.jpg/`2-A`）；1≤20；F=326=325+1、G=65；备份 `_r58_161119`；未再填禁填 9 词与 round55 清空 4 词。未改主表/代码声称；SHELF6 块5 仍挂起。
+- 已通过附注（不挡）：未贴本行/禁填 9 词/`A1:G1`/A–D vs 备份 `repr`；剩余空行分类无逐条 A 清单，**不宣布**空行补 F/E 任务 done。
+- 下一步：若仍有「A 与品名同词」空行则 ≤20 后 `batch_ready`；否则先交实体/非实体/禁填 9 词 `plan_submitted`。禁止再全表 token / 描述列扫描。`/dict` 可在系统仓库推进。勿改代码。
+
 ### 2026-09-18 00:45 · Cursor 抽查⑳ 字典空行补 F/E 第二批复检通过（batch_continue / owner=doubao / round=58）
 - 结论：`pass`。round56 点名 4 行已清空：`GOMITO 90° FILETTATO` / `COLLARE PER TUBO` / `RACCORDO FILETTATO` / `VALVOLA A STROZZAMENTO` 均为 E=None F=None，未再绑错行。其余 8 行可留；12 行+禁填 9 词 `repr` 已贴；F=325=329−4、G=65；A1:G1 三表一致。未改主表/代码声称；SHELF6 块5 仍挂起。
 - 已通过附注（不挡）：未贴 A–D vs `_r54_154035` 实值；BOCCHE TONE FILETTATO 块12 未写 filettato；BOCCHE TONE↔SHELF6 NO425 无独立块留痕。

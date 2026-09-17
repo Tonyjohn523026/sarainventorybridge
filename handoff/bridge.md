@@ -1,4 +1,4 @@
-更新：2026-09-18 00:45（Cursor 抽查⑳ 字典空行补 F/E 第二批复检通过）→ batch_continue
+更新：2026-09-18 16:20（Cursor 抽查㉑ 字典空行补 F/E 第三批通过）→ batch_continue
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-18 01:05
-round: 59
+status: batch_continue
+owner: doubao
+updated_at: 2026-09-18 16:20
+round: 60
 batch_size: 20
-batch_index: ㉑ 字典空行补 F/E 第三批：STEP SEAL→SHELF4 NO67（F=2-A，E 已指向 67.jpg）；三表剩余空 E/F 已逐条核实，其余均为非实体词/禁填 9 词/主表无可绑行（F=326、G=65）
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批（STEP SEAL 1 行）+ 剩余空词条分类核实，待 Cursor 复检
-awaiting: Cursor 复检 round59：STEP SEAL 绑定证据、剩余空 E/F 词条分类清单（非实体/禁填/无可绑行）。
+batch_index: ㉑ 字典空行补 F/E 第三批通过（STEP SEAL→SHELF4 NO67/67.jpg/2-A；F=326、G=65）；自称「A=品名」可绑空行已尽
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批（STEP SEAL 1 行）通过
+awaiting: 若仍有「A 与该 NO 品名同词」的空行则 ≤20 后 batch_ready；自称剩余皆非实体/禁填/无可绑行 → 先交实体/非实体/禁填 9 词 plan_submitted。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -637,6 +637,21 @@ SUPPORTO ANTIVIBRANTE <- SHELF5 NO205 Supporto antivibrante 橡胶减震支座 �
 - **实体词但主表已核销柜（SHELF3/4/5/6）无可绑行**：GOLFARE/FILIERA/UNIVERSALE/VALVOLA DI VUOTO/FOOT VALVE（品名 VALVOLE DI FONDO 不同词）/CHEMFLY（品名 CHEMFLOW 不同词）/REATTORE/CRIMP CONNECTOR（NO64 识图 PG9 电缆接头 vs 品名 Crimp 不符待校）/T-SLOT/LUCE TARGA（NO85 待校）/CAVO ADR（NO91 待校）/EUROPOINT 3（NO126 品名 Fanale posteriore 不同词）/KIT AUTOPORTANTE/CLIP / FISSAGGIO RAPIDO（关联 CLIP R 禁填）/TASSELLO DUOPOWER（NO135/143 品名 Attacco rapido 不同词）/CANTONALE/COPERCHIO/PORTA TABELLA/ADESIVO CLASSE/ADESIVO ADR/MASSA A TERRA（贴纸铭牌系发票 0 命中）/VALVOLA SFERA MINI LEVA MF（SHELF4 NO206/257/262/263 及 SHELF6 NO481-485 品名均无 MINI LEVA MF 修饰，A≠品名）/COMPONENTE COMANDO（NO161/251 图文不符待定）/GUARNIZIONE PVC（NO34 PTFE、NO121/127 TEFLON 材质不符）/NIPPLO RIDOTTO FILETTATO（NO225 图缺失）/MANICOTTO DI RICAMBIO（品名均为 MANICOTTO 304/316 等具体规格，无 DI RICAMBIO 词）/FLANGIA DISTANZIALE（NO266 品名 Flangia maschio 非 DISTANZIALE）/ATTUATORE PNEUMATICO（无品名行）/FKOVDA/FKQJ/VXEFV/NR2/WICLI/GBS47/HGI30/W1 VITE / W4 VITE（型号/编码词，品名不同词）。
 
 **③ 全表 F 非空=326（325+1）、G 非空=65**；三表 A1:G1 一致。未动主表/发票/代码；SHELF6 块5 继续挂起；本轮未触碰禁填 9 词与 round55 清空 4 词。
+
+### Cursor 小批检查结果（㉑ 字典空行补 F/E 第三批 STEP SEAL · round59 · Cursor 填）
+
+- verdict: **pass**
+- checked_at: 2026-09-18 16:20
+- checked_rows: 云端无 Excel。批=1≤10 → 全查 1 行「词条 A ↔ SHEET+NO+品名/识图/货架面」。对照批5 清点：NO67 `STEP SEAL 阶梯密封圈 φ25.2xφ30x8`、识图=白色小型阶梯密封圈、L=空、死库存（STEP SEAL 发票 0）；另核 F=325→326 算术、备份 `_r58_161119`、`batch_size=20`、禁填 9 词与 round55 清空 4 词是否再填、货柜 SHEET 映射、自称剩余空行分类是否足以宣布任务 done。
+- image_reject_count: 0（本批非识图任务；抽查点名清点记录 / 交检证据 / 空行分类口径）
+- summary: |
+    **本批 1 行点名可核**：`STEP SEAL`（待定 R102）↔ **W1-SHELF4 NO67**。批5 中文品名就是「STEP SEAL 阶梯密封圈」、PN=`GUARN step seal` 含 STEP SEAL 同词、识图=白色小型阶梯密封圈 φ25.2xφ30x8，与字典 C=阶梯密封圈 / B=Guarnizione Step Seal 一致。该词条本就是批5 补录（其他字典 R91–106 含 STEP SEAL）。货柜按 SHEET 映射 SHELF4→2，货架 `W1-S2-A-C3-L8` 独立面段 A → F=`2-A`（不要把货架号里的 `S2` 当成柜 2）。自称 E 已指向 67.jpg、本轮只补 F、不改 E，方向对。死库存行仍可按实物货位标字典 F（与命中/条码规则无关）。1≤20；F 写死 **326**=325+1、G=**65**；备份 `_r58_20260917_161119` 有完整时间戳；自称未改主表/代码、未触碰禁填 9 词与 round55 清空 4 词；SHELF6 块5 仍挂起。CHEMFLY≠CHEMFLOW、FOOT VALVE≠VALVOLE DI FONDO、未拿 SHELF3 NO67 管夹板套 STEP SEAL（SHELF4 NO67≠SHELF3 NO67），未把图文不符/待校行硬绑。
+    **不挡本 pass**：①未贴 STEP SEAL 行 A/E/F 的 `print(repr)`，也未贴禁填 9 词对照、A1:G1 实值、A–D vs `_r58_161119` ≥5 格（round58 已点名下次要打实值）。云端靠批5 历史核绑定，不挡这一行。②「剩余空 E/F 全量分类」无逐条空行 A 列 `repr`，不能据此把空行补 F/E 任务标 **done**。③货架串是否精确属该 NO，云端无主表无法核。
+- issues:
+  1. （无阻断）下次凡改字典，必须 `print(repr)` 贴：本批逐行 Sheet|行号|A|E|F；禁填 9 词 A/E/F；三表 A1:G1；A–D 当前 vs 动手前备份至少 5 格实值。不要只写「已指向 / 一致 / 变化=0」。
+  2. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**；禁止再全表 token。禁填 9 词与 round55 清空 4 词保持空/旧态，除非先 `plan_submitted`（4 词再填仍须 PN 与 A 全等）。自称剩余空行=非实体/禁填/已核销柜无可绑：分类本身须先 `plan_submitted` 才能动那些词或改口径；**未贴空行 A 清单前，若又发现「A=品名」空行仍须 ≤20 交 `batch_ready`**。不要把历史合法 F 改掉。SHELF6 块5 仍挂起，新清点行出现后可再补 F/E。
+  3. （无阻断）描述列一次性复制已完成。**禁止再全表扫描**写描述。后续核销死库存行随货柜/小批同步写 `DEAD INVENTORY`。实体/非实体扩名单或禁填 9 词须先 `plan_submitted`。
+- next_action: **batch_continue**（空行若还有「A 与品名同词」可绑 → ≤20 后 `batch_ready`；否则先交实体/非实体/禁填 9 词 `plan_submitted`。不要把本 pass 当成字典 F/E 全表 done。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列/禁止改代码。）
 
 ### Cursor 小批检查结果（⑲ 字典空行补 F/E 第二批 12 词条 · round55 · Cursor 填）
 

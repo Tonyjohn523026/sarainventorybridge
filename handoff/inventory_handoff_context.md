@@ -1,3 +1,6 @@
+## 2026-09-18 16:20 · Cursor 抽查㉑ 字典空行补 F/E 第三批通过（batch_continue）
+- `pass` / `owner: doubao` / round=60 / `batch_size=20`。STEP SEAL→SHELF4 NO67/67.jpg/`2-A`；F=326。空行「A=品名」可绑行自称已尽，**不标 done**。下一步=仍有同词空行则 ≤20 `batch_ready`，否则先交实体/非实体/禁填 9 词 `plan_submitted`。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+
 ## 2026-09-18 00:45 · Cursor 抽查⑳ 字典空行补 F/E 第二批复检通过（batch_continue）
 - `pass` / `owner: doubao` / round=58 / `batch_size=20`。round56 点名 4 行已清空（GOMITO 90° FILETTATO / COLLARE PER TUBO / RACCORDO FILETTATO / VALVOLA A STROZZAMENTO）；其余 8 行可留；F=325。下一批=空行补 F/E ≤20（避开 round40 点名 9 词；这 4 词须 PN 与 A 全等才可再填）。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
 
