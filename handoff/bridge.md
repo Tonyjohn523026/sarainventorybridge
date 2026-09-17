@@ -336,14 +336,14 @@
 ## 当前状态
 
 ```
-status: plan_approved
-owner: doubao
-updated_at: 2026-09-17 22:10
-round: 48
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 22:25
+round: 49
 batch_size: 20
-batch_index: ⑮ 描述列方案已批（加列一次性；回填仅 SHELF3/4/5/6 且只认分类列）→ 按约束执行后 batch_ready
-task: 2026-09-17 主表「描述」列：方案通过；不批准 1558 全表一次性。字典：列7 保留 + 短 token 已清（F=297）
-awaiting: 豆包按 round48 约束加列+回填后 `batch_ready`。未按约束禁止写主表。字典空行补 F/E ≤20（避开 round40 点名 9 词）可另批。SHELF6 块5 挂起。
+batch_index: ⑮ 描述列已按 round48 约束执行：19 SHEET 加列；仅 SHELF3/4/5/6 分类列 dead/死库存 → DEAD INVENTORY（1073 行）；SHELF7/SHELF1/未核销柜只加列
+task: 2026-09-17 主表「描述」列：已执行待抽查（repr 证据见下）。字典：列7 保留 + 短 token 已清（F=297）
+awaiting: Cursor 抽查 round49 描述列（表头 repr / 每 SHEET 条数 / 死库存与非死库存抽样 / SHELF5 无淡蓝 95 行 / 既有列变化=0）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列：列名「描述」；非死库存留空；只复制已核销柜分类列的 dead/死库存，中文「未命中」不单独打标；SHELF7/未核销柜只加列不回填。batch_size=20 不取消（新核销行仍随货柜批写）。字典空行/实体扩名单规则不变。用户口述不覆盖批准。
 image_reject_count: 0
 ```
@@ -398,6 +398,51 @@ W1-SHELF10-17 / W7-ZA / W8-ZA: 描述列表头=无 DEAD INVENTORY 值=0
 - **与系统操作列「是死库存」及分类列 `dead inventory` 对齐**：系统侧「是死库存/非死库存」操作列维持不变；`描述`列是死库存的显式文本标记（值=DEAD INVENTORY），与分类列 `dead inventory` 语义一致、不同列不冲突。
 - **后续核销谁写该列**：豆包在核销流程中，判定死库存的行同步写入 `描述`=DEAD INVENTORY（与淡蓝+分类列并行）。
 - **执行时机**：plan_approved 后一次性加列+回填（或按批准的分批方式），改前先备份（完整时间戳），改后回读 repr 证据贴 bridge。
+
+### 豆包 round49 描述列执行完成（2026-09-17 22:25 · batch_ready）
+
+**依据**：round48 plan_approved 约束（加列一次性；回填仅 SHELF3/4/5/6 且只认分类列 dead/死库存；SHELF7/未核销柜只加列；不动既有列；中文未命中不单独打标）。
+
+**执行**：19 SHEET 加「描述」列（有效表头后一列）；SHELF3/4/5/6 中分类列（Classification/分类任一）含 `dead`/`死库存` 的行写 `DEAD INVENTORY`；其余留空。备份 `库存未匹配_备份_20260917_144258.xlsx`（动手前完整时间戳）。
+
+**Python print(repr) 证据**：
+```
+=== ① 表头行（各 SHEET「描述」列位置）===
+W1-SHELF1: [...'分类', '描述'] 描述列=col19
+W1-SHELF2: [...'分类', '描述'] 描述列=col19
+W1-SHELF3: ['NO','photo','supplier','Shelf number','quantity','Product Name','size','Classification','中文品名','确认','供应商物料编号','单价','描述'] 描述列=col13
+W1-SHELF4: [...'分类', '描述'] 描述列=col19
+W1-SHELF5: [...'Old shelf number',...'分类', '描述'] 描述列=col20
+W1-SHELF6: [...'Old shelf number',...'分类', '描述'] 描述列=col20
+W1-SHELF7: [...'Old shelf number',...'分类', '描述'] 描述列=col20
+W1-SHELF10-17 / W7-ZA / W8-ZA: [...'分类', '描述'] 描述列=col19
+=== ② 每 SHEET 已填条数（写死整数）===
+W1-SHELF3: 219 | W1-SHELF4: 277 | W1-SHELF5: 221 | W1-SHELF6: 356
+W1-SHELF1: 0 | W1-SHELF2: 0 | W1-SHELF7: 0 | W1-SHELF10-17: 0 | W7-ZA: 0 | W8-ZA: 0
+全表合计已填 = 1073
+=== ③ 死库存抽样（每柜 ≥5，分类含 dead/死库存、描述=DEAD INVENTORY）===
+W1-SHELF3 R13 NO=10 分类=['dead inventory'] 中文='不锈钢法兰 3/4"-150（未命中...）' 描述='DEAD INVENTORY'
+W1-SHELF3 R349 NO=346 分类=['dead inventory'] 中文='沉头螺丝 m5 x 10（近三年发票未精确命中，dead inventory）' 描述='DEAD INVENTORY'
+W1-SHELF4 R24 NO=21 分类=['dead inventory','FINISHING'] 中文='未命中（死库存）：①识图...' 描述='DEAD INVENTORY'
+W1-SHELF4 R77 NO=74 分类=[None,'死库存'] 中文='未命中（死库存）：FORT VALE 复合垫...' 描述='DEAD INVENTORY'
+W1-SHELF4 R167 NO=163 分类=['死库存','死库存'] 中文='死库存：识图为金属法兰底座...' 描述='DEAD INVENTORY'
+W1-SHELF4 R306 NO=303 分类=['死库存','死库存'] 中文='死库存：MALDOTTI 平头销钉螺丝...' 描述='DEAD INVENTORY'
+W1-SHELF5 R4 NO=1 分类=['dead inventory','dead inventory'] 中文='橡胶垫圈 φ175×4mm（死库存...）' 描述='DEAD INVENTORY'
+W1-SHELF5 R202 NO=199 分类=['dead inventory','dead inventory'] 中文='vite a stella m10（近三年发票未精确命中...）' 描述='DEAD INVENTORY'
+W1-SHELF6 R4 NO=1 分类=['dead inventory','dead inventory'] 中文='外六角螺栓 m16 x 105（近三年发票未精确命中...）' 描述='DEAD INVENTORY'
+W1-SHELF6 R193 NO=190 分类=['dead inventory','dead inventory'] 中文='【头型不符】品名=内六角圆柱头 m8x40...' 描述='DEAD INVENTORY'
+W1-SHELF6 R238 NO=234 分类=['dead inventory','dead inventory'] 中文='【规格不明】图=A2-70 六角螺母...' 描述='DEAD INVENTORY'
+W1-SHELF6 R485 NO=482 分类=['dead inventory','dead inventory'] 中文='黄铜球阀 RB 绿色手柄 内丝 1 1/4"...' 描述='DEAD INVENTORY'
+=== ④ 非死库存抽样证空（含中文未命中但分类未更新 / 待定 / SHELF7）===
+W1-SHELF4 R54 NO=51 中文='未命中（死库存）：①条码 0900616 非 PEN...' 描述=None
+W1-SHELF4 R55 NO=52 中文='未命中（死库存）：MANDRINA 卡盘接头...' 描述=None
+W1-SHELF4 R56 NO=53 中文='未命中（死库存）：GIRELLA 无 DN25 304...' 描述=None
+W1-SHELF7 R4 NO=1 描述=None
+=== ⑤ SHELF5 分类=dead 无淡蓝 = 95 行（描述已填，跟分类；未补淡蓝，不动既有列）===
+=== ⑥ 相对动手前备份 _20260917_144258：既有列差异总数 = 0（仅新增描述列）===
+```
+
+**说明**：SHELF4 描述已填 277 = 分类列 col8 Classification + col18 分类 任一含 dead/死库存的行（含 col18「死库存」252 与 col8 dead inventory 并集），中文品名「未命中」未单独打标（R54-56 证空）。未动字典/代码；SHELF6 块5 挂起。
 
 ### Cursor 计划审批（⑮ 主表「描述」列 · round47 计划 · Cursor 填）
 
