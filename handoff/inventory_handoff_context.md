@@ -1,3 +1,6 @@
+## 2026-09-17 23:20 · Cursor 抽查⑰ 字典空行补 F/E 未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=52 / `batch_size=20`。空行补 20 词中 18 条点名可核；`MASCHIO A MANDRINA` 误绑 SHELF4 NO37（应为 NO51），`FEMMIA A MANDRINA` 误绑 NO48 且与 MANDRINA 共用图（应为 NO54）。只改这 2 行后 `batch_ready`。禁填 9 词仍勿动。SHELF6 块5 仍挂起。
+
 ## 2026-09-17 22:50 · Cursor 抽查⑯ 主表描述列通过（batch_continue）
 - `pass` / `owner: doubao` / round=50 / `batch_size=20`。描述列一次性复制已过：19 表加列；SHELF3/4/5/6 分类复制 1073（219+277+221+356）；SHELF7/1=0；中文未命中不单独打标。下一批=空行补 F/E ≤20（避开 round40 点名 9 词）。禁止再全表扫描描述列。SHELF6 块5 仍挂起。
 

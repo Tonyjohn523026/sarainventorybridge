@@ -1,3 +1,8 @@
+### 2026-09-17 23:20 · Cursor 抽查⑰ 字典空行补 F/E 未过（needs_doubao_fix / owner=doubao / round=52）
+- 结论：`fail`。20≤20、避开禁填 9 词、F=297→317 算术对；18/20 点名可核（MEZZO RACCORDO/MANDRINA/TAPPO A MORSETTO/STUD KIT/ASTA LAMPEGGIANTE/LENTE GIALL/GOMMA FANALE/GOMMA CONICA/STRISCIA CATARIFRANGENTE/TERMOMETRO/ALZA-ABBASSA/FLANGIA PP-GF/TEE FEMMINA/CURVA FEMMINA 等）。**硬伤**：`MASCHIO A MANDRINA` 绑 SHELF4 NO37（实为 MANDRINA，应为 NO51）；`FEMMIA A MANDRINA` 绑 NO48 且与 `MANDRINA` 共用 48.jpg（实为 MANDRINA DN20，应为 NO54）。交检只贴 4/20 `repr`，禁填 9 词未贴对照。
+- 已通过（不挡 fail）：batch 上限、货柜按 SHEET 映射、HYPERLINK 单反斜杠方向、未改主表/代码声称、SHELF6 块5 挂起。
+- 未决：只改这 2 行 E/F（改绑 NO51/NO54，或用 `_r50_145550` 清空）→ 贴 20 行+禁填 9 词 `repr` → 再 `batch_ready`。其余 18 行可留。勿改主表/代码。
+
 ### 2026-09-17 22:50 · Cursor 抽查⑯ 主表描述列通过（batch_continue / owner=doubao / round=50）
 - 结论：`pass`。round48 约束已落地：19 表加「描述」；仅 SHELF3=219 / SHELF4=277 / SHELF5=221 / SHELF6=356 按分类列复制 `DEAD INVENTORY`（合计 **1073**，不是 1558）；SHELF7/SHELF1/未核销柜=0；中文「未命中」不单独打标（SHELF4 NO51/52/53 描述空）；SHELF5 无淡蓝 95 行已填描述、未补淡蓝；备份 `_144258` 完整时间戳；既有列变化=0 声称。未改字典/代码；SHELF6 块5 仍挂起。
 - 已通过附注（不挡）：多数表头用省略号；非死库存抽样 4 条（不足 5）且未点名待定行；云端无法核 25% 的 1073 行。

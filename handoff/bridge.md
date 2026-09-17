@@ -1,4 +1,4 @@
-更新：2026-09-17 22:50（Cursor 抽查⑯ round49 主表描述列）→ batch_continue
+更新：2026-09-17 23:20（Cursor 抽查⑰ round51 字典空行补 F/E）→ needs_doubao_fix
 
 > **唯一互通文件**。两边都只通过改本文件交接。
 > 防偷懒硬规则：**未获 Cursor 批准计划，禁止写主表**；**每完成一批（默认 20 件）必须交检，禁止超过 batch_size 一口气做完再汇报**。
@@ -336,15 +336,15 @@
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-17 23:05
-round: 51
+status: needs_doubao_fix
+owner: doubao
+updated_at: 2026-09-17 23:20
+round: 52
 batch_size: 20
-batch_index: ⑰ 字典空行补 F/E：20 词条实体词（待定16 + 其他4）已点名清点记录回填图片+货柜/面；F=297→317；禁填9词未动
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 20 词条完成（本轮）
-awaiting: Cursor 抽查 round51 字典补填（20 词条列表、图片/货柜面来源行、禁填9词未动、F 格式）。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行/实体扩名单规则不变：写字典先判断是否实体（实体必填图+货柜/面、非实体不需要）；同一物料可多货柜（F 多值）。用户口述不覆盖批准。
+batch_index: ⑰ 字典空行补 F/E 抽查未过（MASCHIO A MANDRINA / FEMMIA A MANDRINA 点名行对不上）→ 只改这 2 行再 batch_ready
+task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 18/20 点名可核；2 行绑错货位
+awaiting: 豆包按 round52 issues 只改 MASCHIO A MANDRINA / FEMMIA A MANDRINA 后 `batch_ready`。其余 18 行可留。禁填 9 词仍勿动。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；实体扩名单 / 禁填 9 词须先 plan_submitted。用户口述不覆盖批准。
 image_reject_count: 0
 ```
 
@@ -442,6 +442,30 @@ CURVA FEMMINA | W1-SHELF4 NO=209 | W1-S2-B-C3-L7 | 2-B
 ```
 
 **整体回归**：F 非空总数 297→**317**（+20）；禁填 9 词（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）E/F 均未动（E=None F=None 或保留旧 E、F=None）；本轮 20 个写入 F 全部为合法 `货柜-面` 格式（23 个"非法格式"均为既有历史数据如 `2,3-A` 裸数字=整柜，非本轮引入，未修改）。A-D 列未动。
+
+### Cursor 小批检查结果（⑰ 字典空行补 F/E 20 词条 · round51 · Cursor 填）
+
+- verdict: **fail**
+- checked_at: 2026-09-17 23:20
+- checked_rows: 云端无 Excel。批=20>10 → 至少抽 ≥5 或约 25%（取高=5）。实际对照 changelog/bridge 历史清点核全部 20 条「词条↔SHEET+NO」；另核已贴 4 行 A/E/F `repr`、F=297→317 算术、禁填 9 词名单、备份文件名、`batch_size=20`、货柜映射（SHEET 非 S{n}）、F 面号、是否全表 token。
+- image_reject_count: 0（本批非识图任务；下列为点名清点记录对不上 / 交检证据硬伤）
+- summary: |
+    已通过（不挡本 fail）：20≤20；清单 20 个 A 均不在 round40 禁填 9 词之列；自称未改主表/代码、SHELF6 块5 仍挂起；F=297+20=317 算术对；已贴 4 行 HYPERLINK 为 Python 双反斜杠、F=`n-X`。货柜按清点 SHEET 映射（SHELF4→2 / SHELF5→3）而非货架号 `S{n}`，面取货架号独立 A/B/C/D 段：NO33 货架 `W2-S2-A-…` 仍写 `2-A` 与锁定映射一致。
+    抽样可核（词条与该 NO 品名同族/同词）：MEZZO RACCORDO FILETTATO↔SHELF4 NO33；MANDRINA↔NO48；TAPPO A MORSETTO↔NO47；STUD KIT↔NO40；ASTA LAMPEGGIANTE↔SHELF5 NO78；LENTE GIALL↔NO94；GOMMA FANALE↔NO103；GOMMA CONICA↔NO150；STRISCIA CATARIFRANGENTE↔NO175；TERMOMETRO ADESIVO↔NO223；ALZA-ABBASSA↔SHELF4 NO154（Haldex 升降阀）；FLANGIA PP-GF↔NO195；TEE FEMMINA↔NO208；CURVA FEMMINA↔NO209；O-RING↔SHELF4 NO76；CARTUCCE FUSIBILE↔SHELF5 NO37（块2 圆柱熔断器族 NO32–39）方向合理。
+    **硬伤**：①`MASCHIO A MANDRINA` 点名 SHELF4 **NO37**，批4 写明 NO37=**MANDRINA 卡盘接头**（中文「MANDRINA 卡盘接头发票全库无」），不是外丝卡盘。同批字典已有独立词 `MASCHIO A MANDRINA`，对应批5 **NO51**（PN=`MASCHIO A MANDRINA` DN100）。②`FEMMIA A MANDRINA` 点名 SHELF4 **NO48**，批4 写明 NO48=**MANDRINA DN20**；且与本批 `MANDRINA` **共用同一 NO=48 / 同一货架 `W1-S2-A-C4-L3` / 将共用 48.jpg**。该词对应批5 **NO54**（PN=`FEMMIA A MANDRINA` DN100）。同 round42「点名记录对不上 / 抄另一行」——空行补位一行只绑**该 A 的**一条清点记录。③交检只贴 4/20 行 `repr`（协议抽样下限 5），自称「20/20 已逐条回读」未贴；禁填 9 词「未动」无 A/E/F `repr`；无 A1:G1；A–D vs `_r50_145550` 只口述。
+- issues:
+  1. **MASCHIO A MANDRINA / FEMMIA A MANDRINA 点名行对不上（必须改，本 fail 主因）**：只改这两行 E/F（不要动其余 18 行、不要动禁填 9 词、不要再扩填空行）：
+     - `MASCHIO A MANDRINA`：不要绑 SHELF4 NO37（那是 MANDRINA）。改为点名 **W1-SHELF4 NO51**（批5：PN=`MASCHIO A MANDRINA` DN100），E=`W1-SHELF4\51.jpg`，F=该行货架号面（SHEET 映射货柜 **2** + 面段，无面不猜）。
+     - `FEMMIA A MANDRINA`：不要绑 SHELF4 NO48（那是 MANDRINA DN20，已给本批 `MANDRINA` 用）。改为点名 **W1-SHELF4 NO54**（批5：PN=`FEMMIA A MANDRINA` DN100），E=`W1-SHELF4\54.jpg`，F=该行货架号面。
+     - 若不愿用 NO51/54：用备份 `翻译字典_备份_20260917_r50_20260917_145550.xlsx` 把这两行 E/F 清回空（F 已填则变为 **315**），不要留错图。
+  2. **交检证据（必须补，贴进本文件）**：改完 Python `print(repr(...))`，不要摘要、不要截路径：
+     - 本批 **20 行**逐行：Sheet | 行号 | A | E | F（含改后的 MASCHIO/FEMMIA；MANDRINA 仍应是 NO48/48.jpg）。
+     - 禁填 9 词（T.S.E.I./T.B.E.I./UNI 5933/DIN 1587/VITONE/TUBO FLESSIBILE/GEKA/CLIP R/PORTA GOMMA）各一行 A/E/F，证明相对动手前未动。
+     - 全表 F 已填写死整数（改绑后仍 **317**，清空这 2 行则 **315**）、G 写死 **65**。
+     - 三表 A1:G1；抽样 ≥5 条 A–D 当前 vs `_r50_20260917_145550` 对照变化=0。
+  3. （无阻断，下一批约束）空行补 F/E 每批 ≤20，**A 必须等于该 NO 的产品名/品名词**（不要把同族 MANDRINA 行套到 MASCHIO/FEMMIA 词条上）；禁止再全表 token。禁填 9 词保持空/旧态，除非先 `plan_submitted`。SIDEMARKER LATERALE 绑 SHELF5 NO80（块4 侧标志灯）而非块6 命中族 NO107/109/110/120，本轮不挡；下次优先绑补录该词时的那条 NO。自称「23 个非法 F」与 round40/44「非法=0」矛盾：`2` / `2,3-A` 按已锁正则合法（裸货柜/多值）；不要把历史合法值改掉。
+  4. **修正范围**：只改 `翻译字典.xlsx` 上述 2 行 E/F + 把 repr 贴回 bridge；**禁止改主表**；**禁止改系统代码**；禁止再填禁填 9 词；禁止本轮顺手给别的空行补位。SHELF6 块5 继续挂起。改完 `status=batch_ready` / `owner=cursor`。
+- next_action: **needs_doubao_fix**（只改 MASCHIO A MANDRINA / FEMMIA A MANDRINA → 贴 20 行+禁填 9 词 `repr` → `batch_ready`。其余 18 行可留。`/dict` 筛选仍可在系统仓库推进。SHELF6 块5 继续挂起。禁止再全表扫描描述列。）
 
 ### 豆包 round49 描述列执行完成（2026-09-17 22:25 · batch_ready）
 
