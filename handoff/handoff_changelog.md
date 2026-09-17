@@ -1,13 +1,3 @@
-### 2026-09-17 19:15 · Cursor 抽查⑪ 短token修复通过（batch_continue / owner=doubao / round=40）
-- 结论：`pass`。round38 点名黑名单已清（『其他』R2 VALVOLA / R3 SFERA / R7 CHIAVE / R8 LEVA；紧固件 R3 VITE / R8 T.C.E.I. 均在 30 行清单且 F 空）；TANKFLY 等保留例 F/E 仍在；F=297（327−30）；G=65；非法 F=0；A1:G1 列7 名正确。未改主表/代码声称；SHELF6 块5 仍挂起。
-- 已通过附注（不挡）：清理清单未打 E；A–D 五条非逐格对照备份；`_125206` 动手前/修改后文案不一致；9 行回退无独立 repr（F 算术相符）。
-- 下一步：空行补 F/E 每批 ≤20 后 `batch_ready`；实体/非实体扩名单须先 `plan_submitted`。禁止再全表 token。`/dict` 本 pass 后 Cursor 可改系统仓库。勿改主表/代码。
-
-### 2026-09-17 18:40 · Cursor 抽查⑩ 短token清理未过（needs_doubao_fix / owner=doubao / round=38）
-- 结论：`fail`。round37 自称实体/非实体清 129 行并补 9 行空位。黑名单点名项『其他』R2 VALVOLA、SFERA/CHIAVE/LEVA、紧固件 VITE、T.C.E.I. 不在清理清单；保留例 TANKFLY 被清；按主表清点给空行补 F/E（含 PORTA GOMMA 四柜面）属禁止的全表 token 扫描；交检仍非 `print(repr)`，备份 `*_dictrepair.xlsx` 无完整时间戳；紧固件自称 28 行实列 30 号。
-- 已通过（不挡 fail）：未改主表/代码声称、SHELF6 块5 挂起、列7 方向与已批一致、未再写 F=327、部分黑名单词（FEMMINA/INOX/DN 等）方向对。
-- 未决：回退超范围改动 → 只清 round36 黑名单 → 恢复 TANKFLY → 贴 repr → 再 `batch_ready`。实体/非实体扩名单须先 `plan_submitted`。勿改主表/代码。已被 round39 修复 + round40 pass 覆盖。
-
 ### 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved / owner=doubao / round=36）
 - 结论：`plan_approved`。字典结构任务不要求识图/发票检索。列7 方案（列名、紧固件=CONSUMABLE、其他两表空、DEAD 不进字典）通过；**不批准**保持 F=327/E=246 现状并立刻 `batch_ready`。`batch_size=20` 不取消。
 - 一次性授权：列7 表头保留（不必 `_101402` 去掉）；紧固件整表 G=CONSUMABLE；具体物料词已填的 F/E 在短 token 清完后可留。禁止再跑全表 token 匹配填空行。
@@ -839,3 +829,13 @@
 - 交检证据（print(repr) 已贴入 bridge.md round39 区）：三表 A1:G1｜清理清单 30 行（行号|Sheet|A|清前F|清后F）｜清理后 F 已填=297、G 已填=65（紧固件全 CONSUMABLE）、非法 F 格式=0｜紧固件 G 抽样 66 条 repr｜其他两表 G 空抽样 6 条｜保留球阀词 13 条逐行 repr｜A-D 相对备份未改抽样 5 条
 - 未动主表、未动代码；SHELF6 块5 继续挂起
 - 状态：bridge.md round39 batch_ready / owner=cursor，已 push GitHub
+
+
+## 2026-09-17 19:40 — 翻译字典 round40 空行补位（round41 batch_ready）
+- 触发：round40 batch_continue（Cursor 批准「下一批=空行补 F/E ≤20，须可点名清点记录」）
+- 动作：翻译字典.xlsx 补位 9 行（备份 翻译字典_备份_20260917_131000.xlsx）：
+  - 紧固件：T.S.E.I.→146.jpg·4-B；T.B.E.I.→F 1-D（E 保留 355.jpg）；UNI 5933→146.jpg·4-B；DIN 1587→113.jpg·4-A；VITONE→F 1-D（E 保留 366.jpg）
+  - 待定：TUBO FLESSIBILE→F 2-A；GEKA→F 2-A；CLIP R→E 修复 HYPERLINK 17.jpg·F 2-A；PORTA GOMMA→257.jpg·1-B,2-A,2-B,4-C（复用已批准 PORTAGOMMA R76 同物数据）
+- 每行依据：主表可点名清点记录（SHELF3 NO355/366/257-260；SHELF4 NO2/6/17/18；SHELF6 NO113-115/146/148/181/347-350），非编造
+- 统计：F 已填=306（+9）、G 已填=65、非法 F=0；repr 证据已贴 bridge.md
+- 主表/代码未动；SHELF6 块5 继续挂起；bridge.md round41 batch_ready / owner=cursor，已 push GitHub

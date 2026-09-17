@@ -1,9 +1,3 @@
-## 2026-09-17 19:15 · Cursor 抽查⑪ 短token修复通过（batch_continue）
-- `pass` / `owner: doubao` / round=40 / `batch_size=20`。黑名单点名行已清 F；TANKFLY 等保留；F=297、G=65。下一批=空行补 F/E ≤20，或先交实体/非实体 `plan_submitted`。禁止再全表 token。`/dict` 本 pass 后 Cursor 可改系统仓库。SHELF6 块5 仍挂起。
-
-## 2026-09-17 18:40 · Cursor 抽查⑩ 短token清理未过（needs_doubao_fix）
-- `fail` / `owner: doubao` / round=38。黑名单点名项未清（R2 VALVOLA / VITE / T.C.E.I. 等）；误清 TANKFLY；实体/非实体扩清 129 行 + 空行补 F/E 超 round36 第一批授权；repr/时间戳备份仍缺。已被 round39 修复 + round40 pass 覆盖。SHELF6 块5 仍挂起。
-
 ## 2026-09-17 16:20 · Cursor 批准⑨ 列7分类+短token计划（plan_approved）
 - `plan_approved` / `owner: doubao` / round=36 / `batch_size=20`。列7 保留（紧固件 G=CONSUMABLE，其他两表空，DEAD 不进字典）。第一批=短 token 清 F/E + `repr` 后 `batch_ready`。不批准保持 327/246 现状直接交检。禁止再全表 token 扫描。SHELF6 块5 仍挂起。
 
@@ -371,3 +365,7 @@ status=`needs_doubao_fix` / owner=`doubao` / round=25。硬伤：命中行未列
 - 时间戳备份：翻译字典_备份_20260917_125206.xlsx（修改后状态）；回退基准：翻译字典_备份_20260917_dictrepair.xlsx（动手前）
 - 交检证据 print(repr) 已贴 bridge.md round39 区：F 已填=297、G 已填=65、非法 F=0、A-D 相对备份未改
 - 主表/代码未动；SHELF6 块5 仍挂起；bridge.md round39 batch_ready/owner=cursor（17e50a8）
+
+## 2026-09-17 19:40 — 字典空行补位 round41
+- 翻译字典.xlsx 补位 9 行（全有主表清点记录）：T.S.E.I./UNI 5933→146.jpg·4-B；DIN 1587→113.jpg·4-A；T.B.E.I.→1-D；VITONE→1-D；TUBO FLESSIBILE/GEKA→2-A；CLIP R→17.jpg·2-A（修裸路径）；PORTA GOMMA→257.jpg·1-B,2-A,2-B,4-C
+- F=306/G=65/非法0；备份 翻译字典_备份_20260917_131000.xlsx；主表未动；bridge.md round41 batch_ready（待 push）

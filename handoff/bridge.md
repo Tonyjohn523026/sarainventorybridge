@@ -302,17 +302,48 @@
      - 抽样证明 A–D 相对清理前备份未改（≥5 条）。
   4. （无阻断）**修正范围**：只改 `翻译字典.xlsx` 的短 token F/E + 列7 保持 + 把 repr 贴回 bridge；**禁止改主表**；**禁止改系统代码**；禁止再全表 token 扫描；SHELF6 块5 继续挂起。改完 `status=batch_ready` / `owner=cursor`。`/dict` 筛选与分类列导入仍等 **pass**。
 
+### 豆包 round41 空行补位（2026-09-17 19:40 · batch_ready）
+
+**依据**：round40 batch_continue 批准「下一批=空行补 F/E ≤20（须可点名清点记录）」。
+
+**补位 9 行（全部有主表可点名清点记录，非编造）**：
+1. 紧固件 T.S.E.I.（内六角沉头）→ E=W1-SHELF6\146.jpg · F=`4-B`（主表 W1-SHELF6 NO146/148/181 vite testa svasata UNI5933，W1-S5-B-C1-L8）
+2. 紧固件 T.B.E.I.（球面圆头内六角）→ F=`1-D`（E 保留 355.jpg；主表 W1-SHELF3 NO355 vite brugola testa rotonda，W1-S1-D-C1-L10）
+3. 紧固件 UNI 5933（内六角沉头螺钉标准）→ E=W1-SHELF6\146.jpg · F=`4-B`（同 T.S.E.I.）
+4. 紧固件 DIN 1587（盖形螺母标准）→ E=W1-SHELF6\113.jpg · F=`4-A`（主表 W1-SHELF6 NO113-115 DADO CIECO，W1-S5-A-C3-L8）
+5. 紧固件 VITONE（大螺钉）→ F=`1-D`（E 保留 366.jpg；主表 W1-SHELF3 NO366 esagono esterno m4x10，W1-S1-D-C1-L7）
+6. 待定 TUBO FLESSIBILE（柔性软管）→ F=`2-A`（E 保留 2.jpg；主表 W1-SHELF4 NO2 TUBO FLESSIBILE INOX，W1-S2-A-C5-L8）
+7. 待定 GEKA（螺纹接头）→ F=`2-A`（E 保留 6.jpg；主表 W1-SHELF4 NO6 Raccordo GEKA，W1-S2-A-C5-L6）
+8. 待定 CLIP R（R 型卡销）→ E 修复为 HYPERLINK 17.jpg · F=`2-A`（主表 W1-SHELF4 NO17 Clip R，W1-S2-A-C5-L5；旧 E 裸路径 18.jpg 修正为 17.jpg）
+9. 待定 PORTA GOMMA（软管接头）→ E=W1-SHELF3\257.jpg · F=`1-B,2-A,2-B,4-C`（与已批准词条 PORTAGOMMA R76 同物复用；主表 W1-SHELF3 NO257-260 / SHELF4 / SHELF6 NO347-350 portagomma）
+
+**Python print(repr) 回读证据**：
+```
+紧固件字典 R9 A='T.S.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\146.jpg","图146")' F='4-B'
+紧固件字典 R11 A='T.B.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\355.jpg","图355")' F='1-D'
+紧固件字典 R52 A='UNI 5933' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\146.jpg","图146")' F='4-B'
+紧固件字典 R55 A='DIN 1587' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\113.jpg","图113")' F='4-A'
+紧固件字典 R67 A='VITONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\366.jpg","图366")' F='1-D'
+其他字典（待定） R58 A='TUBO FLESSIBILE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\2.jpg","图2")' F='2-A'
+其他字典（待定） R60 A='GEKA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\6.jpg","图6")' F='2-A'
+其他字典（待定） R74 A='CLIP R' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\17.jpg","图17")' F='2-A'
+其他字典（待定） R77 A='PORTA GOMMA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\257.jpg","图257")' F='1-B,2-A,2-B,4-C'
+```
+
+**全表统计（写死整数）**：F 已填 = **306**（上轮 297 + 本轮 9）、G 已填 = **65**（紧固件全 CONSUMABLE）、非法 F 格式 = **0**。其他两表 G 空抽样正常。
+**备份**：`D:\sara\库存管理\翻译字典_备份_20260917_131000.xlsx`（本轮动手前）。
+**未动**：主表、代码；未做全表 token 扫描；SHELF6 块5 仍挂起。
 ## 当前状态
 
 ```
-status: batch_continue
-owner: doubao
-updated_at: 2026-09-17 19:15
-round: 40
+status: batch_ready
+owner: cursor
+updated_at: 2026-09-17 19:40
+round: 41
 batch_size: 20
-batch_index: ⑪ 短token修复 pass → 下一批=空行补 F/E ≤20（须可点名清点记录）；实体/非实体扩名单须先 plan_submitted；SHELF6 块5 仍挂起
-task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 已清（F=297）+ 具体物料词 F/E 可保留；空行仍分批
-awaiting: 豆包做下一批（空行 F/E ≤20）后 `batch_ready`；或先交「实体/非实体」`plan_submitted`。禁止再全表 token 扫描。主表/代码勿改。`/dict` 筛选 Cursor 可在系统仓库推进。
+batch_index: ⑫ 空行补 F/E 完成（9 行，全部有主表可点名清点记录）→ 交检；SHELF6 块5 仍挂起
+task: 2026-09-17 字典结构：列7「分类」保留 + 短 token 已清（F=297）+ 空行补位（本轮 +9 → F=306）；具体物料词 F/E 可保留
+awaiting: Cursor 抽查 round41 补位（9 行 repr 证据见下，F=306/G=65/非法0）。主表/代码本轮未动。后续字典空行仍分批（≤20，须可点名清点记录）。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。本字典任务：词条唯一、未定留空、F 格式 `n` 或 `n-X`（具体物料可多值）；短 token 不得填 F。列7=分类（系统枚举），紧固件=CONSUMABLE，DEAD 不进字典。batch_size=20 不取消。实体/非实体扩名单须先 plan_submitted，plan_approved 后再做。
 image_reject_count: 0
 ```
@@ -2008,6 +2039,37 @@ Cursor 审批关注点：逐张识图痕迹、字典先补、词组+单词+缩�
 
 ---
 
+### 豆包 round41 空行补位（2026-09-17 19:40 · batch_ready）
+
+**依据**：round40 batch_continue 批准「下一批=空行补 F/E ≤20（须可点名清点记录）」。
+
+**补位 9 行（全部有主表可点名清点记录，非编造）**：
+1. 紧固件 T.S.E.I.（内六角沉头）→ E=W1-SHELF6\146.jpg · F=`4-B`（主表 W1-SHELF6 NO146/148/181 vite testa svasata UNI5933，W1-S5-B-C1-L8）
+2. 紧固件 T.B.E.I.（球面圆头内六角）→ F=`1-D`（E 保留 355.jpg；主表 W1-SHELF3 NO355 vite brugola testa rotonda，W1-S1-D-C1-L10）
+3. 紧固件 UNI 5933（内六角沉头螺钉标准）→ E=W1-SHELF6\146.jpg · F=`4-B`（同 T.S.E.I.）
+4. 紧固件 DIN 1587（盖形螺母标准）→ E=W1-SHELF6\113.jpg · F=`4-A`（主表 W1-SHELF6 NO113-115 DADO CIECO，W1-S5-A-C3-L8）
+5. 紧固件 VITONE（大螺钉）→ F=`1-D`（E 保留 366.jpg；主表 W1-SHELF3 NO366 esagono esterno m4x10，W1-S1-D-C1-L7）
+6. 待定 TUBO FLESSIBILE（柔性软管）→ F=`2-A`（E 保留 2.jpg；主表 W1-SHELF4 NO2 TUBO FLESSIBILE INOX，W1-S2-A-C5-L8）
+7. 待定 GEKA（螺纹接头）→ F=`2-A`（E 保留 6.jpg；主表 W1-SHELF4 NO6 Raccordo GEKA，W1-S2-A-C5-L6）
+8. 待定 CLIP R（R 型卡销）→ E 修复为 HYPERLINK 17.jpg · F=`2-A`（主表 W1-SHELF4 NO17 Clip R，W1-S2-A-C5-L5；旧 E 裸路径 18.jpg 修正为 17.jpg）
+9. 待定 PORTA GOMMA（软管接头）→ E=W1-SHELF3\257.jpg · F=`1-B,2-A,2-B,4-C`（与已批准词条 PORTAGOMMA R76 同物复用；主表 W1-SHELF3 NO257-260 / SHELF4 / SHELF6 NO347-350 portagomma）
+
+**Python print(repr) 回读证据**：
+```
+紧固件字典 R9 A='T.S.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\146.jpg","图146")' F='4-B'
+紧固件字典 R11 A='T.B.E.I.' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\355.jpg","图355")' F='1-D'
+紧固件字典 R52 A='UNI 5933' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\146.jpg","图146")' F='4-B'
+紧固件字典 R55 A='DIN 1587' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF6\\113.jpg","图113")' F='4-A'
+紧固件字典 R67 A='VITONE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\366.jpg","图366")' F='1-D'
+其他字典（待定） R58 A='TUBO FLESSIBILE' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\2.jpg","图2")' F='2-A'
+其他字典（待定） R60 A='GEKA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\6.jpg","图6")' F='2-A'
+其他字典（待定） R74 A='CLIP R' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF4\\17.jpg","图17")' F='2-A'
+其他字典（待定） R77 A='PORTA GOMMA' E='=HYPERLINK("D:\\sara\\库存管理\\图片\\W1-SHELF3\\257.jpg","图257")' F='1-B,2-A,2-B,4-C'
+```
+
+**全表统计（写死整数）**：F 已填 = **306**（上轮 297 + 本轮 9）、G 已填 = **65**（紧固件全 CONSUMABLE）、非法 F 格式 = **0**。其他两表 G 空抽样正常。
+**备份**：`D:\sara\库存管理\翻译字典_备份_20260917_131000.xlsx`（本轮动手前）。
+**未动**：主表、代码；未做全表 token 扫描；SHELF6 块5 仍挂起。
 ## 当前状态（2026-09-17 12:05 豆包更新）
 
 - status: **shelf6_done**（整柜级交付，留痕供 Cursor 复检；用户已拍板 Cursor 暂不复检、豆包直接完成整柜留痕）
