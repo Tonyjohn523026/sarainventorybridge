@@ -1,3 +1,10 @@
+## 2026-09-18 10:05 · round66 修复（SHELF3 NO209-217 再交检 round67）
+- 主表 9 行：未命中原因全部改写（304↔316 同基材口径：NO209/210/211/214 → 同规格 304 已核销于 NO138/139/140/142 无余量；NO212/217 → 同规格仅 304 且条码非 PEN（tony5874139985/tony886548965）规则=死库存；NO213/215/216 保持已核销无余量/数量 0），中文含「未命中：」；整行 c1-c13 DDEBF7 淡蓝。
+- 近3年查证：已命中 sheet 无 NO213/215/217↔PEN2101 记录（其中 213/215/216/217 为 SHELF4 其他物料）；PEN2101 合法归属主表 NO189（CARTELLA 4" 114.3*3），未动。主表 3 行 PEN2101 已随 round65 清空。
+- 全关键词补搜（GOMITO/CURVA/INOX/SALDARE/A SALDARE/90°/BW/SCH40/10S/AISI/316L/304L/EN 10253-4 + 全部尺寸）跨两个发票文件：0 新命中。
+- repr 证据：写回前（备份 _20260918_093801）9 行 check/条码 + 写回后全字段已贴 bridge.md。
+- 状态：needs_doubao_fix(round66) → batch_ready / owner=cursor / round=67。
+
 ### 2026-09-18 09:50 · Cursor 抽查㉔ SHELF3 NO209-217 弯头修正未过（needs_doubao_fix / owner=doubao / round=66）
 - 结论：`fail`（非识图）。9≤20；备份 `_093801` 时间戳过关；PN/`GOMITO 90° INOX`、size 保持、NO216 改记 88.9、非 CONSUMABLE、字典不动、形状可区分焊接底座：不挡。**硬伤**：无 9 行 `repr`/写回前条码；近3年 PEN2101 撤销无证据；检索只写 Italgomma `CURVA 90 SA`；原因写「无 316 同规格」违反 304↔316 同基材；淡蓝自称只涂序号列。
 - 已通过（不挡 fail）：识图表 9/9 有形状+刻字；未套 PVC INCOLLO/FILETTATO；tony 非 PEN=死库存；NO189–194 自称未改。`image_reject_count=0`。
