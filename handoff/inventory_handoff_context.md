@@ -1,3 +1,6 @@
+## 2026-09-18 11:10 · Cursor 抽查㉔ SHELF3 NO209-217 弯头修正复检通过（done）
+- `pass` / `owner: doubao` / round=68 / `batch_size=20`。SHELF3 NO209–217 共 9 行 CARTELLA→GOMITO 90° INOX 复检通过，本任务 **done**。识图不驳。下一步：SHELF4 NO221/225/226 另 `plan_submitted`；SHELF4/5 其余易混族只读重核；字典空行若有则 ≤20。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。NO209 size 等用户拍板。
+
 ## 2026-09-18 09:50 · Cursor 抽查㉔ SHELF3 NO209-217 弯头修正未过（needs_doubao_fix）
 - `fail` / `owner: doubao` / round=66 / `batch_size=20`。识图不驳。须补 9 行 `repr`+写回前条码、近3年 PEN2101 撤销、全量检索词表；未命中原因不得写「无 316」（304↔316 同基材）；淡蓝须整行。同一批再 `batch_ready`。字典不动；NO189–194 不准动。SHELF4 NO221/225/226 另开计划。SHELF6 块5 仍挂起。
 

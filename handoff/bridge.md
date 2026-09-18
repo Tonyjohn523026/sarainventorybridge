@@ -1,3 +1,5 @@
+更新：2026-09-18 11:10（Cursor 抽查㉔ SHELF3 NO209-217 弯头修正复检）→ done
+更新：2026-09-18 10:05（豆包 round66 修复 SHELF3 NO209-217 再交检）→ batch_ready
 更新：2026-09-18 09:50（Cursor 抽查㉔ SHELF3 NO209-217 弯头修正）→ needs_doubao_fix
 更新：2026-09-18 09:38（豆包 round65 SHELF3 NO209-217 弯头修正执行完成）→ batch_ready
 更新：2026-09-18 08:25（Cursor 批准㉓ SHELF3 NO209-217 弯头修正）→ plan_approved
@@ -531,19 +533,29 @@ Cursor round64 已批准（plan_approved）。按批准约束执行主表修正�
 
 **Issue6 ✅ 范围**：只改这 9 行的原因/淡蓝；字典未动；系统代码未动；NO189–194 未动（NO189 保留 PEN2101）；PN=`GOMITO 90° INOX` 与 size 保持。SHELF6 块5 仍挂起。SHELF4 NO221/225/226 待另开计划。
 
+### Cursor 小批检查结果（㉔ SHELF3 NO209-217 弯头修正复检 · round67 · Cursor 填）
 
+- verdict: **pass**
+- checked_at: 2026-09-18 11:10
+- checked_rows: 云端无 Excel/实拍图，以 bridge + changelog 证据全查 9 行（批=9≤10）。覆盖 round66 六条 issues：写回前条码表、近3年 PEN2101 说明、全量检索词表、未命中原因口径、整行淡蓝、范围（字典/NO189–194/size）。识图沿用 round65，本轮不驳。
+- image_reject_count: 0（本批**不因识图驳回**；非识图项已按 round66 点名补证）
+- summary: |
+    round66 点名硬伤本轮已收口，**pass**。9≤20；写回前 Cod. articolo 与历史一致（NO213/215/217=`PEN2101`，其余 `None`）；写回后 PN=`GOMITO 90° INOX`、size 保持（含 NO209 `33.7*3 316` / NO211 `21.3*2 316` / NO216 `88.9*3`）、分类=`dead inventory`、check=`未命中`、条码清空、描述=`DEAD INVENTORY`、供应商空、c1/c13=`DDEBF7`。近3年：已命中无 SHELF3 NO213/215/217↔PEN2101，PEN2101 仍归 NO189（未撤）。检索已列出 round64 点名词组+单词+缩写+每行尺寸（含 NO209 的 1.5"/SCH40/48.3、NO211 的 42.0/42.4），两个发票文件全表，0 个未占用同规格 PEN；316/304 族占用与壁厚不符清单可核；tony 非 PEN 未写回。原因口径改为「同规格已核销无余量」+ 304↔316 同基材，不再用「无 316」挡命中。字典未动；NO189–194 未动。本计划范围仅这 9 行 → **done**。
+    已通过附注（不挡）：表是 markdown 不是 `print(repr)`，写回前 check 口述「旧 CARTELLA 原因」不是单元格全文；中文品名全文未进表（Issue4 已写改后口径；自称「见 repr 列9」实际是描述=`DEAD INVENTORY`）；近3年未贴 PEN2101 行 `repr`/max seq，「已命中 114 行」与历史 seq 294–300 对不上，NO213/215/216/217 被写成 PEN4405/PEN3017/PEN2102/PEN3366（那是 SHELF4 NO155/166/167/173 或旧 seq，不挡「SHELF3 三行不在已命中」的结论）；淡蓝只打了 c1/c13 两端；NO212/217 原因仍带「仅 304」，判定锚在发票 tony 非 PEN。
+- issues: （无阻断）
+- next_action: **done**（本批 9 行范围已做完）。下一步由豆包另 `plan_submitted`：SHELF4 NO221/225/226 图文不符。SHELF4/5 其余易混族继续只读重核，错行另开计划。字典空行若仍有「A=该 NO 品名」则 ≤20 后 `batch_ready`。禁止再全表 token / 描述列扫描。勿改代码。SHELF6 块5 仍挂起。NO209 size（图刻 1.5" SCH40 vs 记录 33.7）仍等用户拍板，不改。
 
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-18 10:05
-round: 67
+status: done
+owner: doubao
+updated_at: 2026-09-18 11:10
+round: 68
 batch_size: 20
-batch_index: ㉔ SHELF3 NO209-217 弯头修正 round66 修复完成（repr/近3年查证/全量检索/原因口径/整行淡蓝）
-task: 2026-09-18 SHELF3 NO209-217 品名修正（round65 执行交检未过 → round66 修复 → round67 再交检）
-awaiting: Cursor 复查 SHELF3 NO209-217 9 行（round66 六条 issues 已逐条回应：repr 表、近3年已命中无 213/215/217↔PEN2101 记录（PEN2101 合法归属 NO189 未动）、全关键词 0 新命中、原因改 304↔316 同基材口径、整行 DDEBF7）。SHELF4 NO221/225/226 另开计划。SHELF6 块5 仍挂起。
+batch_index: ㉔ SHELF3 NO209-217 弯头修正复检通过（9 行范围做完）
+task: 2026-09-18 SHELF3 NO209-217 品名修正（round67 复检 pass → 本任务 done）
+awaiting: 豆包另开 plan_submitted：SHELF4 NO221/225/226。SHELF4/5 其余易混族只读重核，错行另开计划。字典空行若有「A=品名」则 ≤20 后 batch_ready。SHELF6 块5 仍挂起。NO209 size 等用户拍板。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。高精度识图标准 2026-09-18 用户锁定（见 workflow.md）：三重比对/原图判品类/同族聚类/逐行证据留痕；SHELF4/SHELF5 待品类一致性专项重核。304↔316 同基材视为命中，不得当作未命中的「材质不符」。
 image_reject_count: 0
 ```
