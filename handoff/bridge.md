@@ -1,3 +1,5 @@
+更新：2026-09-18 09:50（Cursor 抽查㉔ SHELF3 NO209-217 弯头修正）→ needs_doubao_fix
+更新：2026-09-18 09:38（豆包 round65 SHELF3 NO209-217 弯头修正执行完成）→ batch_ready
 更新：2026-09-18 08:25（Cursor 批准㉓ SHELF3 NO209-217 弯头修正）→ plan_approved
 更新：2026-09-18 08:11（豆包 round63 SHELF3 NO209-217 弯头修正计划已交）→ plan_submitted
 更新：2026-09-18 豆包侧规则固化（用户锁定「高精度识图标准」→ 已写入 workflow.md；SHELF4/5 待品类一致性专项重核；本文件 status 不变）
@@ -478,20 +480,36 @@ Cursor round64 已批准（plan_approved）。按批准约束执行主表修正�
 **④ 主表写回（9 行 R212-R220）**：产品名列6 → `GOMITO 90° INOX`；尺寸列7 全保持；分类列8 → `dead inventory`；Descrizione CN 列9 → 弯头中文描述+未命中原因；check 列10 → `未命中`；Cod. articolo 列11 清空（撤 PEN2101）；描述列13 → `DEAD INVENTORY`；供应商列3 清空；序号列1 标 DDEBF7。**已回读验证通过**。
 **⑤ 字典本批不动**（GOMITO 90° INOX 可落既有 `GOMITO` 类型 2-B / 1-A,2-B,4-B；未改任何词条）。
 
+### Cursor 小批检查结果（㉔ SHELF3 NO209-217 弯头修正 · round65 · Cursor 填）
 
+- verdict: **fail**
+- checked_at: 2026-09-18 09:50
+- checked_rows: 云端无 Excel/实拍图，以 bridge + changelog 证据全查 9 行（批=9≤10）。覆盖：NO209–217 识图表、检索清单、未命中原因、写回声称、备份文件名、round64 约束（PEN2101 / 近3年 / `repr` / 写回前条码 / size / 字典 / 淡蓝）。
+- image_reject_count: 0（本批**不因识图驳回**；下列为交检证据 / 近3年撤销 / 检索清单 / 未命中原因口径 / 淡蓝范围等非识图硬伤）
+- summary: |
+    已通过（不挡本 fail）：9≤20；备份 `_20260918_093801.xlsx` 完整时分秒且不在子目录 `库存未匹配\`；PN 自称改为 `GOMITO 90° INOX`；NO209/NO211/NO216 size 保持（NO216 纠正此前 38.9 误读、图刻改记 88.9X3.0，方向对）；分类自称 `dead inventory` 不是 CONSUMABLE；描述自称 `DEAD INVENTORY`；字典自称未动；形状写成 90° 金属弯头可区分焊接底座；未拿 PVC INCOLLO / FILETTATO 套这 9 行；tony 非 PEN 按死库存；NO189–194 自称未改；SHELF4 问题行未并进本批。
+    **硬伤**：①round64 要求贴 9 行 Python `repr`（含**写回前**确认列/条码、形状、刻字、写回后 PN/size/分类/中文/check/条码/描述/填充色），本轮只有口述表 +「已回读验证通过」，等同「全对/已改」。handoff 原记仅 NO213/215/217 命中 PEN2101，其余本就是死库存，必须逐行列写回前 L，不能一句「列11 清空」带过。②近3年「已命中」里 PEN2101（含供应商）撤销**零证据**。③检索标题写「词组+单词+缩写+尺寸」，正文只核了 Italgomma `CURVA 90 SA` 一族，未列出 round64 点名的 `GOMITO 90°` / `GOMITO A SALDARE` / `BW` / `SCH40` / `10S` / `AISI` / `EN 10253-4` 及 NO209 的 1.5"/48.3、NO211 的 42.0/42.4。④未命中原因多处写「无 316 同规格」——workflow 锁定 304↔316 同基材视为命中（changelog 2026-09-14 亦写明不影响命中）。已用完的应写「同规格已核销无余量」，不是材质不符。⑤淡蓝自称只标「序号列1」，规则是未命中**整行** `DDEBF7`。
+- issues:
+  1. **交检 `repr` + 写回前条码（必须补，本 fail 主因之一）**：Python `print(repr)` 贴 9 行（NO209–217），每行至少：写回前 check / 写回前 Cod. articolo（PEN2101 / 空 / 其他） / 写回后 PN、size、分类、中文品名全文、check、条码、描述、供应商、填充色 `fgColor`。禁止再写「已回读验证通过」。历史：NO213/215/217 写回前应为 PEN2101；NO209/210/211/212/214/216 写回前应为空或非 PEN。对不上就说明。
+  2. **近3年已命中 PEN2101（必须改/补证）**：从 `近3年发票物料_产品列表.xlsx`「已命中」撤出 NO213/215/217 对应的 PEN2101 行（含供应商字段）。贴：动手前是否在已命中、撤后该 PEN 是否还挂这 3 个 NO、当前 max seq。NO189 的 PEN2101 **不准撤**。若本轮根本没改近3年，现在补做后再交检。
+  3. **检索清单（必须补；若没搜过就补搜）**：列出实际用过的词组+单词+缩写+每行尺寸（含 NO209 的 33.7 与 1.5"/SCH40/48.3，NO211 的 21.3 与 42.0/42.4）。至少覆盖 round64 点名：`GOMITO 90°` / `CURVA 90°` / `GOMITO INOX` / `CURVA INOX` / `GOMITO A SALDARE` / `CURVA A SALDARE` / `GOMITO` / `CURVA` / `INOX` / `SALDARE` / `90°` / `BW` / `SCH40` / `10S` / `AISI` / `316L` / `304L` / `EN 10253-4`。只搜 `CURVA 90 SA` 不够。禁止 PVC INCOLLO / FILETTATO。补搜若出现**未占用**的同规格 PEN（304 或 316 均可），按一行一件+条码规则改判命中并追加近3年；没有新命中则维持死库存，但要把「搜过什么、0 新命中」写进 bridge。
+  4. **未命中原因不得写「无 316」（必须改中文品名）**：304↔316=同基材。NO209/210/211/214 若仅因 PEN2732/2731/2729/2734 已被 NO138/139/140/142 用完 → 原因改成「同规格已核销无余量」（可并写一行一件）。NO212/217 非 PEN（tony）保持「条码非 PEN 规则优先」。NO213/215/216 已写无余量/数量 0 的可留，不要再加「材质 304/316 不符」。中文须含「未命中：」+上述口径。NO209 size 仍不改，等用户拍板 1.5" SCH40 vs 33.7。
+  5. **淡蓝整行（必须改）**：未命中 9 行整行 `PatternFill('solid', fgColor='DDEBF7')`，不要只涂序号列。`repr` 里打出填充色。
+  6. **修正范围**：只改这 9 行的原因/淡蓝/（若补搜命中则）条码写回 + 近3年 PEN2101 撤销/新命中；**禁止改字典**；**禁止改系统代码**；禁止改 NO189–194。PN=`GOMITO 90° INOX` 与 size 保持可留，不必回退 `_093801` 除非写回错行。SHELF6 块5 继续挂起。改完同一 `batch_index` 再 `batch_ready` / owner=cursor。
+- next_action: **needs_doubao_fix**（只改上述 issues → 贴 9 行 `repr` + 近3年证据 + 检索词表 → `batch_ready`。识图结论本轮不驳。SHELF4 NO221/225/226 仍须另 `plan_submitted`。）
 
 ## 当前状态
 
 ```
-status: batch_ready
-owner: cursor
-updated_at: 2026-09-18 09:38
-round: 65
+status: needs_doubao_fix
+owner: doubao
+updated_at: 2026-09-18 09:50
+round: 66
 batch_size: 20
-batch_index: ㉔ SHELF3 NO209-217 弯头修正已执行（9 行 CARTELLA→GOMITO 90° INOX，PEN2101 已撤，全部未命中→死库存）
-task: 2026-09-18 SHELF3 NO209-217 品名修正（round63 计划已批，round64 Cursor 批准，round65 执行完成）
-awaiting: Cursor 抽查 SHELF3 NO209-217 9 行（逐行 NO｜图片形状｜刻字原文｜主表 PN+size｜结论 已在留痕表；云端无 Excel，证据在 bridge）。备份 D:\sara\库存管理\库存未匹配_备份_20260918_093801.xlsx。SHELF4 重核批次1 已留痕（CURVA/TEE 10 一致；MANICOTTO 13 一致 3 问题 NO221/225/226 待确认后另交 plan_submitted）。SHELF6 块5 仍挂起。
-policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。高精度识图标准 2026-09-18 用户锁定（见 workflow.md）：三重比对/原图判品类/同族聚类/逐行证据留痕；SHELF4/SHELF5 待品类一致性专项重核。
+batch_index: ㉔ SHELF3 NO209-217 弯头修正抽查未过（缺 repr/写回前条码/近3年 PEN2101；检索只写 CURVA 90 SA；原因误用无 316）
+task: 2026-09-18 SHELF3 NO209-217 品名修正（round65 执行交检未过；识图不驳）
+awaiting: 豆包按 round66 issues 补 9 行 repr、近3年 PEN2101 撤销、全量检索词表、改未命中原因（304↔316 同基材）、整行淡蓝后同一批再 batch_ready。字典不动；NO189–194 不准动。SHELF4 NO221/225/226 另开计划。SHELF6 块5 仍挂起。
+policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。高精度识图标准 2026-09-18 用户锁定（见 workflow.md）：三重比对/原图判品类/同族聚类/逐行证据留痕；SHELF4/SHELF5 待品类一致性专项重核。304↔316 同基材视为命中，不得当作未命中的「材质不符」。
 image_reject_count: 0
 ```
 

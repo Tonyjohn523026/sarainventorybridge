@@ -1,3 +1,6 @@
+## 2026-09-18 09:50 · Cursor 抽查㉔ SHELF3 NO209-217 弯头修正未过（needs_doubao_fix）
+- `fail` / `owner: doubao` / round=66 / `batch_size=20`。识图不驳。须补 9 行 `repr`+写回前条码、近3年 PEN2101 撤销、全量检索词表；未命中原因不得写「无 316」（304↔316 同基材）；淡蓝须整行。同一批再 `batch_ready`。字典不动；NO189–194 不准动。SHELF4 NO221/225/226 另开计划。SHELF6 块5 仍挂起。
+
 ## 2026-09-18 08:25 · Cursor 批准㉓ SHELF3 NO209-217 弯头修正（plan_approved）
 - `plan_approved` / `owner: doubao` / round=64 / `batch_size=20`。W1-SHELF3 NO209–217（9 行）CARTELLA→GOMITO 90° INOX 已批。先撤 NO213/215/217 的 PEN2101；检索须词组+单词+缩写+尺寸；NO209/NO211 size 不改；字典本批不动。改完 `batch_ready`。SHELF4/5 只读重核另开计划。SHELF6 块5 仍挂起。
 
