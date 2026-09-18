@@ -1,3 +1,4 @@
+更新：2026-09-18 08:25（Cursor 批准㉓ SHELF3 NO209-217 弯头修正）→ plan_approved
 更新：2026-09-18 08:11（豆包 round63 SHELF3 NO209-217 弯头修正计划已交）→ plan_submitted
 更新：2026-09-18 豆包侧规则固化（用户锁定「高精度识图标准」→ 已写入 workflow.md；SHELF4/5 待品类一致性专项重核；本文件 status 不变）
 
@@ -365,6 +366,32 @@
 
 **不动**：字典、代码、其他行。SHELF6 块5 仍挂起。批准前不动主表；批准后改完贴 9 行 repr 证据 → `status=batch_ready` / `owner=cursor`。
 
+### Cursor 计划审批（㉓ SHELF3 NO209-217 弯头修正 · round63 计划 · Cursor 填）
+
+- plan_verdict: **approved**
+- plan_checked_at: 2026-09-18 08:25
+- plan_notes: |
+    主表核销修正任务（有图、要重检发票），不是字典口径。范围写死 W1-SHELF3 **NO209–217 共 9 行** ≤ `batch_size=20`（YAML 已有 20），有逐行刻字表，不是空泛、不是一次做完全柜 → **批准动手**。用户已确认这 9 行是弯头不是 CARTELLA；changelog 已有对照 NO189–194 为环形焊接底座。
+    计划检索只写了 `GOMITO/CURVA`+尺寸，**不够**词组+单词+缩写；表里有刻字、缺「图片形状」列；未点名撤销历史 PEN2101。下列为批准约束（无阻断，必须按此做），不是驳回。
+    - **先撤错命中**：handoff 记 NO213/215/217（4"）曾命中 I.S.I. **PEN2101**（CARTELLA SALDARE INOX ø100 4"）。改品名前必须撤这 3 行的 PEN2101 / 近3年已命中对应行（含供应商字段那几条），不得把焊接底座发票留在弯头行上。NO189–194 **不准动**（对照仍是 CARTELLA）。
+    - **检索必须全量**（不是只搜 GOMITO 或只搜 CURVA）：词组 `GOMITO 90°` / `CURVA 90°` / `GOMITO INOX` / `CURVA INOX` / `GOMITO A SALDARE` / `CURVA A SALDARE`；单词 `GOMITO` `CURVA` `INOX` `SALDARE`；缩写/标准 `90°` `BW` `SCH40` `10S` `AISI` `316L` `304L` `EN 10253-4` / `10253`；再加**该行尺寸**（含图刻外径×壁厚）。禁止拿 PVC `GOMITO 90° INCOLLO`（PEN2183/PEN2184 等）或螺纹 `GOMITO 90° FILETTATO` 去套这 9 行无缝钢弯头。
+    - **写回规则**：命中→发票品名/供应商/条码/单价等，条码须 **PEN**（非 PEN=死库存，即使发票有同规格）；未命中→淡蓝 `DDEBF7` + 中文三句原因之一或组合 + 描述列 `DEAD INVENTORY`（只这 9 行，禁止再全表扫描述列）；一行一件。每行列**写回前**确认列/条码。
+    - **尺寸**：NO216 `88.9*3`→`38.9x3` 仅当交检能贴该行图刻 `38.9`（38.9 不是 EN 10253-4 常用外径，须说明不是把 88.9 的 8 看成 3）。**NO209 size 不改**，等用户拍板；检索可同时带 33.7 与 1.5"/SCH40/48.3。**NO211** 图刻 `21/42.0 BW 10S` 可能是异径，size 保持 21.3*2；检索带 21.3 与 42.4/42.0，不擅自改尺寸。
+    - **识图交检**：`batch_ready` 逐行 `NO｜图片形状｜刻字原文｜主表 PN+size｜结论`。形状须能区分 L 形弯头 vs 环形焊接底座。再读图则超 4000px 先缩 ≤2000px。拼图只定位行号。
+    - **字典本批不动**：PN 写 `GOMITO 90° INOX` 可落既有 `GOMITO` 类型；**不要**给 `GOMITO 90° FILETTATO` 填 E/F（round55 清空，且那是 PVC 螺纹弯头词）；**不要**改 `CARTELLA SALDARE INOX PESANTE`↔NO189；**不要**改 `GOMITO` 的 222.jpg。新词条须另 `plan_submitted`。
+    - **分类**：不要猜 CONSUMABLE（管件不是紧固件）。原按焊接底座/CARTELLA 锁的类型，改到能落到 `GOMITO` 的类型或留空；不要新建类型词。
+    - **备份**：`D:\sara\库存管理\库存未匹配_备份_YYYYMMDD_HHMMSS.xlsx`（完整时分秒，禁止 `0811`、禁止子目录 `库存未匹配\`、禁止 `*`）。
+    - **范围**：只改这 9 行 + 近3年已命中里对应的 PEN2101 撤销/新命中追加。SHELF4/5 品类重核**只读留痕**，发现错行另交 `plan_submitted`，不要写进本批。SHELF6 块5 仍挂起。勿改代码。
+- plan_issues:
+  1. （无阻断，必须按此做）**第一批=NO209–217**：动手前完整时间戳备份 → 撤 NO213/215/217 的 PEN2101 → PN/中文按计划改 → NO216 仅在图刻可证时改 size；NO209/NO211 size 不改 → 词组+单词+缩写+尺寸全量检索 → 按条码/淡蓝/一行一件写回 → 贴 9 行 `repr`（含写回前条码、形状、刻字、确认列）→ `batch_ready` / owner=cursor。
+  2. （无阻断）交检禁止只写「全对/已改」。9≤10，抽查按全查准备。云端无 Excel，证据必须打进 bridge。
+  3. （无阻断）字典 F/E、禁填 9 词、round55 四词、描述列全表扫描：本批都不要做。
+  4. （无阻断）**修正范围**：只改 `库存未匹配.xlsx` 的 SHELF3 NO209–217（及近3年已命中中与这 9 行相关的撤销/追加）；**禁止改字典**；**禁止改系统代码**；禁止改 NO189–194 及其他行。SHELF6 块5 继续挂起。
+- next_action: **plan_approved**（owner=doubao。按上述约束改 9 行后 `batch_ready`。SHELF4/5 只读重核发现错误另开计划。）
+
+
+---
+
 ---
 
 ### SHELF4 品类一致性专项重核 · 批次1（2026-09-18 08:20 · 只读，未改表）
@@ -409,17 +436,18 @@
 
 **待续**：RACCORDO(21)、TAPPO(9)、FLANGIA(10)、GUARN(82)、MORSETTO(25)、VALVOLA(19)、CAMLOCK 等族未核。3 个问题行（221/225/226）实物待进一步确认（金属件品类/尺寸），确认后与 SHELF3 修正一并交 `plan_submitted`。
 
+
 ## 当前状态
 
 ```
-status: plan_submitted
-owner: cursor
-updated_at: 2026-09-18 08:11
-round: 63
+status: plan_approved
+owner: doubao
+updated_at: 2026-09-18 08:25
+round: 64
 batch_size: 20
-batch_index: ㉓ SHELF3 NO209-217 弯头品名修正计划已交（CARTELLA→GOMITO 90° INOX，9 行，待 Cursor 批准）
-task: 2026-09-18 SHELF3 NO209-217 品名修正（逐张原图刻字证据：9 行均为 90° 不锈钢弯头 EN 10253-4；NO189-194 对照为焊接底座无误）
-awaiting: 待 Cursor 审批 SHELF3 修正计划（round63）。批准前不动主表。批准后：9 行 Product Name→GOMITO 90° INOX、中文品名同步、NO216 size→38.9x3、NO209 待用户确认、确认列按 GOMITO/CURVA 重检发票、备份带时间戳，改完贴 repr → batch_ready。SHELF4/SHELF5 品类一致性专项重核（只读）同步推进。SHELF6 块5 仍挂起。
+batch_index: ㉓ SHELF3 NO209-217 弯头修正已批准（9 行 CARTELLA→GOMITO 90° INOX；先撤 NO213/215/217 的 PEN2101）
+task: 2026-09-18 SHELF3 NO209-217 品名修正（round63 计划已批；对照 NO189-194 焊接底座不在本批）
+awaiting: 豆包按 round64 约束改主表 9 行后 batch_ready。先撤 PEN2101；检索须词组+单词+缩写+尺寸；NO209/NO211 size 不改；NO216 须图刻可证；字典不动；SHELF4/5 只读重核另开计划。SHELF6 块5 仍挂起。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。高精度识图标准 2026-09-18 用户锁定（见 workflow.md）：三重比对/原图判品类/同族聚类/逐行证据留痕；SHELF4/SHELF5 待品类一致性专项重核。
 image_reject_count: 0
 ```
