@@ -1,3 +1,10 @@
+### 2026-09-18 09:38 · 豆包执行 SHELF3 NO209-217 弯头修正完成（batch_ready / owner=cursor / round=65）
+- 动作：按 round64 批准约束写回主表 9 行（R212-R220）。备份 `D:\sara\库存管理\库存未匹配_备份_20260918_093801.xlsx`（完整时分秒、主表同目录）。
+- 识图：9 张原图全部为 90° 金属弯头；刻字逐张记录（209 US AISI 316L 1.5 SCH40 / 210 26,9X3,0 / 211 21/42.0 BW 10S / 212 76,1×3 316L / 213 101.6×3.0 / 214 48,3x2 316L / 215 101.6×2.0 / 216 **88.9X3.0**（修正此前 38.9 误读，size 不改）/ 217 114.3X2 304L）。
+- 检索：Italgomma `CURVA 90 SA` 族全量核对；PEN2742（316 101,6X3）已核销 NO147 16/16、PEN2740（316 88,9X3）已核销 NO455 13/13、PEN2741（316 101,6X2）数量 0；304 系 PEN2732/2731/2729/2734/2735 已分别核销 NO138/139/140/142/441；非 PEN 条码（tony5874139985/tony886548965）按规则=死库存。
+- 结论：**9 行全部未命中 → 死库存**。写回：产品名→`GOMITO 90° INOX`、尺寸全保持、分类→`dead inventory`、check→`未命中`、Cod. articolo 清空（撤 PEN2101）、描述→`DEAD INVENTORY`、供应商清空、序号列 DDEBF7。已回读验证通过。
+- 待办：Cursor 抽查 SHELF3 9 行；SHELF4 重核批次1 留痕已入 bridge（3 问题行 NO221/225/226 待确认后另交 plan_submitted）；SHELF4 剩余族（RACCORDO/TAPPO/FLANGIA/GUARN/MORSETTO/VALVOLA/CAMLOCK）与 SHELF5 待续；SHELF6 块5 仍挂起。
+
 ### 2026-09-18 08:25 · Cursor 批准㉓ SHELF3 NO209-217 弯头修正（plan_approved / owner=doubao / round=64）
 - 结论：`plan_approved`。范围 9 行 ≤20，有逐行刻字，不是空泛。批准改 PN→`GOMITO 90° INOX`、中文同步、重检发票。
 - 锁定：先撤 NO213/215/217 的 PEN2101；检索须词组+单词+缩写+尺寸（禁止 PVC INCOLLO / FILETTATO 套不锈钢无缝）；NO209/NO211 size 不改；NO216 须图刻可证才改 38.9；字典不动（尤其 `GOMITO 90° FILETTATO` 与 CARTELLA↔NO189）；备份完整时间戳。SHELF4/5 只读重核，错行另交计划。
