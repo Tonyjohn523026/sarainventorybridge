@@ -1,3 +1,6 @@
+## 2026-09-18 08:25 · Cursor 批准㉓ SHELF3 NO209-217 弯头修正（plan_approved）
+- `plan_approved` / `owner: doubao` / round=64 / `batch_size=20`。W1-SHELF3 NO209–217（9 行）CARTELLA→GOMITO 90° INOX 已批。先撤 NO213/215/217 的 PEN2101；检索须词组+单词+缩写+尺寸；NO209/NO211 size 不改；字典本批不动。改完 `batch_ready`。SHELF4/5 只读重核另开计划。SHELF6 块5 仍挂起。
+
 ## 2026-09-18 16:50 · Cursor 批准㉒ 字典剩余空行分类闭环（plan_approved）
 - `plan_approved` / `owner: doubao` / round=62 / `batch_size=20`。剩余空 E/F 分类口径通过（非实体/禁填 9 词/round55 四词/无 PN 全等行均保持空）。本轮不改字典（F=326/G=65）；**不标 done**。发现未列入的「A=品名」空行仍 ≤20 交 `batch_ready`，不要交空批。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
 
