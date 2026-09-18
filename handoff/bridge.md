@@ -1,4 +1,4 @@
-更新：2026-09-18 16:50（Cursor 批准㉒ 字典剩余空行分类闭环）→ plan_approved
+更新：2026-09-18 08:11（豆包 round63 SHELF3 NO209-217 弯头修正计划已交）→ plan_submitted
 更新：2026-09-18 豆包侧规则固化（用户锁定「高精度识图标准」→ 已写入 workflow.md；SHELF4/5 待品类一致性专项重核；本文件 status 不变）
 
 > **唯一互通文件**。两边都只通过改本文件交接。
@@ -334,17 +334,48 @@
 **全表统计（写死整数）**：F 已填 = **306**（上轮 297 + 本轮 9）、G 已填 = **65**（紧固件全 CONSUMABLE）、非法 F 格式 = **0**。其他两表 G 空抽样正常。
 **备份**：`D:\sara\库存管理\翻译字典_备份_20260917_131000.xlsx`（本轮动手前）。
 **未动**：主表、代码；未做全表 token 扫描；SHELF6 块5 仍挂起。
+### 豆包 round63 plan_submitted · SHELF3 NO209-217 弯头品名修正（2026-09-18 08:11）
+
+**依据**：用户指出「209-217 明明是不锈钢弯管」；逐张原图复核确认 9 行 CARTELLA INOX（焊接底座）误记，实为 90° 不锈钢弯头（GOMITO，EN 10253-4 无缝）。高精度识图标准已固化 workflow.md（2026-09-18 用户锁定）。
+
+**范围**：主表 W1-SHELF3 NO209-217 共 **9 行**（≤ batch_size=20，一批完成）。
+
+**逐行证据（原图刻字 · 三重比对）**：
+
+| NO | 现记录 CARTELLA INOX | 图刻原文 | 目标 Product Name | size 处理 |
+|---|---|---|---|---|
+| 209 | 33.7*3 316 | US AISI 316L 1.5 SCH40 | GOMITO 90° INOX | 待用户确认（图印 1.5 英寸≈48.3，疑 33.7 误） |
+| 210 | 26.9*3 316 | 26,9X3,0 EN 10253-4 | GOMITO 90° INOX | 保留 |
+| 211 | 21.3*2 316 | 21/42.0 BW 10S | GOMITO 90° INOX | 保留 |
+| 212 | 76.1*3 | 76,1x3 EN 10253-4 | GOMITO 90° INOX | 保留 |
+| 213 | 101.6*3 | 101.6x3.0 EN 10253-4 | GOMITO 90° INOX | 保留 |
+| 214 | 48.3*2 | 48,3x2 EN 10253-4 | GOMITO 90° INOX | 保留 |
+| 215 | 101.6*2 | 101.6X2.0 EN 10253-4 | GOMITO 90° INOX | 保留 |
+| 216 | 88.9*3 | 38.9x3.0 EN 10253-4 | GOMITO 90° INOX | 88.9→38.9x3（图印） |
+| 217 | 114.3*2 | 114.3x2 304L EN 10253-4 | GOMITO 90° INOX | 保留 |
+
+**修改方案**：
+1. Product Name：9 行 `CARTELLA INOX` → `GOMITO 90° INOX`（90° 不锈钢弯头）。
+2. 中文品名：9 行同步 →「90° 不锈钢弯头（无缝 EN 10253-4）」。
+3. size：NO216 88.9*3→38.9x3（图印）；NO209 待用户确认（图印 1.5 英寸 SCH40）；其余 7 行保留。
+4. 确认列：9 行按 `GOMITO/CURVA` + 尺寸重新发票检索（EN 10253-4 弯头），命中回写发票信息（含供应商）、未命中按死库存规则标原因。
+5. 分类列：如该批已按「焊接底座」归类，同步改（遵循系统「类型→物料行联动」）。
+6. 备份：动手前备份主表到 `D:\sara\库存管理\库存未匹配\库存未匹配_备份_20260918_0811.xlsx`（带时间戳）。
+7. 对照组 NO189-194 已核实为环形焊接底座（刻印 114.3X3.18 / 88.9x2 / 48.3x2 / 168.3），无误，不在本批。
+
+**不动**：字典、代码、其他行。SHELF6 块5 仍挂起。批准前不动主表；批准后改完贴 9 行 repr 证据 → `status=batch_ready` / `owner=cursor`。
+
 ## 当前状态
 
 ```
-status: plan_approved
-owner: doubao
-updated_at: 2026-09-18 16:50
-round: 62
+status: plan_submitted
+owner: cursor
+updated_at: 2026-09-18 08:11
+round: 63
 batch_size: 20
-batch_index: ㉒ 字典剩余空 E/F 分类口径已批准（不写 Excel；非实体/禁填 9 词/round55 四词/无 PN 全等行保持空；不标 done）
-task: 2026-09-17 主表「描述」列已闭环（round49/50）。字典：空行补 F/E 第三批通过（round59 STEP SEAL）；剩余空行分类口径 round62 已锁定
-awaiting: 本轮无 Excel 改动，不要为交检而 batch_ready。若发现未列入的「A=该 NO 品名」空行则 ≤20 后 batch_ready；新货柜清点同样 ≤20。禁填 9 词 / round55 四词 / 非实体词保持空。禁止再全表 token / 描述列扫描。SHELF6 块5 仍挂起。
+batch_index: ㉓ SHELF3 NO209-217 弯头品名修正计划已交（CARTELLA→GOMITO 90° INOX，9 行，待 Cursor 批准）
+task: 2026-09-18 SHELF3 NO209-217 品名修正（逐张原图刻字证据：9 行均为 90° 不锈钢弯头 EN 10253-4；NO189-194 对照为焊接底座无误）
+awaiting: 待 Cursor 审批 SHELF3 修正计划（round63）。批准前不动主表。批准后：9 行 Product Name→GOMITO 90° INOX、中文品名同步、NO216 size→38.9x3、NO209 待用户确认、确认列按 GOMITO/CURVA 重检发票、备份带时间戳，改完贴 repr → batch_ready。SHELF4/SHELF5 品类一致性专项重核（只读）同步推进。SHELF6 块5 仍挂起。
 policy_note: 硬规则不变（逐行识图、词组+单词+缩写全量、非 PEN=死库存、淡蓝+原因、一行一件）。描述列已就位，后续核销死库存行同步写 DEAD INVENTORY，不得再开全表扫描。batch_size=20 不取消。字典空行须点名单条清点记录（SHELF+NO+货架号面且 A 与该行品名同词）；禁填 9 词 / round55 四词再填须先 plan_submitted。用户口述不覆盖批准。高精度识图标准 2026-09-18 用户锁定（见 workflow.md）：三重比对/原图判品类/同族聚类/逐行证据留痕；SHELF4/SHELF5 待品类一致性专项重核。
 image_reject_count: 0
 ```
