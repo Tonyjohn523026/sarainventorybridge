@@ -365,6 +365,50 @@
 
 **不动**：字典、代码、其他行。SHELF6 块5 仍挂起。批准前不动主表；批准后改完贴 9 行 repr 证据 → `status=batch_ready` / `owner=cursor`。
 
+---
+
+### SHELF4 品类一致性专项重核 · 批次1（2026-09-18 08:20 · 只读，未改表）
+
+按「高精度识图标准」逐张原图重核 SHELF4 易混族（图片 `D:\sara\库存管理\图片\W1-SHELF4\`，全 367 张齐全）。
+
+**① CURVA / TEE 族 10 行 → 全部一致 ✓**
+
+| NO | 图片形状 | 刻字/印字 | 主表品名 | 结论 |
+|---|---|---|---|---|
+| 208 | PVC-U 三通 T 型 | PVC-U 1/2 Astore | TEE femmina PVC 1/2" | 一致 |
+| 209 | PVC 90° 弯头 | — | Curva femmina PVC 1/2" | 一致 |
+| 213 | PVC T 型三通（两金属螺丝） | — | TEE PVC 40mm 带螺丝孔 | 一致 |
+| 215 | PVC 三通 | 侧刻不可辨 | TEE PVC φ32 | 一致（尺寸 OCR 需人工复核） |
+| 218 | PVC 90° 弯头 | — | curva femmina Pvc 3/4" | 一致 |
+| 220 | PVC 90° 弯头 | 200 | curva PVC φ90 3" | 一致 |
+| 230 | PVC 90° 弯头 | — | CURVA PVC 63 DN50 | 一致 |
+| 231 | PVC 90° 弯头 | — | CURVA PVC φ40 | 一致 |
+| 232 | PVC 90° 弯头 | — | CURVA PVC φ32 DN25 | 一致 |
+| 239 | PVC T 型三通 | — | TEE PVC D63 DN50 | 一致 |
+
+**② MANICOTTO 族 16 行 → 13 一致 ✓ / 3 问题 ⚠**
+
+| NO | 图片形状 | 刻字/印字 | 主表品名 | 结论 |
+|---|---|---|---|---|
+| 32 | 金属内丝管件 | FORT VALE PART NO.600/1010 CAST 473974 | MANICOTTO A SALDARE 1½"BSP 316 | 一致 |
+| 207 | PVC 内丝+六角管件 | — | Manicotto PVC 63 x 2" DN50 | 一致 |
+| 210 | PVC 直接头圆筒 | — | Manicotto PVC 50mm | 一致 |
+| 214 | PVC 直接头 | — | Manicotto PVC 63mm | 一致 |
+| 219 | PVC 直接头 | 08ND:06（模糊） | Manicotto φ90 DN80 | 一致 |
+| 221 | **灰色金属衬套/轴套** | — | manicotto PVC φ40-φ32 | ⚠ **图/名不符**（金属件记 PVC，原备注已标"需校对"） |
+| 222 | PVC 直通 | — | manicotto PVC φ32 | 一致 |
+| 223 | PVC 环形管件 | PN16 / 50 PVC-U | manicotto PVC 50x40 | 一致 |
+| 224 | PVC 直接头 | PN16 / PVC-U / 75×63(1.0) | manicotto PVC 75x63 | 一致（刻字吻合） |
+| 225 | **金属环形套筒（银灰）** | — | manicotto PVC 110x63 | ⚠ **图/名不符**（金属件记 PVC） |
+| 226 | **金属空心圆柱套筒（内壁凹槽）** | SK | Manicotto PVC φ40 DN32 | ⚠ **图/名不符**（金属件记 PVC） |
+| 227 | PVC 直接头 | — | Manicotto PVC φ63 | 一致 |
+| 228 | PVC 管材短截 | — | Manicotto φ76xφ90 | 一致 |
+| 258 | PVC 外丝+六角+承插 | — | Manicotto maschio femmina 2½"x2" | 一致 |
+| 259 | PVC 外丝直接头 | 3/4" | Manicotto maschio 3/4" | 一致 |
+| 260 | PVC 外丝直接头 | 1/2" | Manicotto maschio 1/2" | 一致 |
+
+**待续**：RACCORDO(21)、TAPPO(9)、FLANGIA(10)、GUARN(82)、MORSETTO(25)、VALVOLA(19)、CAMLOCK 等族未核。3 个问题行（221/225/226）实物待进一步确认（金属件品类/尺寸），确认后与 SHELF3 修正一并交 `plan_submitted`。
+
 ## 当前状态
 
 ```
